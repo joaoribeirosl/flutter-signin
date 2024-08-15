@@ -1,0 +1,1 @@
+protoc --dart_out=. <path/to/messages.proto>

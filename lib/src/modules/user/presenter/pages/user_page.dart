@@ -16,7 +16,7 @@ class _UserPageState extends State<UserPage> {
   void initState() {
     super.initState();
     userStore = context.read<UserStore>();
-    Modular.to.navigate('/user_module');
+    Modular.to.navigate('/user_module'); //main -> user
   }
 
 

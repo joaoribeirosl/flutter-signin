@@ -1,0 +1,11 @@
+syntax = "proto2";
+
+message Task{
+    required string id = 1;
+    required string task = 2;
+    required string user_id = 3;
+}
+
+message Tasks{
+    repeated Task tasks = 3;
+}

@@ -3,7 +3,7 @@ description: "Learn Flutter Project."
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.4.4 <4.0.0"
+  sdk: ">=3.4.1 <4.0.0"
 
 dependencies:
   flutter:
@@ -14,6 +14,7 @@ dependencies:
   protobuf: ^3.1.0
   mobx: ^2.3.3+2
   flutter_mobx: ^2.2.1+1
+  slidy: ^3.2.2+2
 
 dev_dependencies:
   flutter_test:

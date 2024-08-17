@@ -10,6 +10,11 @@ class MainApp extends StatefulWidget {
 class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('home_page'),
+      ),
+      body: const Center(child: Text('como q escrev')),
+    );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
+// import 'package:flutter_modular/flutter_modular.dart';
+// import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -9,14 +9,14 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  late final AuthStore userStore;
+  // late final AuthStore authStore;
 
-  @override
-  void initState() {
-    super.initState();
-    userStore = context.read<AuthStore>();
-    Modular.to.navigate('/auth_module');
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   userStore = context.read<AuthStore>();
+  //   Modular.to.navigate('/auth_module');
+  // }
 
   @override
   Widget build(BuildContext context) {

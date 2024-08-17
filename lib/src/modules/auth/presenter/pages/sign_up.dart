@@ -9,7 +9,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  // late final AuthStore userStore;
+  // late final AuthStore authStore;
 
   // @override
   // void initState() {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 // import 'package:flutter_modular/flutter_modular.dart';
 // import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
 
@@ -85,7 +86,9 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             const SizedBox(height: 16),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Modular.to.pushNamed('/');
+              },
               child: const Text('Already have an account? Sign In'),
             ),
           ],

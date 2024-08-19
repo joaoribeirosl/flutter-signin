@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 // import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
 
 class SignInPage extends StatefulWidget {
@@ -62,8 +62,11 @@ class _SignInPageState extends State<SignInPage> {
               onPressed: () {},
               child: const Text('Login'),
             ),
+            const SizedBox(height: 15),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Modular.to.pushNamed('/signup_page/');
+              },
               child: const Text('Forgot Password?'),
             ),
             const SizedBox(height: 16),

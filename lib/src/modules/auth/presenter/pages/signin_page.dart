@@ -45,6 +45,7 @@ class _SignInPageState extends State<SignInPage> {
             const TextField(
               decoration: InputDecoration(
                 labelText: 'Username',
+                prefixIcon: Icon(Icons.person),
                 border: OutlineInputBorder(),
               ),
             ),

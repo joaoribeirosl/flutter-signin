@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 // import 'package:flutter_modular/flutter_modular.dart';
 // import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
+class SignInPage extends StatefulWidget {
+  const SignInPage({super.key});
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  State<SignInPage> createState() => _SignInPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _SignInPageState extends State<SignInPage> {
   // late final AuthStore authStore;
 
   // @override
   // void initState() {
   //   super.initState();
-  //   userStore = context.read<AuthStore>();
-  //   Modular.to.navigate('/auth_module');
+  //   // userStore = context.read<AuthStore>();
+  //   // Modular.to.pushNamed('/');
   // }
 
   @override
@@ -28,7 +28,7 @@ class _SignUpPageState extends State<SignUpPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Text(
-              'Sign Up',
+              'Welcome back',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -37,15 +37,14 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             const SizedBox(height: 8),
             const Text(
-              'Create your account',
-              style: TextStyle(fontSize: 16),
+              'Enter your credentials to login',
+              style: TextStyle(fontSize: 10),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 32),
             const TextField(
               decoration: InputDecoration(
                 labelText: 'Username',
-                prefixIcon: Icon(Icons.person),
                 border: OutlineInputBorder(),
               ),
             ),
@@ -58,36 +57,19 @@ class _SignUpPageState extends State<SignUpPage> {
                 border: OutlineInputBorder(),
               ),
             ),
-            const SizedBox(height: 16),
-            const TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Confirm Password',
-                prefixIcon: Icon(Icons.lock_outline),
-                border: OutlineInputBorder(),
-              ),
-            ),
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: () {},
-              child: const Text('Sign Up'),
+              child: const Text('Login'),
             ),
-            const SizedBox(height: 16),
-            const Text(
-              'OR',
-              style: TextStyle(fontSize: 16),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton.icon(
+            TextButton(
               onPressed: () {},
-              icon: const Icon(Icons.login),
-              label: const Text('Sign in with Google'),
+              child: const Text('Forgot Password?'),
             ),
             const SizedBox(height: 16),
             TextButton(
               onPressed: () {},
-              child: const Text('Already have an account? Sign In'),
+              child: const Text('Don\'t have an account? Sign Up'),
             ),
           ],
         ),

@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 // import 'package:flutter_modular/flutter_modular.dart';
 // import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
 
-class SignInPage extends StatefulWidget {
-  const SignInPage({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
   @override
-  State<SignInPage> createState() => _SignInPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
-  // late final AuthStore authStore;
+class _SignUpPageState extends State<SignUpPage> {
 
   // @override
   // void initState() {
@@ -28,7 +27,7 @@ class _SignInPageState extends State<SignInPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Text(
-              'Welcome back',
+              'Sign Up',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -37,8 +36,8 @@ class _SignInPageState extends State<SignInPage> {
             ),
             const SizedBox(height: 8),
             const Text(
-              'Enter your credentials to login',
-              style: TextStyle(fontSize: 10),
+              'Create your account',
+              style: TextStyle(fontSize: 16),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 32),
@@ -58,19 +57,36 @@ class _SignInPageState extends State<SignInPage> {
                 border: OutlineInputBorder(),
               ),
             ),
+            const SizedBox(height: 16),
+            const TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: 'Confirm Password',
+                prefixIcon: Icon(Icons.lock_outline),
+                border: OutlineInputBorder(),
+              ),
+            ),
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: () {},
-              child: const Text('Login'),
+              child: const Text('Sign Up'),
             ),
-            TextButton(
+            const SizedBox(height: 16),
+            const Text(
+              'OR',
+              style: TextStyle(fontSize: 16),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton.icon(
               onPressed: () {},
-              child: const Text('Forgot Password?'),
+              icon: const Icon(Icons.login),
+              label: const Text('Sign in with Google'),
             ),
             const SizedBox(height: 16),
             TextButton(
               onPressed: () {},
-              child: const Text('Don\'t have an account? Sign Up'),
+              child: const Text('Already have an account? Sign In'),
             ),
           ],
         ),

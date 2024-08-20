@@ -11,6 +11,14 @@ abstract class _AuthStore with Store {
   late final String title;
 
   @observable
+  int totalTasks = 0;
+
+  @action
+  void incrementTask() {
+    totalTasks++;
+  }
+
+  @observable
   bool done = false;
 
   @action

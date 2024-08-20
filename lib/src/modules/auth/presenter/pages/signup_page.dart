@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-// import 'package:flutter_modular/flutter_modular.dart';
-// import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
+import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -11,12 +10,13 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   userStore = context.read<AuthStore>();
-  //   Modular.to.navigate('/auth_module');
-  // }
+  late final AuthStore authStore; 
+
+  @override
+  void initState() {
+    super.initState();
+    authStore = context.read<AuthStore>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +52,26 @@ class _SignUpPageState extends State<SignUpPage> {
             const SizedBox(height: 16),
             const TextField(
               obscureText: true,
+              enableSuggestions: false,
+              autocorrect: false,
               decoration: InputDecoration(
                 labelText: 'Password',
+                helperText:'Password must contain at least 6 characters',
                 prefixIcon: Icon(Icons.lock),
                 border: OutlineInputBorder(),
+                // suffixIcon: IconButton( 
+                //       icon: Icon(authStore.showPassword 
+                //           ? Icons.visibility 
+                //           : Icons.visibility_off), 
+                //       onPressed: () { 
+                //         setState( 
+                //           () { 
+                //             showPassword = !showPassword; 
+                //           }, 
+                //         ); 
+                //       }, 
+                    // ),
+                
               ),
             ),
             const SizedBox(height: 16),

@@ -20,3 +20,7 @@ class SigninError extends AppError {
 class SignupError extends AppError {
   SignupError(super.message, [super.tracking]);
 }
+
+class DecodeError extends AppError {
+  DecodeError(super.message, [super.tracking]);
+}

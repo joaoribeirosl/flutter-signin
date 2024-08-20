@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-// import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
+import 'package:flutter_signin/src/modules/auth/infra/datasource/auth_datasource.dart';
+// import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
+import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -9,7 +11,8 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  // late final AuthStore authStore;
+  late final AuthStore authStore;
+  final AuthDatasource authDatasource = AuthDatasource();
 
   // @override
   // void initState() {
@@ -60,20 +63,21 @@ class _SignInPageState extends State<SignInPage> {
             ),
             const SizedBox(height: 24),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                // var testUser = User(id: '1', name: 'jo', password: 'pass');
+                // authDatasource.login(testUser);
+              },
               child: const Text('Login'),
             ),
             const SizedBox(height: 15),
             TextButton(
-              onPressed: () {
-                Modular.to.pushNamed('/signup_page/');
-              },
+              onPressed: () {},
               child: const Text('Forgot Password?'),
             ),
             const SizedBox(height: 16),
             TextButton(
               onPressed: () {
-                
+                Modular.to.pushNamed('/signup_page/');
               },
               child: const Text('Don\'t have an account? Sign Up'),
             ),

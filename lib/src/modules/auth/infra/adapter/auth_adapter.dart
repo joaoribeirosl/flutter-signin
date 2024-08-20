@@ -1,25 +1,23 @@
 import 'dart:typed_data';
-import 'package:flutter/material.dart';
+import 'package:flutter_signin/src/modules/auth/domain/errors/auth_error.dart';
 import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
-class AuthSigninAdapter {
+class AuthAdapter {
 
 
   User? dataFromProto(Uint8List data) {
     try {
       return User.fromBuffer(data);
     } catch (e) {
-      debugPrint('decode error: $e');
+      throw DecodeError('decode error, $e');
     }
-    return null;
   }
 
   Uint8List? protoToData(User data) {
     try {
       return data.writeToBuffer();
     } catch (e) {
-      debugPrint('decode error: $e');
+      throw DecodeError('decode error, $e');
     }
-    return null;
   }
 
 }

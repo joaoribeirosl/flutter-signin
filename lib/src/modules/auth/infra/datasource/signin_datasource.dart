@@ -5,7 +5,7 @@ import 'package:flutter_signin/src/modules/auth/infra/adapter/auth_adapter.dart'
 import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
 import 'package:http/http.dart' as http;
 
-class AuthDatasource {
+class SigninDatasource {
   final client = http.Client();
   final AuthAdapter authSigninAdapter = AuthAdapter();
 

@@ -1,3 +1,8 @@
+import 'dart:typed_data';
+
+import 'package:flutter_signin/src/modules/auth/infra/datasource/signin_datasource.dart';
+import 'package:flutter_signin/src/modules/auth/infra/datasource/signup_datasource.dart';
+import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
 import 'package:mobx/mobx.dart';
 
 part 'auth_store.g.dart';
@@ -6,6 +11,9 @@ part 'auth_store.g.dart';
 class AuthStore = _AuthStore with _$AuthStore;
 
 abstract class _AuthStore with Store {
+
+  final SigninDatasource signinDatasource = SigninDatasource();
+  final SignupDatasource signupDatasource = SignupDatasource();
 
   @observable
   String username = '';
@@ -27,5 +35,10 @@ abstract class _AuthStore with Store {
 
   @computed
   bool get isFormValid => password.length > 6;
+
+  Future<Uint8List?> signup() async {
+    var newUser = User(id: '1', name: 'jo', password: 'pass'); 
+    return await signupDatasource.signup(newUser);
+  }
 
 }

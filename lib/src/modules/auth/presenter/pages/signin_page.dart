@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_signin/src/modules/auth/infra/datasource/auth_datasource.dart';
+import 'package:flutter_signin/src/modules/auth/infra/datasource/signin_datasource.dart';
 // import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
 import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
 
@@ -12,7 +12,7 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   late final AuthStore authStore;
-  final AuthDatasource authDatasource = AuthDatasource();
+  final SigninDatasource authDatasource = SigninDatasource();
 
   @override
   void initState() {

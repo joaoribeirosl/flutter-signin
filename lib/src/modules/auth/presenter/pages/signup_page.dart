@@ -85,7 +85,9 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             const SizedBox(height: 24),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                await authStore.signup();
+              },
               child: const Text('Sign Up'),
             ),
             const SizedBox(height: 16),

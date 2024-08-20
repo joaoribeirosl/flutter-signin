@@ -1,25 +1,32 @@
+import 'dart:typed_data';
+
+import 'package:flutter_signin/src/modules/auth/domain/errors/auth_error.dart';
+import 'package:flutter_signin/src/modules/auth/external/server_address.dart';
 import 'package:flutter_signin/src/modules/auth/infra/adapter/auth_signin_adapter.dart';
 import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
 import 'package:http/http.dart' as http;
 
+// var testUser = User(id: '1', name: 'jo', password: 'pass');
+
 class AuthDatasource {
   final client = http.Client();
-  final AuthSigninAdapter authAdapter = AuthSigninAdapter();
+  final AuthSigninAdapter authSigninAdapter = AuthSigninAdapter();
 
-  // static const String apiUrl = String.fromEnvironment('API_URL', defaultValue: 'http://127.0.0.1:10100/');
-  
-
-  Future<User?> login() async {
+  Future<Uint8List?> login(User data) async {
     try {
+      final req = authSigninAdapter.protoToData(data);
+      if (req == null) return null;
+
       final res = await client.post(
-        Uri.parse('http://127.0.0.1:10100/'),
+        Uri.parse(signinRoute),
+        body: req,
       );
       if (res.statusCode == 200) {
-        return authAdapter.dataFromProto(res.bodyBytes);
+        return req;
       }
-      return null;
     } catch (e) {
-      throw Exception('route error');
+      throw SigninError('error to signin');
     }
+    return null;
   }
 }

@@ -1,7 +1,4 @@
-const ip = 'http://127.0.0.1';
-const port = '10100';
+import 'package:flutter_signin/src/modules/auth/external/constants.dart';
 
-const serverAdress = '$ip:$port';
-
-const signinRoute = '$serverAdress/login';
-const signupRoute = '$serverAdress/sign_uo_user';
+const signinRoute = '${Constants.apiUrl}/login';
+const signupRoute = '${Constants.apiUrl}/sign_uo_user';

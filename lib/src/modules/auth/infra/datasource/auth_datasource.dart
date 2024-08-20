@@ -6,12 +6,11 @@ class AuthDatasource {
   final client = http.Client();
   final AuthSigninAdapter authAdapter = AuthSigninAdapter();
 
-  static const String apiUrl = String.fromEnvironment('API_URL', defaultValue: 'http://127.0.0.1:10100/');
+  // static const String apiUrl = String.fromEnvironment('API_URL', defaultValue: 'http://127.0.0.1:10100/');
   
 
   Future<User?> login() async {
     try {
-      print(apiUrl);
       final res = await client.post(
         Uri.parse('http://127.0.0.1:10100/'),
       );

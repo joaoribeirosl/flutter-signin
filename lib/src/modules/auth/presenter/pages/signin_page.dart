@@ -72,7 +72,9 @@ class _SignInPageState extends State<SignInPage> {
             ),
             const SizedBox(height: 16),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                
+              },
               child: const Text('Don\'t have an account? Sign Up'),
             ),
           ],

@@ -21,6 +21,10 @@ class SignupError extends AppError {
   SignupError(super.message, [super.tracking]);
 }
 
+class TaskError extends AppError {
+  TaskError(super.message, [super.tracking]);
+}
+
 class DecodeError extends AppError {
   DecodeError(super.message, [super.tracking]);
 }

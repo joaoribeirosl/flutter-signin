@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
 import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -97,9 +98,9 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
             const SizedBox(height: 16),
-            const TextField(
-              obscureText: true,
-              decoration: InputDecoration(
+            TextField(
+              obscureText: authStore.showPassword ? false : true,
+              decoration: const InputDecoration(
                 labelText: 'Confirm Password',
                 prefixIcon: Icon(Icons.lock_outline),
                 border: OutlineInputBorder(),
@@ -113,7 +114,13 @@ class _SignUpPageState extends State<SignUpPage> {
                     name: usernameController.text,
                     password: passwordController.text);
                 await authStore.signup(newUser);
-                Modular.to.pushNamed('/task_page/');
+                // if (res != null) {
+                //   Fluttertoast.showToast(
+                //     msg: "congratz, you created your account!",
+                //   );
+                // }
+
+                Modular.to.pushNamed('/');
               },
               child: const Text('Sign Up'),
             ),

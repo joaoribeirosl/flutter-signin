@@ -1,13 +1,11 @@
-
 import 'package:mobx/mobx.dart';
 
 part 'task_store.g.dart';
 
 // ignore: library_private_types_in_public_api
-class AuthStore = _AuthStore with _$AuthStore;
+class TaskStore = _TaskStore with _$TaskStore;
 
-abstract class _AuthStore with Store {
-
+abstract class _TaskStore with Store {
   late final String title;
 
   @observable

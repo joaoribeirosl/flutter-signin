@@ -8,9 +8,9 @@ part of 'task_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$AuthStore on _AuthStore, Store {
+mixin _$TaskStore on _TaskStore, Store {
   late final _$totalTasksAtom =
-      Atom(name: '_AuthStore.totalTasks', context: context);
+      Atom(name: '_TaskStore.totalTasks', context: context);
 
   @override
   int get totalTasks {
@@ -25,7 +25,7 @@ mixin _$AuthStore on _AuthStore, Store {
     });
   }
 
-  late final _$doneAtom = Atom(name: '_AuthStore.done', context: context);
+  late final _$doneAtom = Atom(name: '_TaskStore.done', context: context);
 
   @override
   bool get done {
@@ -40,28 +40,28 @@ mixin _$AuthStore on _AuthStore, Store {
     });
   }
 
-  late final _$_AuthStoreActionController =
-      ActionController(name: '_AuthStore', context: context);
+  late final _$_TaskStoreActionController =
+      ActionController(name: '_TaskStore', context: context);
 
   @override
   void incrementTask() {
-    final _$actionInfo = _$_AuthStoreActionController.startAction(
-        name: '_AuthStore.incrementTask');
+    final _$actionInfo = _$_TaskStoreActionController.startAction(
+        name: '_TaskStore.incrementTask');
     try {
       return super.incrementTask();
     } finally {
-      _$_AuthStoreActionController.endAction(_$actionInfo);
+      _$_TaskStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void toggleDone() {
     final _$actionInfo =
-        _$_AuthStoreActionController.startAction(name: '_AuthStore.toggleDone');
+        _$_TaskStoreActionController.startAction(name: '_TaskStore.toggleDone');
     try {
       return super.toggleDone();
     } finally {
-      _$_AuthStoreActionController.endAction(_$actionInfo);
+      _$_TaskStoreActionController.endAction(_$actionInfo);
     }
   }
 

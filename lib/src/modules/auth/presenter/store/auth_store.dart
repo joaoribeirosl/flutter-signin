@@ -22,7 +22,7 @@ abstract class _AuthStore with Store {
   void toggleShowPassword() => showPassword = !showPassword;
 
   // @computed
-  // bool get isFormValid => password.length > 6; USE CASE => DOMAIN
+  // bool get isFormValid => password.length > 6; USE CASES => DOMAIN
 
   Future<Uint8List?> signup(User user) async {
     return await signupDatasource.signup(user);

@@ -107,6 +107,8 @@ class _SignInPageState extends State<SignInPage> {
                     name: usernameController.text,
                     password: passwordController.text);
                 await authStore.login(newUser);
+
+                // Modular.to.pushNamed('/task_page'); // TODO bem vindo ivson <username>
               },
               child: const Text('Login'),
             ),

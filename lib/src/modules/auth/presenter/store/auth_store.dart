@@ -11,34 +11,26 @@ part 'auth_store.g.dart';
 class AuthStore = _AuthStore with _$AuthStore;
 
 abstract class _AuthStore with Store {
-
   final SigninDatasource signinDatasource = SigninDatasource();
   final SignupDatasource signupDatasource = SignupDatasource();
-
-  @observable
-  String username = '';
-
-  @action
-  void setUsername(String value) => username = value;
-
-  @observable
-  String password = '';
 
   @observable
   bool showPassword = false;
 
   @action
-  void setPassword(String value) => password = value;
+  void toggleShowPassword() =>
+      showPassword = !showPassword; // implement showPassword
 
-  @action
-  void toggleShowPassword() => showPassword = !showPassword; // implement showPassword
-
-  @computed
-  bool get isFormValid => password.length > 6;
+  // @computed
+  // bool get isFormValid => password.length > 6; USE CASE => DOMAIN
 
   Future<Uint8List?> signup() async {
-    var newUser = User(id: '1', name: 'jo', password: 'pass'); 
+    var newUser = User(id: '1', name: 'jo', password: 'pass');
     return await signupDatasource.signup(newUser);
   }
 
+  Future<Uint8List?> login() async {
+    var newUser = User(id: '', name: 'jo', password: 'pass');
+    return await signinDatasource.login(newUser);
+  }
 }

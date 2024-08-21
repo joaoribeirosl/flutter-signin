@@ -9,8 +9,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-
-  late final AuthStore authStore; 
+  late final AuthStore authStore;
 
   @override
   void initState() {
@@ -50,28 +49,27 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
             const SizedBox(height: 16),
-            const TextField(
-              obscureText: true,
+            TextField(
+              obscureText: authStore.showPassword ? true : false,
               enableSuggestions: false,
               autocorrect: false,
               decoration: InputDecoration(
                 labelText: 'Password',
-                helperText:'Password must contain at least 6 characters',
-                prefixIcon: Icon(Icons.lock),
-                border: OutlineInputBorder(),
-                // suffixIcon: IconButton( 
-                //       icon: Icon(authStore.showPassword 
-                //           ? Icons.visibility 
-                //           : Icons.visibility_off), 
-                //       onPressed: () { 
-                //         setState( 
-                //           () { 
-                //             showPassword = !showPassword; 
-                //           }, 
-                //         ); 
-                //       }, 
-                    // ),
-                
+                helperText: "Password must contain at least 6 characters",
+                prefixIcon: const Icon(Icons.lock),
+                border: const OutlineInputBorder(),
+                suffixIcon: IconButton(
+                  icon: Icon(authStore.showPassword
+                      ? Icons.visibility
+                      : Icons.visibility_off),
+                  onPressed: () {
+                    setState(
+                      () {
+                        authStore.showPassword = !authStore.showPassword;
+                      },
+                    );
+                  },
+                ),
               ),
             ),
             const SizedBox(height: 16),

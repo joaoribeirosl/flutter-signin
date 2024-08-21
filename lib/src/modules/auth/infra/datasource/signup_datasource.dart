@@ -7,11 +7,11 @@ import 'package:http/http.dart' as http;
 
 class SignupDatasource {
   final client = http.Client();
-  final AuthAdapter authSigninAdapter = AuthAdapter();
+  final AuthAdapter authAdapter = AuthAdapter();
 
   Future<Uint8List?> signup(User data) async {
     try {
-      final req = authSigninAdapter.protoToData(data);
+      final req = authAdapter.protoToData(data);
       if (req == null) return null;
 
       final res = await client.post(

@@ -13,24 +13,22 @@ class AuthStore = _AuthStore with _$AuthStore;
 abstract class _AuthStore with Store {
   final SigninDatasource signinDatasource = SigninDatasource();
   final SignupDatasource signupDatasource = SignupDatasource();
+  // final SignInPage signInPage = const SignInPage();
 
   @observable
   bool showPassword = false;
 
   @action
-  void toggleShowPassword() =>
-      showPassword = !showPassword; // implement showPassword
+  void toggleShowPassword() => showPassword = !showPassword;
 
   // @computed
   // bool get isFormValid => password.length > 6; USE CASE => DOMAIN
 
-  Future<Uint8List?> signup() async {
-    var newUser = User(id: '1', name: 'jo', password: 'pass');
-    return await signupDatasource.signup(newUser);
+  Future<Uint8List?> signup(User user) async {
+    return await signupDatasource.signup(user);
   }
 
-  Future<Uint8List?> login() async {
-    var newUser = User(id: '', name: 'jo', password: 'pass');
-    return await signinDatasource.login(newUser);
+  Future<Uint8List?> login(User user) async {
+    return await signinDatasource.login(user);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
 import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -10,11 +11,32 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   late final AuthStore authStore;
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     authStore = context.read<AuthStore>();
+    usernameController.addListener(_usernamePrinter);
+    passwordController.addListener(_passwordPrinter);
+  }
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  void _usernamePrinter() {
+    final text = usernameController.text;
+    print('Second text field: $text');
+  }
+
+  void _passwordPrinter() {
+    final text = passwordController.text;
+    print('Second text field: $text');
   }
 
   @override
@@ -41,8 +63,9 @@ class _SignUpPageState extends State<SignUpPage> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 32),
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              controller: usernameController,
+              decoration: const InputDecoration(
                 labelText: 'Username',
                 prefixIcon: Icon(Icons.person),
                 border: OutlineInputBorder(),
@@ -50,7 +73,8 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             const SizedBox(height: 16),
             TextField(
-              obscureText: authStore.showPassword ? true : false,
+              controller: passwordController,
+              obscureText: authStore.showPassword ? false : true,
               enableSuggestions: false,
               autocorrect: false,
               decoration: InputDecoration(
@@ -84,7 +108,12 @@ class _SignUpPageState extends State<SignUpPage> {
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: () async {
-                await authStore.signup();
+                final newUser = User(
+                    id: '',
+                    name: usernameController.text,
+                    password: passwordController.text);
+                await authStore.signup(newUser);
+                Modular.to.pushNamed('/task_page/');
               },
               child: const Text('Sign Up'),
             ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin/src/modules/auth/infra/datasource/signin_datasource.dart';
+import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
 import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
 
 class SignInPage extends StatefulWidget {
@@ -76,7 +77,7 @@ class _SignInPageState extends State<SignInPage> {
             const SizedBox(height: 16),
             TextField(
               controller: passwordController,
-              obscureText: authStore.showPassword ? true : false,
+              obscureText: authStore.showPassword ? false : true,
               enableSuggestions: false,
               autocorrect: false,
               decoration: InputDecoration(
@@ -101,7 +102,11 @@ class _SignInPageState extends State<SignInPage> {
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: () async {
-                await authStore.login();
+                final newUser = User(
+                    id: '',
+                    name: usernameController.text,
+                    password: passwordController.text);
+                await authStore.login(newUser);
               },
               child: const Text('Login'),
             ),

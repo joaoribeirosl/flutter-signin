@@ -9,9 +9,9 @@ class SigninDatasource {
   final client = http.Client();
   final AuthAdapter authAdapter = AuthAdapter();
 
-  Future<Uint8List?> login(User data) async {
+  Future<Uint8List?> login(User user) async {
     try {
-      final req = authAdapter.protoToData(data);
+      final req = authAdapter.protoToData(user);
       if (req == null) return null;
 
       final res = await client.post(

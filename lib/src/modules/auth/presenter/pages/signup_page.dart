@@ -65,7 +65,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   onPressed: () {
                     setState(
                       () {
-                        authStore.showPassword = !authStore.showPassword;
+                        authStore.toggleShowPassword();
                       },
                     );
                   },

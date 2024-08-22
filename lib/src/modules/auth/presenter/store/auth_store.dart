@@ -13,13 +13,20 @@ class AuthStore = _AuthStore with _$AuthStore;
 abstract class _AuthStore with Store {
   final SigninDatasource signinDatasource = SigninDatasource();
   final SignupDatasource signupDatasource = SignupDatasource();
-  // final SignInPage signInPage = const SignInPage();
 
   @observable
   bool showPassword = false;
 
   @action
   void toggleShowPassword() => showPassword = !showPassword;
+
+  @observable
+  bool enableButton = false;
+
+  @action
+  void toggleEnableButton() => enableButton = !enableButton;
+
+  // bool get isSignInValid =>
 
   // @computed
   // bool get isFormValid => password.length > 6; USE CASES => DOMAIN

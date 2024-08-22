@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
 import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
@@ -73,27 +74,25 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
             const SizedBox(height: 16),
-            TextField(
-              controller: passwordController,
-              obscureText: authStore.showPassword ? false : true,
-              enableSuggestions: false,
-              autocorrect: false,
-              decoration: InputDecoration(
-                labelText: 'Password',
-                helperText: "Password must contain at least 6 characters",
-                prefixIcon: const Icon(Icons.lock),
-                border: const OutlineInputBorder(),
-                suffixIcon: IconButton(
-                  icon: Icon(authStore.showPassword
-                      ? Icons.visibility
-                      : Icons.visibility_off),
-                  onPressed: () {
-                    setState(
-                      () {
-                        authStore.toggleShowPassword();
-                      },
-                    );
-                  },
+            Observer(
+              builder: (_) => TextField(
+                controller: passwordController,
+                obscureText: authStore.showPassword ? false : true,
+                enableSuggestions: false,
+                autocorrect: false,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  helperText: "Password must contain at least 6 characters",
+                  prefixIcon: const Icon(Icons.lock),
+                  border: const OutlineInputBorder(),
+                  suffixIcon: IconButton(
+                    icon: Icon(authStore.showPassword
+                        ? Icons.visibility
+                        : Icons.visibility_off),
+                    onPressed: () {
+                      authStore.toggleShowPassword();
+                    },
+                  ),
                 ),
               ),
             ),

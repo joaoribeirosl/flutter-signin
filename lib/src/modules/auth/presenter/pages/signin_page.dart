@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin/src/modules/auth/infra/datasource/signin_datasource.dart';
 import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
@@ -75,42 +76,43 @@ class _SignInPageState extends State<SignInPage> {
               ),
             ),
             const SizedBox(height: 16),
-            TextField(
-              controller: passwordController,
-              obscureText: authStore.showPassword ? false : true,
-              enableSuggestions: false,
-              autocorrect: false,
-              decoration: InputDecoration(
-                labelText: 'Password',
-                helperText: "Password must contain at least 6 characters",
-                prefixIcon: const Icon(Icons.lock),
-                border: const OutlineInputBorder(),
-                suffixIcon: IconButton(
-                  icon: Icon(authStore.showPassword
-                      ? Icons.visibility
-                      : Icons.visibility_off),
-                  onPressed: () {
-                    setState(
-                      () {
-                        authStore.toggleShowPassword();
-                      },
-                    );
-                  },
+            Observer(
+              builder: (_) => TextField(
+                controller: passwordController,
+                obscureText: authStore.showPassword ? false : true,
+                enableSuggestions: false,
+                autocorrect: false,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  helperText: "Password must contain at least 6 characters",
+                  prefixIcon: const Icon(Icons.lock),
+                  border: const OutlineInputBorder(),
+                  suffixIcon: IconButton(
+                    icon: Icon(authStore.showPassword
+                        ? Icons.visibility
+                        : Icons.visibility_off),
+                    onPressed: () {
+                      authStore.toggleShowPassword();
+                    },
+                  ),
                 ),
               ),
             ),
             const SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: () async {
-                final newUser = User(
-                    id: '',
-                    name: usernameController.text,
-                    password: passwordController.text);
-                await authStore.login(newUser);
-
-                // Modular.to.pushNamed('/task_page'); // TODO bem vindo ivson <username>
-              },
-              child: const Text('Login'),
+            Observer(
+              builder: (_) => ElevatedButton(
+                onPressed: authStore.enableButton
+                    ? () async {
+                        final newUser = User(
+                            id: '',
+                            name: usernameController.text,
+                            password: passwordController.text);
+                        await authStore.login(newUser);
+                        // Modular.to.pushNamed('/task_page'); // TODO bem vindo ivson <username>
+                      }
+                    : null,
+                child: const Text('Login'),
+              ),
             ),
             const SizedBox(height: 15),
             TextButton(

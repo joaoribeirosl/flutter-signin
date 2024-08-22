@@ -82,6 +82,7 @@ class _SignInPageState extends State<SignInPage> {
                 obscureText: authStore.showPassword ? false : true,
                 enableSuggestions: false,
                 autocorrect: false,
+                onChanged: (value) => authStore.toggleEnablePassword(value),
                 decoration: InputDecoration(
                   labelText: 'Password',
                   helperText: "Password must contain at least 6 characters",
@@ -108,7 +109,8 @@ class _SignInPageState extends State<SignInPage> {
                             name: usernameController.text,
                             password: passwordController.text);
                         await authStore.login(newUser);
-                        // Modular.to.pushNamed('/task_page'); // TODO bem vindo ivson <username>
+
+                        // Modular.to.pushNamed('/task_page/');
                       }
                     : null,
                 child: const Text('Login'),

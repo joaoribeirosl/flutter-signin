@@ -25,6 +25,22 @@ mixin _$AuthStore on _AuthStore, Store {
     });
   }
 
+  late final _$enableButtonAtom =
+      Atom(name: '_AuthStore.enableButton', context: context);
+
+  @override
+  bool get enableButton {
+    _$enableButtonAtom.reportRead();
+    return super.enableButton;
+  }
+
+  @override
+  set enableButton(bool value) {
+    _$enableButtonAtom.reportWrite(value, super.enableButton, () {
+      super.enableButton = value;
+    });
+  }
+
   late final _$_AuthStoreActionController =
       ActionController(name: '_AuthStore', context: context);
 
@@ -40,9 +56,21 @@ mixin _$AuthStore on _AuthStore, Store {
   }
 
   @override
+  void toggleEnablePassword(String password) {
+    final _$actionInfo = _$_AuthStoreActionController.startAction(
+        name: '_AuthStore.toggleEnablePassword');
+    try {
+      return super.toggleEnablePassword(password);
+    } finally {
+      _$_AuthStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-showPassword: ${showPassword}
+showPassword: ${showPassword},
+enableButton: ${enableButton}
     ''';
   }
 }

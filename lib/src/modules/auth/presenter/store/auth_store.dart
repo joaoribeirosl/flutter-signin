@@ -11,8 +11,8 @@ part 'auth_store.g.dart';
 class AuthStore = _AuthStore with _$AuthStore;
 
 abstract class _AuthStore with Store {
-  final SigninDatasource signinDatasource = SigninDatasource();
-  final SignupDatasource signupDatasource = SignupDatasource();
+  final signinDatasource = SigninDatasource();
+  final signupDatasource = SignupDatasource();
 
   @observable
   bool showPassword = false;
@@ -24,9 +24,12 @@ abstract class _AuthStore with Store {
   bool enableButton = false;
 
   @action
-  void toggleEnableButton() => enableButton = !enableButton;
+  void toggleEnablePassword(String password) {
+    enableButton = password.isNotEmpty;
+  }
 
-  // bool get isSignInValid =>
+  // bool get isLoginValid =>
+  // bool get isSignupValid =>
 
   // @computed
   // bool get isFormValid => password.length > 6; USE CASES => DOMAIN

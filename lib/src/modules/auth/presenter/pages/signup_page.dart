@@ -78,6 +78,7 @@ class _SignUpPageState extends State<SignUpPage> {
               builder: (_) => TextField(
                 controller: passwordController,
                 obscureText: authStore.showPassword ? false : true,
+                onChanged: (value) => authStore.toggleEnablePassword(value),
                 enableSuggestions: false,
                 autocorrect: false,
                 decoration: InputDecoration(

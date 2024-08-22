@@ -13,7 +13,7 @@ class _TaskPageState extends State<TaskPage> {
     return const Scaffold(
       body: Column(
         children: [
-          Text('Welcome howtowrit'),
+          Text('Welcome ivson <username>'),
           SizedBox(height: 10),
           Text('task list:'),
 

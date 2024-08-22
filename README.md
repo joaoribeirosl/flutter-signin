@@ -7,6 +7,6 @@ This Flutter project was developed as a technical assessment for residents selec
 This project follows the Clean Architecture principles, ensuring a clear separation of concerns and maintainability. The structure of the project is modular, allowing for scalable and easily testable code. 
 
 ### Key Technologies Used:
-- **Clean Dart**: The project adheres to the Clean Architecture guidelines, promoting a clear and maintainable codebase by separating business logic, data, and presentation layers.
-- **Flutter Modular**: Used for dependency injection and navigation management, allowing for a modular and scalable application structure.
-- **MobX**: Implemented for state management, enabling reactive programming and ensuring a seamless user experience through efficient state updates.
+- **Clean Dart**
+- **Flutter Modular**
+- **MobX**

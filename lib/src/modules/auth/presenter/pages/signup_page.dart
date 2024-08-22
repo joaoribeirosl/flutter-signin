@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-// import 'package:flutter_modular/flutter_modular.dart';
-// import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
+import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
+import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -10,13 +12,34 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  late final AuthStore authStore;
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   userStore = context.read<AuthStore>();
-  //   Modular.to.navigate('/auth_module');
-  // }
+  @override
+  void initState() {
+    super.initState();
+    authStore = context.read<AuthStore>();
+    usernameController.addListener(_usernamePrinter);
+    passwordController.addListener(_passwordPrinter);
+  }
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  void _usernamePrinter() {
+    final text = usernameController.text;
+    print('Second text field: $text');
+  }
+
+  void _passwordPrinter() {
+    final text = passwordController.text;
+    print('Second text field: $text');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,26 +65,42 @@ class _SignUpPageState extends State<SignUpPage> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 32),
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              controller: usernameController,
+              decoration: const InputDecoration(
                 labelText: 'Username',
                 prefixIcon: Icon(Icons.person),
                 border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 16),
-            const TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Password',
-                prefixIcon: Icon(Icons.lock),
-                border: OutlineInputBorder(),
+            Observer(
+              builder: (_) => TextField(
+                controller: passwordController,
+                obscureText: authStore.showPassword ? false : true,
+                onChanged: (value) => authStore.toggleEnablePassword(value),
+                enableSuggestions: false,
+                autocorrect: false,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  helperText: "Password must contain at least 6 characters",
+                  prefixIcon: const Icon(Icons.lock),
+                  border: const OutlineInputBorder(),
+                  suffixIcon: IconButton(
+                    icon: Icon(authStore.showPassword
+                        ? Icons.visibility
+                        : Icons.visibility_off),
+                    onPressed: () {
+                      authStore.toggleShowPassword();
+                    },
+                  ),
+                ),
               ),
             ),
             const SizedBox(height: 16),
-            const TextField(
-              obscureText: true,
-              decoration: InputDecoration(
+            TextField(
+              obscureText: authStore.showPassword ? false : true,
+              decoration: const InputDecoration(
                 labelText: 'Confirm Password',
                 prefixIcon: Icon(Icons.lock_outline),
                 border: OutlineInputBorder(),
@@ -69,7 +108,20 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             const SizedBox(height: 24),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                final newUser = User(
+                    id: '',
+                    name: usernameController.text,
+                    password: passwordController.text);
+                await authStore.signup(newUser);
+                // if (res != null) {
+                //   Fluttertoast.showToast(
+                //     msg: "congratz, you created your account!",
+                //   );
+                // }
+
+                Modular.to.pushNamed('/');
+              },
               child: const Text('Sign Up'),
             ),
             const SizedBox(height: 16),

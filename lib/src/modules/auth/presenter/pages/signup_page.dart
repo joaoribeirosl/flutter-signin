@@ -120,7 +120,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 //   );
                 // }
 
-                Modular.to.pushNamed('/');
+                Modular.to.navigate('/');
               },
               child: const Text('Sign Up'),
             ),
@@ -139,7 +139,7 @@ class _SignUpPageState extends State<SignUpPage> {
             const SizedBox(height: 16),
             TextButton(
               onPressed: () {
-                Modular.to.pushNamed('/');
+                Modular.to.navigate('/');
               },
               child: const Text('Already have an account? Sign In'),
             ),

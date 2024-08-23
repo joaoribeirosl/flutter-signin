@@ -110,7 +110,7 @@ class _SignInPageState extends State<SignInPage> {
                             password: passwordController.text);
                         await authStore.login(newUser);
 
-                        // Modular.to.pushNamed('/task_page/');
+                        Modular.to.navigate('/task_module/');
                       }
                     : null,
                 child: const Text('Login'),
@@ -124,7 +124,7 @@ class _SignInPageState extends State<SignInPage> {
             const SizedBox(height: 16),
             TextButton(
               onPressed: () {
-                Modular.to.pushNamed('/signup_page/');
+                Modular.to.navigate('/signup_page/');
               },
               child: const Text('Don\'t have an account? Sign Up'),
             ),

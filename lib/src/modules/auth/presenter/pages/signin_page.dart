@@ -13,9 +13,9 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   late final AuthStore authStore;
-  final SigninDatasource authDatasource = SigninDatasource();
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final authDatasource = SigninDatasource();
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   void initState() {
@@ -63,7 +63,7 @@ class _SignInPageState extends State<SignInPage> {
             const SizedBox(height: 8),
             const Text(
               'Enter your credentials to login',
-              style: TextStyle(fontSize: 10),
+              style: TextStyle(fontSize: 15),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 32),

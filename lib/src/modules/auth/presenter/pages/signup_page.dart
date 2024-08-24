@@ -13,8 +13,9 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   late final AuthStore authStore;
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   @override
   void initState() {
@@ -22,12 +23,14 @@ class _SignUpPageState extends State<SignUpPage> {
     authStore = context.read<AuthStore>();
     usernameController.addListener(_usernamePrinter);
     passwordController.addListener(_passwordPrinter);
+    confirmPasswordController.addListener(_confirmPasswordPrinter);
   }
 
   @override
   void dispose() {
     usernameController.dispose();
     passwordController.dispose();
+    confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -38,6 +41,11 @@ class _SignUpPageState extends State<SignUpPage> {
 
   void _passwordPrinter() {
     final text = passwordController.text;
+    print('Second text field: $text');
+  }
+
+  void _confirmPasswordPrinter() {
+    final text = confirmPasswordController.text;
     print('Second text field: $text');
   }
 
@@ -99,6 +107,7 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             const SizedBox(height: 16),
             TextField(
+              controller: confirmPasswordController,
               obscureText: authStore.showPassword ? false : true,
               decoration: const InputDecoration(
                 labelText: 'Confirm Password',

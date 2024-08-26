@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_signin/src/modules/tasks/presenter/pages/components/custom_sidebar.dart';
 import 'package:flutter_signin/src/modules/tasks/presenter/store/task_store.dart';
 
 class TaskPage extends StatefulWidget {
@@ -18,7 +17,35 @@ class _TaskPageState extends State<TaskPage> {
       appBar: AppBar(
         title: const Text('Adicionar Tasks'),
       ),
-      drawer: CustomSidebar(taskStore: taskStore),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                'Sidebar',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.task),
+              title: const Text('Tasks'),
+              onTap: () {},
+            ),
+          ],
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

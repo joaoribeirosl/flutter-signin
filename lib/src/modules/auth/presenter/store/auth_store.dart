@@ -1,6 +1,5 @@
-import 'dart:typed_data';
-import 'package:flutter_signin/src/modules/auth/external/datasource/signin_datasource.dart';
-import 'package:flutter_signin/src/modules/auth/external/datasource/signup_datasource.dart';
+import 'package:flutter_signin/src/modules/auth/domain/usecases/login_use_case.dart';
+import 'package:flutter_signin/src/modules/auth/domain/usecases/signup_use_case.dart';
 import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
 import 'package:mobx/mobx.dart';
 
@@ -10,9 +9,10 @@ part 'auth_store.g.dart';
 class AuthStore = _AuthStore with _$AuthStore;
 
 abstract class _AuthStore with Store {
-  // late final IAuthUseCases authUseCase;
-  final signinDatasource = SigninDatasource();
-  final signupDatasource = SignupDatasource();
+  final ILoginUseCase _loginUseCase;
+  final ISignupUseCase _signupUseCase;
+
+  _AuthStore(this._loginUseCase, this._signupUseCase);
 
   @observable
   bool showPassword = false;
@@ -28,17 +28,21 @@ abstract class _AuthStore with Store {
     enableButton = password.isNotEmpty;
   }
 
-  // bool get isLoginValid =>
-  // bool get isSignupValid =>
-
-  // @computed
-  // bool get isFormValid => password.length > 6; USE CASES => DOMAIN
-
-  Future<Uint8List?> signup(User user) async {
-    return await signupDatasource.signup(user);
+  Future<bool> login(String userName, String password) async {
+    final res =
+        await _loginUseCase.call(User(password: password, name: userName));
+    if (res.$2 != null) {
+      return true;
+    }
+    return false;
   }
 
-  Future<Uint8List?> login(User user) async {
-    return await signinDatasource.login(user);
+  Future<bool> signup(String userName, String password) async {
+    final res =
+        await _signupUseCase.call(User(password: password, name: userName));
+    if (res.$2 != null) {
+      return true;
+    }
+    return false;
   }
 }

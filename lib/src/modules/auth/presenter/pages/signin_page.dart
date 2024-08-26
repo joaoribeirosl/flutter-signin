@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
 import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
 
 class SignInPage extends StatefulWidget {
@@ -12,7 +11,7 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   late final AuthStore authStore;
-  // final authDatasource = SigninDatasource();
+
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -103,13 +102,11 @@ class _SignInPageState extends State<SignInPage> {
               builder: (_) => ElevatedButton(
                 onPressed: authStore.enableButton
                     ? () async {
-                        final newUser = User(
-                            id: '',
-                            name: usernameController.text,
-                            password: passwordController.text);
-                        await authStore.login(newUser);
-
-                        Modular.to.navigate('/task_module/');
+                        if (await authStore.login(
+                            usernameController.text, passwordController.text)) {
+                          authStore.enableButton = false;
+                          Modular.to.navigate('/task_module/');
+                        } else {}
                       }
                     : null,
                 child: const Text('Login'),

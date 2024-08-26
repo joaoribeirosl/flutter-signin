@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
 import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
-// import 'package:fluttertoast/fluttertoast.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -118,16 +116,11 @@ class _SignUpPageState extends State<SignUpPage> {
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: () async {
-                final newUser = User(
-                    id: '',
-                    name: usernameController.text,
-                    password: passwordController.text);
-                await authStore.signup(newUser);
-                // if (res != null) {
-                //   Fluttertoast.showToast(
-                //     msg: "congratz, you created your account!",
-                //   );
-                // }
+                if (await authStore.signup(
+                    usernameController.text, passwordController.text)) {
+                  authStore.enableButton = false;
+                  Modular.to.navigate('/task_module/');
+                } else {}
 
                 Modular.to.navigate('/');
               },

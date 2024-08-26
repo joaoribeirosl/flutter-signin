@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_signin/src/modules/auth/infra/datasource/signin_datasource.dart';
-import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
 import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
 
 class SignInPage extends StatefulWidget {
@@ -13,9 +11,9 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   late final AuthStore authStore;
-  final SigninDatasource authDatasource = SigninDatasource();
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   void initState() {
@@ -63,7 +61,7 @@ class _SignInPageState extends State<SignInPage> {
             const SizedBox(height: 8),
             const Text(
               'Enter your credentials to login',
-              style: TextStyle(fontSize: 10),
+              style: TextStyle(fontSize: 15),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 32),
@@ -104,13 +102,11 @@ class _SignInPageState extends State<SignInPage> {
               builder: (_) => ElevatedButton(
                 onPressed: authStore.enableButton
                     ? () async {
-                        final newUser = User(
-                            id: '',
-                            name: usernameController.text,
-                            password: passwordController.text);
-                        await authStore.login(newUser);
-
-                        // Modular.to.pushNamed('/task_page/');
+                        if (await authStore.login(
+                            usernameController.text, passwordController.text)) {
+                          authStore.enableButton = false;
+                          Modular.to.navigate('/task_module/');
+                        } else {}
                       }
                     : null,
                 child: const Text('Login'),
@@ -124,7 +120,7 @@ class _SignInPageState extends State<SignInPage> {
             const SizedBox(height: 16),
             TextButton(
               onPressed: () {
-                Modular.to.pushNamed('/signup_page/');
+                Modular.to.navigate('/signup_page/');
               },
               child: const Text('Don\'t have an account? Sign Up'),
             ),

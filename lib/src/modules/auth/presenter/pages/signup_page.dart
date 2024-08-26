@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
 import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
-// import 'package:fluttertoast/fluttertoast.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -13,8 +11,9 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   late final AuthStore authStore;
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   @override
   void initState() {
@@ -22,12 +21,14 @@ class _SignUpPageState extends State<SignUpPage> {
     authStore = context.read<AuthStore>();
     usernameController.addListener(_usernamePrinter);
     passwordController.addListener(_passwordPrinter);
+    confirmPasswordController.addListener(_confirmPasswordPrinter);
   }
 
   @override
   void dispose() {
     usernameController.dispose();
     passwordController.dispose();
+    confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -38,6 +39,11 @@ class _SignUpPageState extends State<SignUpPage> {
 
   void _passwordPrinter() {
     final text = passwordController.text;
+    print('Second text field: $text');
+  }
+
+  void _confirmPasswordPrinter() {
+    final text = confirmPasswordController.text;
     print('Second text field: $text');
   }
 
@@ -99,6 +105,7 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             const SizedBox(height: 16),
             TextField(
+              controller: confirmPasswordController,
               obscureText: authStore.showPassword ? false : true,
               decoration: const InputDecoration(
                 labelText: 'Confirm Password',
@@ -109,18 +116,13 @@ class _SignUpPageState extends State<SignUpPage> {
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: () async {
-                final newUser = User(
-                    id: '',
-                    name: usernameController.text,
-                    password: passwordController.text);
-                await authStore.signup(newUser);
-                // if (res != null) {
-                //   Fluttertoast.showToast(
-                //     msg: "congratz, you created your account!",
-                //   );
-                // }
+                if (await authStore.signup(
+                    usernameController.text, passwordController.text)) {
+                  authStore.enableButton = false;
+                  Modular.to.navigate('/task_module/');
+                } else {}
 
-                Modular.to.pushNamed('/');
+                Modular.to.navigate('/');
               },
               child: const Text('Sign Up'),
             ),
@@ -139,7 +141,7 @@ class _SignUpPageState extends State<SignUpPage> {
             const SizedBox(height: 16),
             TextButton(
               onPressed: () {
-                Modular.to.pushNamed('/');
+                Modular.to.navigate('/');
               },
               child: const Text('Already have an account? Sign In'),
             ),

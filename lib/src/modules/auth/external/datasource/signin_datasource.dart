@@ -22,7 +22,7 @@ class SigninDatasource implements ISigninDatasource {
         return res.bodyBytes;
       }
     } catch (e) {
-      throw SigninError('error to signin, $e');
+      throw ServerError('error to connect with server, $e');
     }
     return null;
   }

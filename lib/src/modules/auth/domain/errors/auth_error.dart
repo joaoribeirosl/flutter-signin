@@ -28,3 +28,7 @@ class TaskError extends AppError {
 class DecodeError extends AppError {
   DecodeError(super.message, [super.tracking]);
 }
+
+class ServerError extends AppError {
+  ServerError(super.message, [super.tracking]);
+}

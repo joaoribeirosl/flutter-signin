@@ -15,14 +15,14 @@ class SignupDatasource implements ISignupDatasource {
   Future<bool?> signup(Uint8List userEncoded) async {
     try {
       final res = await _client.post(
-        Uri.parse(signinRoute),
+        Uri.parse(signupRoute),
         body: userEncoded,
       );
       if (res.statusCode == 200) {
         return true;
       }
     } catch (e) {
-      throw SigninError('error to signin, $e');
+      throw ServerError('error to connect with server, $e');
     }
     return null;
   }

@@ -23,7 +23,7 @@ class _TaskPageState extends State<TaskPage> {
           children: [
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Color.fromARGB(255, 212, 97, 132),
               ),
               child: Text(
                 'Sidebar',

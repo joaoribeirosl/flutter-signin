@@ -116,8 +116,8 @@ class _SignUpPageState extends State<SignUpPage> {
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: () async {
-                if (await authStore.signup(
-                    usernameController.text, passwordController.text)) {
+                if (await authStore.signup(usernameController.text,
+                    passwordController.text, confirmPasswordController.text)) {
                   authStore.enableButton = false;
                   Modular.to.navigate('/task_module/');
                 } else {}

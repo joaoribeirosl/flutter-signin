@@ -37,12 +37,17 @@ abstract class _AuthStore with Store {
     return false;
   }
 
-  Future<bool> signup(String userName, String password) async {
-    final res =
-        await _signupUseCase.call(User(password: password, name: userName));
-    if (res.$2 != null) {
-      return true;
+  Future<bool> signup(
+      String userName, String password, String confirmPassword) async {
+    if (confirmPassword == password) {
+      final res =
+          await _signupUseCase.call(User(password: password, name: userName));
+      if (res.$2 != null) {
+        return true;
+      }
+      return false;
+    } else {
+      return false; // TODO toast
     }
-    return false;
   }
 }

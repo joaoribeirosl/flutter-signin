@@ -44,17 +44,6 @@ mixin _$TaskStore on _TaskStore, Store {
       ActionController(name: '_TaskStore', context: context);
 
   @override
-  void incrementTask() {
-    final _$actionInfo = _$_TaskStoreActionController.startAction(
-        name: '_TaskStore.incrementTask');
-    try {
-      return super.incrementTask();
-    } finally {
-      _$_TaskStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   void toggleDone() {
     final _$actionInfo =
         _$_TaskStoreActionController.startAction(name: '_TaskStore.toggleDone');

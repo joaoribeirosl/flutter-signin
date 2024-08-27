@@ -3,7 +3,7 @@ import 'package:flutter_signin/src/modules/auth/domain/repositories/auth_reposit
 import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
 
 abstract class ILoginUseCase {
-  Future<(IAppError?, User?)> call(User user);
+  Future<(IAuthError?, User?)> call(User user);
 }
 
 class LoginUseCase implements ILoginUseCase {
@@ -12,7 +12,7 @@ class LoginUseCase implements ILoginUseCase {
   LoginUseCase(this._repository);
 
   @override
-  Future<(IAppError?, User?)> call(User user) async {
+  Future<(IAuthError?, User?)> call(User user) async {
     // user.name.isEmpty
     //   (erro, null);
     return await _repository.login(user);

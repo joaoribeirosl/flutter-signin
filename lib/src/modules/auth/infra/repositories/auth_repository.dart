@@ -12,7 +12,7 @@ class AuthRepository implements IAuthRepository {
   AuthRepository(this._signinDatasource, this._signupDatasource);
 
   @override
-  Future<(IAppError?, User?)> login(User data) async {
+  Future<(IAuthError?, User?)> login(User data) async {
     try {
       final userEncoded = AuthAdapter.protoToData(data);
       final res = await _signinDatasource.login(userEncoded);
@@ -22,13 +22,13 @@ class AuthRepository implements IAuthRepository {
       } else {
         return (SigninError('user not found'), null);
       }
-    } on IAppError catch (e) {
+    } on IAuthError catch (e) {
       return (e, null);
     }
   }
 
   @override
-  Future<(IAppError?, bool?)> signup(User user) async {
+  Future<(IAuthError?, bool?)> signup(User user) async {
     try {
       final userEncoded = AuthAdapter.protoToData(user);
       final res = await _signupDatasource.signup(userEncoded);
@@ -37,7 +37,7 @@ class AuthRepository implements IAuthRepository {
       } else {
         return (SignupError('user already exists'), null);
       }
-    } on IAppError catch (e) {
+    } on IAuthError catch (e) {
       return (e, null);
     }
   }

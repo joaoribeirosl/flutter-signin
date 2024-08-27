@@ -9,11 +9,10 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  
   @override
   Widget build(BuildContext context) {
-    const primaryColorLigth = Color.fromRGBO(54, 81, 220, 1);
-    const primaryColorDark = Color.fromRGBO(86, 207, 255, 1);
+    const primaryColorLigth = Color.fromRGBO(173, 82, 120, 1);
+    const primaryColorDark = Color.fromRGBO(165, 88, 124, 1);
 
     return MaterialApp.router(
       title: 'flutter app',
@@ -92,7 +91,6 @@ class _MainAppState extends State<MainApp> {
         checkboxTheme: const CheckboxThemeData(
           side: BorderSide(color: primaryColorDark),
         ),
-        
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: primaryColorDark,
@@ -100,7 +98,6 @@ class _MainAppState extends State<MainApp> {
             textStyle: const TextStyle(fontWeight: FontWeight.normal),
           ),
         ),
-        
         useMaterial3: true,
       ),
       routerConfig: Modular.routerConfig,

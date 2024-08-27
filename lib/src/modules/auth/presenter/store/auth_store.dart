@@ -9,7 +9,7 @@ part 'auth_store.g.dart';
 class AuthStore = _AuthStore with _$AuthStore;
 
 abstract class _AuthStore with Store {
-  final ILoginUseCase _loginUseCase;
+  final ISigninUseCase _loginUseCase;
   final ISignupUseCase _signupUseCase;
 
   _AuthStore(this._loginUseCase, this._signupUseCase);
@@ -37,12 +37,17 @@ abstract class _AuthStore with Store {
     return false;
   }
 
-  Future<bool> signup(String userName, String password) async {
-    final res =
-        await _signupUseCase.call(User(password: password, name: userName));
-    if (res.$2 != null) {
-      return true;
+  Future<bool> signup(
+      String userName, String password, String confirmPassword) async {
+    if (confirmPassword == password) {
+      final res =
+          await _signupUseCase.call(User(password: password, name: userName));
+      if (res.$2 != null) {
+        return true;
+      }
+      return false;
+    } else {
+      return false;
     }
-    return false;
   }
 }

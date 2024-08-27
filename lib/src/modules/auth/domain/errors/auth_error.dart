@@ -1,30 +1,30 @@
-abstract class IAppError {
+abstract class IAuthError {
   String get message;
   String? get tracking;
 }
 
-class AppError implements IAppError {
+class AuthError implements IAuthError {
   @override
   final String message;
 
   @override
   final String? tracking;
 
-  AppError(this.message, [this.tracking]);
+  AuthError(this.message, [this.tracking]);
 }
 
-class SigninError extends AppError {
+class SigninError extends AuthError {
   SigninError(super.message, [super.tracking]);
 }
 
-class SignupError extends AppError {
+class SignupError extends AuthError {
   SignupError(super.message, [super.tracking]);
 }
 
-class TaskError extends AppError {
-  TaskError(super.message, [super.tracking]);
+class DecodeError extends AuthError {
+  DecodeError(super.message, [super.tracking]);
 }
 
-class DecodeError extends AppError {
-  DecodeError(super.message, [super.tracking]);
+class ServerError extends AuthError {
+  ServerError(super.message, [super.tracking]);
 }

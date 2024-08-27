@@ -23,7 +23,7 @@ class AuthModule extends Module {
 
     i.add<IAuthRepository>(AuthRepository.new);
 
-    i.add<ILoginUseCase>(LoginUseCase.new);
+    i.add<ISigninUseCase>(SigninUseCase.new);
     i.add<ISignupUseCase>(SignupUseCase.new);
 
     i.addSingleton(AuthStore.new);

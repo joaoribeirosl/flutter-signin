@@ -9,7 +9,7 @@ part 'auth_store.g.dart';
 class AuthStore = _AuthStore with _$AuthStore;
 
 abstract class _AuthStore with Store {
-  final ILoginUseCase _loginUseCase;
+  final ISigninUseCase _loginUseCase;
   final ISignupUseCase _signupUseCase;
 
   _AuthStore(this._loginUseCase, this._signupUseCase);
@@ -47,7 +47,7 @@ abstract class _AuthStore with Store {
       }
       return false;
     } else {
-      return false; // TODO toast
+      return false;
     }
   }
 }

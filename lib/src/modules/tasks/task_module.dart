@@ -34,6 +34,7 @@ class TaskModule extends Module {
 
   @override
   void routes(RouteManager r) {
-    r.child(Modular.initialRoute, child: (context) => const TaskPage());
+    r.child(Modular.initialRoute,
+        child: (context) => TaskPage(username: r.args.data));
   }
 }

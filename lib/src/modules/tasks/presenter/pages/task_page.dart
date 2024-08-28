@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin/src/modules/tasks/presenter/store/task_store.dart';
 
 class TaskPage extends StatefulWidget {
-  const TaskPage({super.key});
+  final String? username;
+  const TaskPage({super.key, this.username});
 
   @override
   State<TaskPage> createState() => _TaskPageState();
@@ -11,11 +13,32 @@ class TaskPage extends StatefulWidget {
 class _TaskPageState extends State<TaskPage> {
   late final TaskStore taskStore;
 
+  final taskController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    taskStore = context.read<TaskStore>();
+
+    taskController.addListener(_taskPrinter);
+  }
+
+  @override
+  void dispose() {
+    taskController.dispose();
+    super.dispose();
+  }
+
+  void _taskPrinter() {
+    final text = taskController.text;
+    print('Second text field: $text');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Bem vindo ivson'),
+        title: Text('Welcome ivson ${widget.username}'),
       ),
       drawer: Drawer(
         child: ListView(
@@ -52,17 +75,20 @@ class _TaskPageState extends State<TaskPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Adicionar uma nova task',
+              'Task List',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              controller: taskController,
+              decoration: const InputDecoration(
                 labelText: 'Task',
               ),
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                await taskStore.addTask(taskController.text, userId);
+              },
               child: const Text('Adicionar Task'),
             ),
             const SizedBox(height: 24),

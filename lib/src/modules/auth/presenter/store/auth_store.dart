@@ -1,4 +1,4 @@
-import 'package:flutter_signin/src/modules/auth/domain/usecases/login_use_case.dart';
+import 'package:flutter_signin/src/modules/auth/domain/usecases/signin_use_case.dart';
 import 'package:flutter_signin/src/modules/auth/domain/usecases/signup_use_case.dart';
 import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
 import 'package:mobx/mobx.dart';

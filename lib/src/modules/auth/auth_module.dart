@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin/src/modules/auth/domain/repositories/auth_repository.dart';
-import 'package:flutter_signin/src/modules/auth/domain/usecases/login_use_case.dart';
+import 'package:flutter_signin/src/modules/auth/domain/usecases/signin_use_case.dart';
 import 'package:flutter_signin/src/modules/auth/domain/usecases/signup_use_case.dart';
 import 'package:flutter_signin/src/modules/auth/external/datasource/signin_datasource.dart';
 import 'package:flutter_signin/src/modules/auth/external/datasource/signup_datasource.dart';
@@ -10,6 +10,7 @@ import 'package:flutter_signin/src/modules/auth/infra/repositories/auth_reposito
 import 'package:flutter_signin/src/modules/auth/presenter/pages/signin_page.dart';
 import 'package:flutter_signin/src/modules/auth/presenter/pages/signup_page.dart';
 import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
+import 'package:flutter_signin/src/modules/tasks/presenter/pages/task_page.dart';
 import 'package:flutter_signin/src/modules/tasks/task_module.dart';
 import 'package:http/http.dart' as http;
 
@@ -31,7 +32,12 @@ class AuthModule extends Module {
 
   @override
   void routes(RouteManager r) {
-    r.child(Modular.initialRoute, child: (context) => const SignInPage());
+    r.child(Modular.initialRoute,
+        child: (context) => const SignInPage(),
+        children: [
+          ChildRoute('/task_page/',
+              child: (context) => TaskPage(username: r.args.data)),
+        ]);
     r.child('/signup_page/', child: (context) => const SignUpPage());
     r.module('/task_module/', module: TaskModule());
   }

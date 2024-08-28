@@ -10,7 +10,6 @@ part 'task_store.g.dart';
 class TaskStore = _TaskStore with _$TaskStore;
 
 abstract class _TaskStore with Store {
-  // final AuthStore _authStore;
   final IAddTaskUseCase _addTaskUseCase;
   final IGetAllTasksUseCase _getAllTasksUseCase;
   final IRemoveTaskByIdUseCase _removeTaskByIdUseCase;
@@ -31,10 +30,6 @@ abstract class _TaskStore with Store {
 
   // @action
   // void toggleDone() => done = !done;
-
-  // void getUserName() {
-  //   // return _authStore.username
-  // }
 
   Future<bool> addTask(String task, String userId) async {
     final res = await _addTaskUseCase.call(Task(task: task, userId: userId));

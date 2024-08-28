@@ -1,3 +1,3 @@
 abstract class IRemoveTaskByIdDatasource {
-  Future<bool?> addTask(int id);
+  Future<bool?> removeTaskById(int id);
 }

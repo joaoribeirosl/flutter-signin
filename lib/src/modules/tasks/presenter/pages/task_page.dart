@@ -40,7 +40,9 @@ class _TaskPageState extends State<TaskPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Welcome ivson ${widget.user?.name}'),
+        title: const Text(
+          'Welcome ivson',
+        ),
       ),
       drawer: Drawer(
         child: ListView(
@@ -76,9 +78,9 @@ class _TaskPageState extends State<TaskPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Task List',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            Text(
+              ' ${widget.user?.name}\'s Task List',
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             Observer(
               builder: (_) => TextField(
@@ -96,17 +98,29 @@ class _TaskPageState extends State<TaskPage> {
                     ? () async {
                         await taskStore.addTask(
                             taskController.text, widget.user?.id ?? '-1');
+                        // limpar o campo dps de digitar
                       }
                     : null,
                 child: const Text('Add Task'),
               ),
             ),
             const SizedBox(height: 24),
-            Expanded(
-              child: ListView.builder(
-                itemBuilder: (context, index) {
-                  return const ListTile();
-                },
+            Observer(
+              builder: (_) => Expanded(
+                child: ListView.builder(
+                  itemCount: taskStore.taskList.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      child: ListTile(
+                        title: Text(taskStore.taskList[index]),
+                        trailing: IconButton(
+                          icon: const Icon(Icons.delete),
+                          onPressed: () {},
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
           ],

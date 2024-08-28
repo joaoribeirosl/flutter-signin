@@ -45,7 +45,7 @@ abstract class _AuthStore with Store {
       String userName, String password, String confirmPassword) async {
     if (confirmPassword == password) {
       final res =
-          await _signupUseCase.call(User(password: password, name: userName));
+          await _signupUseCase.call(User(name: userName, password: password));
       if (res.$2 != null) {
         return true;
       }

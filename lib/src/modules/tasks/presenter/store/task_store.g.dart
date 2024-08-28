@@ -41,6 +41,22 @@ mixin _$TaskStore on _TaskStore, Store {
     });
   }
 
+  late final _$taskListAtom =
+      Atom(name: '_TaskStore.taskList', context: context);
+
+  @override
+  List<String> get taskList {
+    _$taskListAtom.reportRead();
+    return super.taskList;
+  }
+
+  @override
+  set taskList(List<String> value) {
+    _$taskListAtom.reportWrite(value, super.taskList, () {
+      super.taskList = value;
+    });
+  }
+
   late final _$_TaskStoreActionController =
       ActionController(name: '_TaskStore', context: context);
 
@@ -69,7 +85,8 @@ mixin _$TaskStore on _TaskStore, Store {
   @override
   String toString() {
     return '''
-enableButton: ${enableButton}
+enableButton: ${enableButton},
+taskList: ${taskList}
     ''';
   }
 }

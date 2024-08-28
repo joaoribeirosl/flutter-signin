@@ -39,9 +39,17 @@ abstract class _TaskStore with Store {
   // @action
   // void toggleDone() => done = !done;
 
-  Future<bool> addTask(String task, String userId) async {
-    final res = await _addTaskUseCase.call(Task(task: task, userId: userId));
+  final actualTask = Task();
+
+  @observable
+  List<String> taskList = <String>[];
+
+  Future<bool> addTask(String task, String userId) async { // TODO fix Observer
+    actualTask.task = task;
+    actualTask.userId = userId;
+    final res = await _addTaskUseCase.call(actualTask);
     if (res.$2 != null) {
+      taskList.add(actualTask.task);
       return true;
     }
     return false;

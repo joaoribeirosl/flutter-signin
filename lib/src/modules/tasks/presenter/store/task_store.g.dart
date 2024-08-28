@@ -25,6 +25,22 @@ mixin _$TaskStore on _TaskStore, Store {
     });
   }
 
+  late final _$enableButtonAtom =
+      Atom(name: '_TaskStore.enableButton', context: context);
+
+  @override
+  bool get enableButton {
+    _$enableButtonAtom.reportRead();
+    return super.enableButton;
+  }
+
+  @override
+  set enableButton(bool value) {
+    _$enableButtonAtom.reportWrite(value, super.enableButton, () {
+      super.enableButton = value;
+    });
+  }
+
   late final _$_TaskStoreActionController =
       ActionController(name: '_TaskStore', context: context);
 
@@ -40,9 +56,20 @@ mixin _$TaskStore on _TaskStore, Store {
   }
 
   @override
+  void toggleEnableTaskButton(String task) {
+    final _$actionInfo = _$_TaskStoreActionController.startAction(
+        name: '_TaskStore.toggleEnableTaskButton');
+    try {
+      return super.toggleEnableTaskButton(task);
+    } finally {
+      _$_TaskStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-
+enableButton: ${enableButton}
     ''';
   }
 }

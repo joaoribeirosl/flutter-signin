@@ -20,6 +20,8 @@ abstract class _AuthStore with Store {
   @action
   void toggleShowPassword() => showPassword = !showPassword;
 
+  final actualUser = User();
+
   @observable
   bool enableButton = false;
 
@@ -29,9 +31,11 @@ abstract class _AuthStore with Store {
   }
 
   Future<bool> login(String userName, String password) async {
-    final res =
-        await _loginUseCase.call(User(password: password, name: userName));
+    actualUser.name = userName;
+    actualUser.password = password;
+    final res = await _loginUseCase.call(actualUser);
     if (res.$2 != null) {
+      actualUser.id = res.$2!.id;
       return true;
     }
     return false;

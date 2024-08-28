@@ -106,7 +106,7 @@ class _SignInPageState extends State<SignInPage> {
                             usernameController.text, passwordController.text)) {
                           authStore.enableButton = false;
                           Modular.to.navigate('/task_module/',
-                              arguments: usernameController.text);
+                              arguments: authStore.actualUser);
                         } else {}
                       }
                     : null,

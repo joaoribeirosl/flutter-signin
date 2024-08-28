@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
 import 'package:flutter_signin/src/modules/tasks/presenter/store/task_store.dart';
 
 class TaskPage extends StatefulWidget {
-  final String? username;
-  const TaskPage({super.key, this.username});
+  final User? user;
+  const TaskPage({super.key, required this.user});
 
   @override
   State<TaskPage> createState() => _TaskPageState();
@@ -38,7 +40,7 @@ class _TaskPageState extends State<TaskPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Welcome ivson ${widget.username}'),
+        title: Text('Welcome ivson ${widget.user?.name}'),
       ),
       drawer: Drawer(
         child: ListView(
@@ -78,18 +80,26 @@ class _TaskPageState extends State<TaskPage> {
               'Task List',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            TextField(
-              controller: taskController,
-              decoration: const InputDecoration(
-                labelText: 'Task',
+            Observer(
+              builder: (_) => TextField(
+                controller: taskController,
+                onChanged: (value) => taskStore.toggleEnableTaskButton(value),
+                decoration: const InputDecoration(
+                  labelText: 'Task',
+                ),
               ),
             ),
             const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () async {
-                await taskStore.addTask(taskController.text, userId);
-              },
-              child: const Text('Adicionar Task'),
+            Observer(
+              builder: (_) => ElevatedButton(
+                onPressed: taskStore.enableButton
+                    ? () async {
+                        await taskStore.addTask(
+                            taskController.text, widget.user?.id ?? '-1');
+                      }
+                    : null,
+                child: const Text('Add Task'),
+              ),
             ),
             const SizedBox(height: 24),
             Expanded(

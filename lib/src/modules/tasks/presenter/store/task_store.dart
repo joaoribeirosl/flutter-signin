@@ -25,6 +25,14 @@ abstract class _TaskStore with Store {
     _totalTasks++;
   }
 
+  @observable
+  bool enableButton = false;
+
+  @action
+  void toggleEnableTaskButton(String task) {
+    enableButton = task.isNotEmpty;
+  }
+
   // @observable
   // bool done = false;
 

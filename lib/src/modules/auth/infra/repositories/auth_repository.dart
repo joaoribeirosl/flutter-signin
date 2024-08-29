@@ -17,7 +17,6 @@ class AuthRepository implements IAuthRepository {
       final userEncoded = AuthAdapter.protoToData(data);
       final res = await _signinDatasource.login(userEncoded);
       final user = AuthAdapter.dataFromProto(res);
-      print(user);
       if (user != null) {
         return (null, user);
       } else {

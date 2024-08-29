@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:flutter_signin/src/modules/auth/infra/adapter/auth_adapter.dart';
 import 'package:flutter_signin/src/modules/tasks/domain/errors/task_error.dart';
 import 'package:flutter_signin/src/modules/tasks/domain/repositories/task_respository.dart';
 import 'package:flutter_signin/src/modules/tasks/infra/adapter/task_adapter.dart';
@@ -32,8 +33,14 @@ class TaskRepository implements ITaskRepository {
   }
 
   @override
-  Future<(ITaskError?, Tasks?)> getAllTasks(String userId) {
-    throw UnimplementedError();
+  Future<(ITaskError?, Tasks?)> getAllTasks(String idUser) async {
+    // try {
+    //   final res = await _getAllTasksDatasource.getAllTasks(idUser);
+    //   final tasks = TaskAdapter.protoToData(res);
+    //   if (tasks != null) {
+    //     return (null, tasks);
+    //   }
+    // } on ITaskError catch (e) {}
   }
 
   @override

@@ -40,8 +40,8 @@ class _TaskPageState extends State<TaskPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Welcome ivson',
+        title: Text(
+          'Welcome ${widget.user?.name}',
         ),
       ),
       drawer: Drawer(
@@ -79,7 +79,7 @@ class _TaskPageState extends State<TaskPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              ' ${widget.user?.name}\'s Task List',
+              '${widget.user?.name}\'s Task List',
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             TextField(

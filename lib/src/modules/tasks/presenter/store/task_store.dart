@@ -47,9 +47,20 @@ abstract class _TaskStore with Store {
   Future<bool> addTask(String task, String userId) async {
     actualTask.task = task;
     actualTask.userId = userId;
-    final res = await _addTaskUseCase.call(actualTask);
+    if (task != '') {
+      final res = await _addTaskUseCase.call(actualTask);
+      if (res.$2 != null) {
+        taskList.insert(0, actualTask.task);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  Future<bool> getAllTasks(String userId) async {
+    final res = await _getAllTasksUseCase.call(userId);
     if (res.$2 != null) {
-      taskList.insert(0, actualTask.task);
+      // get all tasks
       return true;
     }
     return false;

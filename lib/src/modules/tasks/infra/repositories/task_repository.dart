@@ -32,7 +32,7 @@ class TaskRepository implements ITaskRepository {
   }
 
   @override
-  Future<(ITaskError?, Tasks?)> getAllTasks() {
+  Future<(ITaskError?, Tasks?)> getAllTasks(String userId) {
     throw UnimplementedError();
   }
 

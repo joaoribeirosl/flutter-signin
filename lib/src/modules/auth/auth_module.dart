@@ -10,7 +10,6 @@ import 'package:flutter_signin/src/modules/auth/infra/repositories/auth_reposito
 import 'package:flutter_signin/src/modules/auth/presenter/pages/signin_page.dart';
 import 'package:flutter_signin/src/modules/auth/presenter/pages/signup_page.dart';
 import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
-import 'package:flutter_signin/src/modules/tasks/presenter/pages/task_page.dart';
 import 'package:flutter_signin/src/modules/tasks/task_module.dart';
 import 'package:http/http.dart' as http;
 

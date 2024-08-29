@@ -9,7 +9,7 @@ class RemoveTaskByIdDatasource implements IRemoveTaskByIdDatasource {
   RemoveTaskByIdDatasource(this._client);
 
   @override
-  Future<bool?> removeTaskById(int id) {
+  Future<bool?> removeTaskById(String id) {
     throw UnimplementedError();
   }
 }

@@ -54,4 +54,13 @@ abstract class _TaskStore with Store {
     }
     return false;
   }
+
+  Future<bool> removeTaskById(String taskId) async {
+    final res = await _removeTaskByIdUseCase.call(taskId);
+    if (res.$2 != null) {
+      // remove task from list
+      return true;
+    }
+    return false;
+  }
 }

@@ -37,7 +37,7 @@ class TaskRepository implements ITaskRepository {
   }
 
   @override
-  Future<(ITaskError?, bool?)> removeTaskById(int id) {
+  Future<(ITaskError?, bool?)> removeTaskById(String id) {
     throw UnimplementedError();
   }
 }

@@ -4,5 +4,5 @@ import 'package:flutter_signin/src/modules/tasks/infra/proto/tasks.pb.dart';
 abstract class ITaskRepository {
   Future<(ITaskError?, bool?)> addTask(Task task);
   Future<(ITaskError?, Tasks?)> getAllTasks();
-  Future<(ITaskError?, bool?)> removeTaskById(int id);
+  Future<(ITaskError?, bool?)> removeTaskById(String id);
 }

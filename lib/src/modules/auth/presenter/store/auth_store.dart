@@ -1,4 +1,4 @@
-import 'package:flutter_signin/src/modules/auth/domain/usecases/login_use_case.dart';
+import 'package:flutter_signin/src/modules/auth/domain/usecases/signin_use_case.dart';
 import 'package:flutter_signin/src/modules/auth/domain/usecases/signup_use_case.dart';
 import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
 import 'package:mobx/mobx.dart';
@@ -20,6 +20,8 @@ abstract class _AuthStore with Store {
   @action
   void toggleShowPassword() => showPassword = !showPassword;
 
+  final actualUser = User();
+
   @observable
   bool enableButton = false;
 
@@ -29,9 +31,11 @@ abstract class _AuthStore with Store {
   }
 
   Future<bool> login(String userName, String password) async {
-    final res =
-        await _loginUseCase.call(User(password: password, name: userName));
+    actualUser.name = userName;
+    actualUser.password = password;
+    final res = await _loginUseCase.call(actualUser);
     if (res.$2 != null) {
+      actualUser.id = res.$2!.id;
       return true;
     }
     return false;
@@ -41,7 +45,7 @@ abstract class _AuthStore with Store {
       String userName, String password, String confirmPassword) async {
     if (confirmPassword == password) {
       final res =
-          await _signupUseCase.call(User(password: password, name: userName));
+          await _signupUseCase.call(User(name: userName, password: password));
       if (res.$2 != null) {
         return true;
       }

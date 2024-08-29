@@ -13,8 +13,6 @@ class SignupUseCase implements ISignupUseCase {
 
   @override
   Future<(IAuthError?, bool?)> call(User user) async {
-    // user.name.isEmpty
-    //   (erro, null);
     return await _repository.signup(user);
   }
 }

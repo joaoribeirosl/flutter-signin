@@ -9,34 +9,35 @@ part of 'task_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$TaskStore on _TaskStore, Store {
-  late final _$totalTasksAtom =
-      Atom(name: '_TaskStore.totalTasks', context: context);
+  late final _$enableButtonAtom =
+      Atom(name: '_TaskStore.enableButton', context: context);
 
   @override
-  int get totalTasks {
-    _$totalTasksAtom.reportRead();
-    return super.totalTasks;
+  bool get enableButton {
+    _$enableButtonAtom.reportRead();
+    return super.enableButton;
   }
 
   @override
-  set totalTasks(int value) {
-    _$totalTasksAtom.reportWrite(value, super.totalTasks, () {
-      super.totalTasks = value;
+  set enableButton(bool value) {
+    _$enableButtonAtom.reportWrite(value, super.enableButton, () {
+      super.enableButton = value;
     });
   }
 
-  late final _$doneAtom = Atom(name: '_TaskStore.done', context: context);
+  late final _$taskListAtom =
+      Atom(name: '_TaskStore.taskList', context: context);
 
   @override
-  bool get done {
-    _$doneAtom.reportRead();
-    return super.done;
+  ObservableList<String> get taskList {
+    _$taskListAtom.reportRead();
+    return super.taskList;
   }
 
   @override
-  set done(bool value) {
-    _$doneAtom.reportWrite(value, super.done, () {
-      super.done = value;
+  set taskList(ObservableList<String> value) {
+    _$taskListAtom.reportWrite(value, super.taskList, () {
+      super.taskList = value;
     });
   }
 
@@ -44,11 +45,11 @@ mixin _$TaskStore on _TaskStore, Store {
       ActionController(name: '_TaskStore', context: context);
 
   @override
-  void toggleDone() {
-    final _$actionInfo =
-        _$_TaskStoreActionController.startAction(name: '_TaskStore.toggleDone');
+  void toggleEnableTaskButton(String task) {
+    final _$actionInfo = _$_TaskStoreActionController.startAction(
+        name: '_TaskStore.toggleEnableTaskButton');
     try {
-      return super.toggleDone();
+      return super.toggleEnableTaskButton(task);
     } finally {
       _$_TaskStoreActionController.endAction(_$actionInfo);
     }
@@ -57,8 +58,8 @@ mixin _$TaskStore on _TaskStore, Store {
   @override
   String toString() {
     return '''
-totalTasks: ${totalTasks},
-done: ${done}
+enableButton: ${enableButton},
+taskList: ${taskList}
     ''';
   }
 }

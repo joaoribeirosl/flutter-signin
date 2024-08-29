@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin/src/modules/auth/domain/repositories/auth_repository.dart';
-import 'package:flutter_signin/src/modules/auth/domain/usecases/login_use_case.dart';
+import 'package:flutter_signin/src/modules/auth/domain/usecases/signin_use_case.dart';
 import 'package:flutter_signin/src/modules/auth/domain/usecases/signup_use_case.dart';
 import 'package:flutter_signin/src/modules/auth/external/datasource/signin_datasource.dart';
 import 'package:flutter_signin/src/modules/auth/external/datasource/signup_datasource.dart';

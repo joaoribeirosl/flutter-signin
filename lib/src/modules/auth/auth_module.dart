@@ -32,12 +32,7 @@ class AuthModule extends Module {
 
   @override
   void routes(RouteManager r) {
-    r.child(Modular.initialRoute,
-        child: (context) => const SignInPage(),
-        children: [
-          ChildRoute('/task_page/',
-              child: (context) => TaskPage(user: r.args.data)),
-        ]);
+    r.child(Modular.initialRoute, child: (context) => const SignInPage());
     r.child('/signup_page/', child: (context) => const SignUpPage());
     r.module('/task_module/', module: TaskModule());
   }

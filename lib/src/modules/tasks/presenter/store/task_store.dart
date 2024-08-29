@@ -17,13 +17,13 @@ abstract class _TaskStore with Store {
   _TaskStore(this._addTaskUseCase, this._getAllTasksUseCase,
       this._removeTaskByIdUseCase);
 
-  @observable
-  int _totalTasks = 0;
+  // @observable
+  // int _totalTasks = 0;
 
-  @action
-  void incrementTask() {
-    _totalTasks++;
-  }
+  // @action
+  // void incrementTask() {
+  //   _totalTasks++;
+  // }
 
   @observable
   bool enableButton = false;
@@ -42,14 +42,14 @@ abstract class _TaskStore with Store {
   final actualTask = Task();
 
   @observable
-  List<String> taskList = <String>[];
+  var taskList = ObservableList<String>();
 
-  Future<bool> addTask(String task, String userId) async { // TODO fix Observer
+  Future<bool> addTask(String task, String userId) async {
     actualTask.task = task;
     actualTask.userId = userId;
     final res = await _addTaskUseCase.call(actualTask);
     if (res.$2 != null) {
-      taskList.add(actualTask.task);
+      taskList.insert(0, actualTask.task);
       return true;
     }
     return false;

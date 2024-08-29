@@ -82,13 +82,11 @@ class _TaskPageState extends State<TaskPage> {
               ' ${widget.user?.name}\'s Task List',
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            Observer(
-              builder: (_) => TextField(
-                controller: taskController,
-                onChanged: (value) => taskStore.toggleEnableTaskButton(value),
-                decoration: const InputDecoration(
-                  labelText: 'Task',
-                ),
+            TextField(
+              controller: taskController,
+              onChanged: (value) => taskStore.toggleEnableTaskButton(value),
+              decoration: const InputDecoration(
+                labelText: 'Task',
               ),
             ),
             const SizedBox(height: 16),
@@ -98,7 +96,7 @@ class _TaskPageState extends State<TaskPage> {
                     ? () async {
                         await taskStore.addTask(
                             taskController.text, widget.user?.id ?? '-1');
-                        // limpar o campo dps de digitar
+                        taskController.text = '';
                       }
                     : null,
                 child: const Text('Add Task'),

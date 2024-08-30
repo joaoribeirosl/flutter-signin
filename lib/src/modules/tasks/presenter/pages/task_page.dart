@@ -23,7 +23,6 @@ class _TaskPageState extends State<TaskPage> {
     taskStore = context.read<TaskStore>();
     taskController.addListener(_taskPrinter);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // works without all this!
       taskStore.getAllTasks(widget.user!.id);
     });
   }

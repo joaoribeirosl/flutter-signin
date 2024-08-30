@@ -12,11 +12,10 @@ class GetAllTasksDatasource implements IGetAllTasksDatasource {
   GetAllTasksDatasource(this._client);
 
   @override
-  Future<Uint8List?> getAllTasks() async {
+  Future<Uint8List?> getAllTasks(String idUser) async {
     try {
-      final res = await _client.get(
-        Uri.parse(getAllTasksRoute),
-      );
+      final res = await _client
+          .get(Uri.parse(getAllTasksRoute), headers: {'id': idUser});
       if (res.statusCode == 200) {
         return res.bodyBytes;
       }

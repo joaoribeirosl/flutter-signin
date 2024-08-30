@@ -21,8 +21,10 @@ class _TaskPageState extends State<TaskPage> {
   void initState() {
     super.initState();
     taskStore = context.read<TaskStore>();
-
     taskController.addListener(_taskPrinter);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      taskStore.getAllTasks(widget.user!.id);
+    });
   }
 
   @override
@@ -110,7 +112,7 @@ class _TaskPageState extends State<TaskPage> {
                   itemBuilder: (context, index) {
                     return Card(
                       child: ListTile(
-                        title: Text(taskStore.taskList[index]),
+                        title: Text(taskStore.taskList[index].task),
                         trailing: IconButton(
                           icon: const Icon(Icons.delete),
                           onPressed: () {},

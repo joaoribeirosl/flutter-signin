@@ -3,10 +3,11 @@ import 'package:flutter_signin/src/modules/tasks/domain/errors/task_error.dart';
 import 'package:flutter_signin/src/modules/tasks/infra/proto/tasks.pb.dart';
 
 class TaskAdapter {
-  static Task? dataFromProto(Uint8List? data) {
+  static List<Task>? protoFromData(Uint8List? data) {
     try {
       if (data != null) {
-        return Task.fromBuffer(data);
+        final res = Tasks.fromBuffer(data);
+        return res.tasks;
       }
       return null;
     } catch (e) {
@@ -21,4 +22,15 @@ class TaskAdapter {
       throw DecodeError('decode error, $e');
     }
   }
+
+  // static Uint8List? protoToData(dynamic data) {
+  //   try {
+  //     if (data is Task) {
+  //       return data.writeToBuffer();
+  //     } else if (data is Tasks) {}
+  //     return null;
+  //   } catch (e) {
+  //     throw DecodeError('decode error, $e');
+  //   }
+  // }
 }

@@ -42,17 +42,29 @@ abstract class _TaskStore with Store {
   final actualTask = Task();
 
   @observable
-  var taskList = ObservableList<String>();
+  List<Task> taskList = ObservableList<Task>();
 
   Future<bool> addTask(String task, String userId) async {
     actualTask.task = task;
     actualTask.userId = userId;
-    final res = await _addTaskUseCase.call(actualTask);
-    if (res.$2 != null) {
-      taskList.insert(0, actualTask.task);
-      return true;
+    if (task != '') {
+      final res = await _addTaskUseCase.call(actualTask);
+      if (res.$2 != null) {
+        await getAllTasks(userId);
+        return true;
+      }
     }
     return false;
+  }
+
+  Future<List<Task>?> getAllTasks(String userId) async {
+    final res = await _getAllTasksUseCase.call(userId);
+    if (res.$2 != null) {
+      taskList.clear();
+      taskList.addAll(res.$2!);
+      return taskList;
+    }
+    return null;
   }
 
   Future<bool> removeTaskById(String taskId) async {

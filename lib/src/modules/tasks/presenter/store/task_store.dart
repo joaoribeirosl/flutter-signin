@@ -50,7 +50,7 @@ abstract class _TaskStore with Store {
     if (task != '') {
       final res = await _addTaskUseCase.call(actualTask);
       if (res.$2 != null) {
-        taskList.insert(0, actualTask);
+        await getAllTasks(userId);
         return true;
       }
     }
@@ -60,9 +60,8 @@ abstract class _TaskStore with Store {
   Future<List<Task>?> getAllTasks(String userId) async {
     final res = await _getAllTasksUseCase.call(userId);
     if (res.$2 != null) {
-      for (var item in res.$2!) {
-        taskList.insert(0, item);
-      }
+      taskList.clear();
+      taskList.addAll(res.$2!);
       return taskList;
     }
     return null;

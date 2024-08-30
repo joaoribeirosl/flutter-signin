@@ -23,12 +23,13 @@ class _TaskPageState extends State<TaskPage> {
     super.initState();
     taskStore = context.read<TaskStore>();
     taskController.addListener(_taskPrinter);
-    getTasks(widget.user!.id);
+    // getTasks(widget.user!.id);
+    taskStore.getAllTasks(widget.user!.id);
   }
 
-  Future<List<Task>?> getTasks(userId) async {
-    return await taskStore.getAllTasks(userId);
-  }
+  // Future<void> getTasks(String userId) async {
+  //   await taskStore.getAllTasks(userId);
+  // }
 
   @override
   void dispose() {

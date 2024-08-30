@@ -42,7 +42,6 @@ abstract class _TaskStore with Store {
   final actualTask = Task();
 
   @observable
-  // var taskList = ObservableList<String>();
   List<Task> taskList = ObservableList<Task>();
 
   Future<bool> addTask(String task, String userId) async {

@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-import 'package:flutter_signin/src/modules/auth/infra/adapter/auth_adapter.dart';
 import 'package:flutter_signin/src/modules/tasks/domain/errors/task_error.dart';
 import 'package:flutter_signin/src/modules/tasks/domain/repositories/task_respository.dart';
 import 'package:flutter_signin/src/modules/tasks/infra/adapter/task_adapter.dart';

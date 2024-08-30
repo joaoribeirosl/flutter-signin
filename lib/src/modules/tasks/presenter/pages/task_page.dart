@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
-import 'package:flutter_signin/src/modules/tasks/infra/proto/tasks.pb.dart';
 import 'package:flutter_signin/src/modules/tasks/presenter/store/task_store.dart';
 
 class TaskPage extends StatefulWidget {
@@ -23,13 +22,11 @@ class _TaskPageState extends State<TaskPage> {
     super.initState();
     taskStore = context.read<TaskStore>();
     taskController.addListener(_taskPrinter);
-    // getTasks(widget.user!.id);
-    taskStore.getAllTasks(widget.user!.id);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // works without all this!
+      taskStore.getAllTasks(widget.user!.id);
+    });
   }
-
-  // Future<void> getTasks(String userId) async {
-  //   await taskStore.getAllTasks(userId);
-  // }
 
   @override
   void dispose() {

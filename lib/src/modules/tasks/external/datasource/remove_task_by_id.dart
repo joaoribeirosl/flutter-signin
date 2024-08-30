@@ -1,7 +1,4 @@
 import 'dart:typed_data';
-
-import 'package:flutter_signin/src/modules/tasks/domain/errors/task_error.dart';
-import 'package:flutter_signin/src/modules/tasks/external/server_address.dart';
 import 'package:flutter_signin/src/modules/tasks/infra/adapter/task_adapter.dart';
 import 'package:flutter_signin/src/modules/tasks/infra/datasource/remove_task_by_id_use_case_interface.dart';
 import 'package:http/http.dart' as http;

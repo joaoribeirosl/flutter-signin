@@ -21,6 +21,10 @@ class RemoveTaskError extends TaskError {
   RemoveTaskError(super.message, [super.tracking]);
 }
 
+class GetTasksError extends TaskError {
+  GetTasksError(super.message, [super.tracking]);
+}
+
 class DecodeError extends TaskError {
   DecodeError(super.message, [super.tracking]);
 }

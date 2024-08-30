@@ -3,7 +3,7 @@ import 'package:flutter_signin/src/modules/auth/domain/errors/auth_error.dart';
 import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
 
 class AuthAdapter {
-  static User? dataFromProto(Uint8List? data) {
+  static User? protoFromData(Uint8List? data) {
     try {
       if (data != null) {
         return User.fromBuffer(data);

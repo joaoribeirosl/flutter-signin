@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 class AddTaskDatasource implements IAddTaskDatasource {
   final http.Client _client;
-  final TaskAdapter taskAdapter = TaskAdapter();
+  final taskAdapter = TaskAdapter();
 
   AddTaskDatasource(this._client);
 

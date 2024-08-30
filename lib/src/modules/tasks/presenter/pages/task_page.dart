@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
+import 'package:flutter_signin/src/modules/tasks/infra/proto/tasks.pb.dart';
 import 'package:flutter_signin/src/modules/tasks/presenter/store/task_store.dart';
 
 class TaskPage extends StatefulWidget {
@@ -21,8 +22,12 @@ class _TaskPageState extends State<TaskPage> {
   void initState() {
     super.initState();
     taskStore = context.read<TaskStore>();
-
     taskController.addListener(_taskPrinter);
+    getTasks(widget.user!.id);
+  }
+
+  Future<List<Task>?> getTasks(userId) async {
+    return await taskStore.getAllTasks(userId);
   }
 
   @override
@@ -110,7 +115,7 @@ class _TaskPageState extends State<TaskPage> {
                   itemBuilder: (context, index) {
                     return Card(
                       child: ListTile(
-                        title: Text(taskStore.taskList[index]),
+                        title: Text(taskStore.taskList[index].task),
                         trailing: IconButton(
                           icon: const Icon(Icons.delete),
                           onPressed: () {},

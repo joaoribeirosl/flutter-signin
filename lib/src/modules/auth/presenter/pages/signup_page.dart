@@ -120,9 +120,8 @@ class _SignUpPageState extends State<SignUpPage> {
                 children: [
                   Checkbox(
                     value: authStore.agreeTermsCheckboxValue,
-                    onChanged: (value) {
-                      authStore.agreeTermsCheckboxValue = value ?? false;
-                    },
+                    onChanged: (value) =>
+                        authStore.agreeTermsCheckboxValue = value ?? false,
                   ),
                   const Expanded(
                     child: Text(

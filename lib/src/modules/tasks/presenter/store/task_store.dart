@@ -33,12 +33,6 @@ abstract class _TaskStore with Store {
     enableButton = task.isNotEmpty;
   }
 
-  // @observable
-  // bool done = false;
-
-  // @action
-  // void toggleDone() => done = !done;
-
   final actualTask = Task();
 
   @observable
@@ -67,7 +61,7 @@ abstract class _TaskStore with Store {
     return null;
   }
 
-  Future<bool> removeTaskById(String idTask, String idUser) async {
+  Future<bool> removeTaskById(String idTask) async {
     final res = await _removeTaskByIdUseCase.call(idTask);
     if (res.$2 != null) {
       taskList.removeWhere((task) => task.id == idTask);

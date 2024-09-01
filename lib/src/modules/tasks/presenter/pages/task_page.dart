@@ -117,8 +117,7 @@ class _TaskPageState extends State<TaskPage> {
                         trailing: IconButton(
                           icon: const Icon(Icons.delete),
                           onPressed: () async {
-                            await taskStore.removeTaskById(
-                                actualTask.id, widget.user!.id);
+                            await taskStore.removeTaskById(actualTask.id);
                           },
                         ),
                       ),

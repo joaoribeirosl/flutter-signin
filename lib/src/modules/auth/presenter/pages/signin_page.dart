@@ -80,7 +80,7 @@ class _SignInPageState extends State<SignInPage> {
                 obscureText: authStore.showPassword ? false : true,
                 enableSuggestions: false,
                 autocorrect: false,
-                onChanged: (value) => authStore.toggleEnablePassword(value),
+                onChanged: (value) => authStore.toggleEnableSignin(value),
                 decoration: InputDecoration(
                   labelText: 'Password',
                   prefixIcon: const Icon(Icons.lock),
@@ -99,14 +99,14 @@ class _SignInPageState extends State<SignInPage> {
             const SizedBox(height: 24),
             Observer(
               builder: (_) => ElevatedButton(
-                onPressed: authStore.enableButton
+                onPressed: authStore.enableSigninButton
                     ? () async {
                         if (await authStore.login(
                             usernameController.text, passwordController.text)) {
-                          authStore.enableButton = false;
+                          authStore.enableSigninButton = false;
                           Modular.to.navigate('/task_module/',
                               arguments: authStore.actualUser);
-                        } else {}
+                        }
                       }
                     : null,
                 child: const Text('Login'),

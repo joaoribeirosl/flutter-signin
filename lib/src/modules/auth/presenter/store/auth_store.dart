@@ -23,11 +23,19 @@ abstract class _AuthStore with Store {
   final actualUser = User();
 
   @observable
-  bool enableButton = false;
+  bool enableSigninButton = false;
 
   @action
-  void toggleEnablePassword(String password) {
-    enableButton = password.isNotEmpty;
+  void toggleEnableSignin(String password) {
+    enableSigninButton = password.isNotEmpty;
+  }
+
+  @observable
+  bool enableSignupButton = false;
+
+  @action
+  void toggleEnableSignup(String confirmPassword) {
+    enableSignupButton = confirmPassword.isNotEmpty;
   }
 
   Future<bool> login(String userName, String password) async {

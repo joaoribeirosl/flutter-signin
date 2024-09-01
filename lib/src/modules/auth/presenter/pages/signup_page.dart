@@ -84,7 +84,6 @@ class _SignUpPageState extends State<SignUpPage> {
               builder: (_) => TextField(
                 controller: passwordController,
                 obscureText: authStore.showPassword ? false : true,
-                onChanged: (value) => authStore.toggleEnablePassword(value),
                 enableSuggestions: false,
                 autocorrect: false,
                 decoration: InputDecoration(
@@ -104,25 +103,33 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
             const SizedBox(height: 16),
-            TextField(
-              controller: confirmPasswordController,
-              obscureText: authStore.showPassword ? false : true,
-              decoration: const InputDecoration(
-                labelText: 'Confirm Password',
-                prefixIcon: Icon(Icons.lock_outline),
-                border: OutlineInputBorder(),
+            Observer(
+              builder: (_) => TextField(
+                controller: confirmPasswordController,
+                onChanged: (value) => authStore.toggleEnableSignup(value),
+                obscureText: authStore.showPassword ? false : true,
+                decoration: const InputDecoration(
+                  labelText: 'Confirm Password',
+                  prefixIcon: Icon(Icons.lock_outline),
+                  border: OutlineInputBorder(),
+                ),
               ),
             ),
             const SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: () async {
-                if (await authStore.signup(usernameController.text,
-                    passwordController.text, confirmPasswordController.text)) {
-                  authStore.enableButton = false;
-                  Modular.to.navigate('/');
-                }
-              },
-              child: const Text('Sign Up'),
+            Observer(
+              builder: (_) => ElevatedButton(
+                onPressed: authStore.enableSignupButton
+                    ? () async {
+                        if (await authStore.signup(
+                            usernameController.text,
+                            passwordController.text,
+                            confirmPasswordController.text)) {
+                          Modular.to.navigate('/');
+                        }
+                      }
+                    : null,
+                child: const Text('Sign Up'),
+              ),
             ),
             const SizedBox(height: 16),
             const Text(
@@ -134,7 +141,7 @@ class _SignUpPageState extends State<SignUpPage> {
             ElevatedButton.icon(
               onPressed: () {},
               icon: const Icon(Icons.login),
-              label: const Text('Sign in with Google'),
+              label: const Text('Sign up with Google'),
             ),
             const SizedBox(height: 16),
             TextButton(

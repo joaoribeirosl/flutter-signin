@@ -52,10 +52,10 @@ class _TaskPageState extends State<TaskPage> {
           children: [
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 212, 97, 132),
+                color: Color.fromARGB(255, 213, 131, 150),
               ),
               child: Text(
-                'Sidebar',
+                'Menu',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -63,14 +63,9 @@ class _TaskPageState extends State<TaskPage> {
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.home),
-              title: const Text('Home'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: const Icon(Icons.task),
-              title: const Text('Tasks'),
-              onTap: () {},
+              leading: const Icon(Icons.logout),
+              title: const Text('logout'),
+              onTap: () => Modular.to.navigate('/'),
             ),
           ],
         ),
@@ -80,10 +75,6 @@ class _TaskPageState extends State<TaskPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              '${widget.user?.name}\'s Task List',
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
             TextField(
               controller: taskController,
               onChanged: (value) => taskStore.toggleEnableTaskButton(value),
@@ -103,6 +94,11 @@ class _TaskPageState extends State<TaskPage> {
                     : null,
                 child: const Text('Add Task'),
               ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              '${widget.user?.name}\'s Task List:',
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 24),
             Observer(

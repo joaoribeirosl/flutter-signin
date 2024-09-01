@@ -12,7 +12,6 @@ class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     const primaryColorLigth = Color.fromRGBO(173, 82, 120, 1);
-    const primaryColorDark = Color.fromRGBO(165, 88, 124, 1);
 
     return MaterialApp.router(
       title: 'flutter app',
@@ -54,47 +53,6 @@ class _MainAppState extends State<MainApp> {
           style: ElevatedButton.styleFrom(
             backgroundColor: primaryColorLigth,
             foregroundColor: Colors.white,
-            textStyle: const TextStyle(fontWeight: FontWeight.normal),
-          ),
-        ),
-        useMaterial3: true,
-      ),
-      darkTheme: ThemeData(
-        expansionTileTheme: const ExpansionTileThemeData(
-            textColor: primaryColorDark, collapsedTextColor: primaryColorDark),
-        listTileTheme: const ListTileThemeData(textColor: primaryColorDark),
-        textTheme: const TextTheme(
-          titleSmall: TextStyle(
-            color: primaryColorDark,
-          ),
-          titleLarge: TextStyle(
-            color: primaryColorDark,
-          ),
-          titleMedium: TextStyle(
-              color: primaryColorDark,
-              fontWeight: FontWeight.normal,
-              fontSize: 16),
-          bodySmall: TextStyle(
-            color: primaryColorDark,
-          ),
-          bodyMedium: TextStyle(
-            color: primaryColorDark,
-            fontSize: 16,
-          ),
-          labelMedium: TextStyle(
-            color: primaryColorDark,
-          ),
-          labelLarge: TextStyle(
-            color: primaryColorDark,
-          ),
-        ),
-        checkboxTheme: const CheckboxThemeData(
-          side: BorderSide(color: primaryColorDark),
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: primaryColorDark,
-            foregroundColor: Colors.black,
             textStyle: const TextStyle(fontWeight: FontWeight.normal),
           ),
         ),

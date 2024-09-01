@@ -25,19 +25,35 @@ mixin _$AuthStore on _AuthStore, Store {
     });
   }
 
-  late final _$enableButtonAtom =
-      Atom(name: '_AuthStore.enableButton', context: context);
+  late final _$enableSigninButtonAtom =
+      Atom(name: '_AuthStore.enableSigninButton', context: context);
 
   @override
-  bool get enableButton {
-    _$enableButtonAtom.reportRead();
-    return super.enableButton;
+  bool get enableSigninButton {
+    _$enableSigninButtonAtom.reportRead();
+    return super.enableSigninButton;
   }
 
   @override
-  set enableButton(bool value) {
-    _$enableButtonAtom.reportWrite(value, super.enableButton, () {
-      super.enableButton = value;
+  set enableSigninButton(bool value) {
+    _$enableSigninButtonAtom.reportWrite(value, super.enableSigninButton, () {
+      super.enableSigninButton = value;
+    });
+  }
+
+  late final _$enableSignupButtonAtom =
+      Atom(name: '_AuthStore.enableSignupButton', context: context);
+
+  @override
+  bool get enableSignupButton {
+    _$enableSignupButtonAtom.reportRead();
+    return super.enableSignupButton;
+  }
+
+  @override
+  set enableSignupButton(bool value) {
+    _$enableSignupButtonAtom.reportWrite(value, super.enableSignupButton, () {
+      super.enableSignupButton = value;
     });
   }
 
@@ -56,11 +72,22 @@ mixin _$AuthStore on _AuthStore, Store {
   }
 
   @override
-  void toggleEnablePassword(String password) {
+  void toggleEnableSignin(String password) {
     final _$actionInfo = _$_AuthStoreActionController.startAction(
-        name: '_AuthStore.toggleEnablePassword');
+        name: '_AuthStore.toggleEnableSignin');
     try {
-      return super.toggleEnablePassword(password);
+      return super.toggleEnableSignin(password);
+    } finally {
+      _$_AuthStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void toggleEnableSignup(String confirmPassword) {
+    final _$actionInfo = _$_AuthStoreActionController.startAction(
+        name: '_AuthStore.toggleEnableSignup');
+    try {
+      return super.toggleEnableSignup(confirmPassword);
     } finally {
       _$_AuthStoreActionController.endAction(_$actionInfo);
     }
@@ -70,7 +97,8 @@ mixin _$AuthStore on _AuthStore, Store {
   String toString() {
     return '''
 showPassword: ${showPassword},
-enableButton: ${enableButton}
+enableSigninButton: ${enableSigninButton},
+enableSignupButton: ${enableSignupButton}
     ''';
   }
 }

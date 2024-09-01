@@ -1,6 +1,6 @@
 # flutter-signin
 
-This Flutter project was developed as a technical assessment for residents selected to work on the front-end of projects within the UFPE's CIN/Softex postgraduate program. The goal is to evaluate the skills of the team members in Flutter development.
+This Flutter project was developed as a technical assessment for residents selected to work on the front-end of projects within the UFPE's CIn/Softex postgraduate program. The goal is to evaluate the skills of the team members in Flutter development.
 
 ## Architecture and Libraries
 
@@ -10,3 +10,6 @@ This project follows the Clean Architecture principles, ensuring a clear separat
 - **Clean Dart**
 - **Flutter Modular**
 - **MobX**
+
+## Backend Repository
+https://github.com/jefferson-norberto2/api_tasks

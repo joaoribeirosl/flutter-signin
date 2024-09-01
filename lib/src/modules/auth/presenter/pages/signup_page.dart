@@ -115,22 +115,22 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
             const SizedBox(height: 24),
-            Observer(
-              builder: (_) => Row(
-                children: [
-                  Checkbox(
+            Row(
+              children: [
+                Observer(
+                  builder: (_) => Checkbox(
                     value: authStore.agreeTermsCheckboxValue,
                     onChanged: (value) =>
                         authStore.agreeTermsCheckboxValue = value ?? false,
                   ),
-                  const Expanded(
-                    child: Text(
-                      'I Agree with terms of Service and Privacy Policy',
-                      style: TextStyle(fontSize: 14),
-                    ),
+                ),
+                const Expanded(
+                  child: Text(
+                    'I Agree with terms of Service and Privacy Policy',
+                    style: TextStyle(fontSize: 14),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
             const SizedBox(height: 24),
             Observer(

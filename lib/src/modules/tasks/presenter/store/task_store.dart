@@ -33,32 +33,26 @@ abstract class _TaskStore with Store {
     enableButton = task.isNotEmpty;
   }
 
-  // @observable
-  // bool done = false;
-
-  // @action
-  // void toggleDone() => done = !done;
-
   final actualTask = Task();
 
   @observable
   List<Task> taskList = ObservableList<Task>();
 
-  Future<bool> addTask(String task, String userId) async {
+  Future<bool> addTask(String task, String idUser) async {
     actualTask.task = task;
-    actualTask.userId = userId;
+    actualTask.userId = idUser;
     if (task != '') {
       final res = await _addTaskUseCase.call(actualTask);
       if (res.$2 != null) {
-        await getAllTasks(userId);
+        await getAllTasks(idUser);
         return true;
       }
     }
     return false;
   }
 
-  Future<List<Task>?> getAllTasks(String userId) async {
-    final res = await _getAllTasksUseCase.call(userId);
+  Future<List<Task>?> getAllTasks(String idUser) async {
+    final res = await _getAllTasksUseCase.call(idUser);
     if (res.$2 != null) {
       taskList.clear();
       taskList.addAll(res.$2!);
@@ -67,10 +61,10 @@ abstract class _TaskStore with Store {
     return null;
   }
 
-  Future<bool> removeTaskById(String taskId) async {
-    final res = await _removeTaskByIdUseCase.call(taskId);
+  Future<bool> removeTaskById(String idTask) async {
+    final res = await _removeTaskByIdUseCase.call(idTask);
     if (res.$2 != null) {
-      // remove task from list
+      taskList.removeWhere((task) => task.id == idTask);
       return true;
     }
     return false;

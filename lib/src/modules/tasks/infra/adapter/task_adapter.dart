@@ -22,15 +22,4 @@ class TaskAdapter {
       throw DecodeError('decode error, $e');
     }
   }
-
-  // static Uint8List? protoToData(dynamic data) {
-  //   try {
-  //     if (data is Task) {
-  //       return data.writeToBuffer();
-  //     } else if (data is Tasks) {}
-  //     return null;
-  //   } catch (e) {
-  //     throw DecodeError('decode error, $e');
-  //   }
-  // }
 }

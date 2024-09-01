@@ -44,7 +44,15 @@ class TaskRepository implements ITaskRepository {
   }
 
   @override
-  Future<(ITaskError?, bool?)> removeTaskById(String id) {
-    throw UnimplementedError();
+  Future<(ITaskError?, bool?)> removeTaskById(String idTask) async {
+    try {
+      final res = await _removeTaskByIdDatasource.removeTaskById(idTask);
+      if (res != null) {
+        return (null, true);
+      }
+      return (RemoveTaskError('task not found'), null);
+    } on ITaskError catch (e) {
+      return (e, null);
+    }
   }
 }

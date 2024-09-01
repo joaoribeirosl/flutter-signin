@@ -119,10 +119,8 @@ class _SignUpPageState extends State<SignUpPage> {
                 if (await authStore.signup(usernameController.text,
                     passwordController.text, confirmPasswordController.text)) {
                   authStore.enableButton = false;
-                  Modular.to.navigate('/task_module/');
-                } else {}
-
-                Modular.to.navigate('/');
+                  Modular.to.navigate('/');
+                }
               },
               child: const Text('Sign Up'),
             ),

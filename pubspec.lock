@@ -17,14 +17,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.4.1"
-  ansicolor:
-    dependency: transitive
-    description:
-      name: ansicolor
-      sha256: "50e982d500bc863e1d703448afdbf9e5a72eb48840a4f766fa361ffd6877055f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.3"
   args:
     dependency: transitive
     description:
@@ -185,14 +177,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.8"
-  dart_console:
-    dependency: transitive
-    description:
-      name: dart_console
-      sha256: dfa4b63eb4382325ff975fdb6b7a0db8303bb5809ee5cb4516b44153844742ed
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.2.0"
   dart_style:
     dependency: transitive
     description:
@@ -201,14 +185,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.6"
-  dartz:
-    dependency: transitive
-    description:
-      name: dartz
-      sha256: e6acf34ad2e31b1eb00948692468c30ab48ac8250e0f0df661e29f12dd252168
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.10.1"
   fake_async:
     dependency: transitive
     description:
@@ -217,22 +193,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.1"
-  ffi:
-    dependency: transitive
-    description:
-      name: ffi
-      sha256: "16ed7b077ef01ad6170a3d0c57caa4a112a38d7a2ed5602e0aca9ca6f3d98da6"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.3"
-  fhir_yaml:
-    dependency: transitive
-    description:
-      name: fhir_yaml
-      sha256: f4f1f0854ff426c3ed48c4f7aef8290331ef1c9e963dbe6ddc710a39a3fb9f08
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.4.2"
   file:
     dependency: transitive
     description:
@@ -288,14 +248,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  fluttertoast:
-    dependency: "direct main"
-    description:
-      name: fluttertoast
-      sha256: "95f349437aeebe524ef7d6c9bde3e6b4772717cf46a0eb6a3ceaddc740b297cc"
-      url: "https://pub.dev"
-    source: hosted
-    version: "8.2.8"
   frontend_server_client:
     dependency: transitive
     description:
@@ -344,14 +296,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
-  intl:
-    dependency: transitive
-    description:
-      name: intl
-      sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.18.1"
   io:
     dependency: transitive
     description:
@@ -536,14 +480,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.0"
-  recase:
-    dependency: transitive
-    description:
-      name: recase
-      sha256: e4eb4ec2dcdee52dcf99cb4ceabaffc631d7424ee55e56f280bc039737f89213
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.1.0"
   result_dart:
     dependency: transitive
     description:
@@ -552,14 +488,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
-  rxdart:
-    dependency: transitive
-    description:
-      name: rxdart
-      sha256: "2ef8b4e91cb3b55d155e0e34eeae0ac7107974e451495c955ac04ddee8cc21fd"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.26.0"
   shelf:
     dependency: transitive
     description:
@@ -581,14 +509,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
-  slidy:
-    dependency: "direct main"
-    description:
-      name: slidy
-      sha256: dc0c0b911f8c8f3355bb4a163aba078b61aff88bb35c3993e08db5b094278815
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.2.2+2"
   source_gen:
     dependency: transitive
     description:
@@ -733,14 +653,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
-  win32:
-    dependency: transitive
-    description:
-      name: win32
-      sha256: "68d1e89a91ed61ad9c370f9f8b6effed9ae5e0ede22a270bdfa6daf79fc2290a"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.5.4"
   yaml:
     dependency: transitive
     description:

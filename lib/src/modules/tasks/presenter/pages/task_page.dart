@@ -110,12 +110,16 @@ class _TaskPageState extends State<TaskPage> {
                 child: ListView.builder(
                   itemCount: taskStore.taskList.length,
                   itemBuilder: (context, index) {
+                    final idTask = taskStore.taskList[index].id;
                     return Card(
                       child: ListTile(
                         title: Text(taskStore.taskList[index].task),
                         trailing: IconButton(
                           icon: const Icon(Icons.delete),
-                          onPressed: () {},
+                          onPressed: () async {
+                            await taskStore.removeTaskById(
+                                idTask, widget.user!.id);
+                          },
                         ),
                       ),
                     );

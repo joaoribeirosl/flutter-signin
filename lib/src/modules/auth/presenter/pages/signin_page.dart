@@ -83,7 +83,6 @@ class _SignInPageState extends State<SignInPage> {
                 onChanged: (value) => authStore.toggleEnablePassword(value),
                 decoration: InputDecoration(
                   labelText: 'Password',
-                  helperText: "Password must contain at least 6 characters",
                   prefixIcon: const Icon(Icons.lock),
                   border: const OutlineInputBorder(),
                   suffixIcon: IconButton(

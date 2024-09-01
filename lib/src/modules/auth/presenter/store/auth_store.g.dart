@@ -41,19 +41,20 @@ mixin _$AuthStore on _AuthStore, Store {
     });
   }
 
-  late final _$enableSignupButtonAtom =
-      Atom(name: '_AuthStore.enableSignupButton', context: context);
+  late final _$agreeTermsCheckboxValueAtom =
+      Atom(name: '_AuthStore.agreeTermsCheckboxValue', context: context);
 
   @override
-  bool get enableSignupButton {
-    _$enableSignupButtonAtom.reportRead();
-    return super.enableSignupButton;
+  bool get agreeTermsCheckboxValue {
+    _$agreeTermsCheckboxValueAtom.reportRead();
+    return super.agreeTermsCheckboxValue;
   }
 
   @override
-  set enableSignupButton(bool value) {
-    _$enableSignupButtonAtom.reportWrite(value, super.enableSignupButton, () {
-      super.enableSignupButton = value;
+  set agreeTermsCheckboxValue(bool value) {
+    _$agreeTermsCheckboxValueAtom
+        .reportWrite(value, super.agreeTermsCheckboxValue, () {
+      super.agreeTermsCheckboxValue = value;
     });
   }
 
@@ -83,22 +84,11 @@ mixin _$AuthStore on _AuthStore, Store {
   }
 
   @override
-  void toggleEnableSignup(String confirmPassword) {
-    final _$actionInfo = _$_AuthStoreActionController.startAction(
-        name: '_AuthStore.toggleEnableSignup');
-    try {
-      return super.toggleEnableSignup(confirmPassword);
-    } finally {
-      _$_AuthStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 showPassword: ${showPassword},
 enableSigninButton: ${enableSigninButton},
-enableSignupButton: ${enableSignupButton}
+agreeTermsCheckboxValue: ${agreeTermsCheckboxValue}
     ''';
   }
 }

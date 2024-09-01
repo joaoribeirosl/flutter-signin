@@ -46,9 +46,6 @@ class _MainAppState extends State<MainApp> {
             color: primaryColorLigth,
           ),
         ),
-        checkboxTheme: const CheckboxThemeData(
-          side: BorderSide(color: primaryColorLigth),
-        ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: primaryColorLigth,

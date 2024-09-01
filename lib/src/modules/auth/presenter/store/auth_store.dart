@@ -31,12 +31,7 @@ abstract class _AuthStore with Store {
   }
 
   @observable
-  bool enableSignupButton = false;
-
-  @action
-  void toggleEnableSignup(String confirmPassword) {
-    enableSignupButton = confirmPassword.isNotEmpty;
-  }
+  bool agreeTermsCheckboxValue = false;
 
   Future<bool> login(String userName, String password) async {
     actualUser.name = userName;

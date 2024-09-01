@@ -106,7 +106,6 @@ class _SignUpPageState extends State<SignUpPage> {
             Observer(
               builder: (_) => TextField(
                 controller: confirmPasswordController,
-                onChanged: (value) => authStore.toggleEnableSignup(value),
                 obscureText: authStore.showPassword ? false : true,
                 decoration: const InputDecoration(
                   labelText: 'Confirm Password',
@@ -117,13 +116,33 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             const SizedBox(height: 24),
             Observer(
+              builder: (_) => Row(
+                children: [
+                  Checkbox(
+                    value: authStore.agreeTermsCheckboxValue,
+                    onChanged: (value) {
+                      authStore.agreeTermsCheckboxValue = value ?? false;
+                    },
+                  ),
+                  const Expanded(
+                    child: Text(
+                      'I Agree with terms of Service and Privacy Policy',
+                      style: TextStyle(fontSize: 14),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 24),
+            Observer(
               builder: (_) => ElevatedButton(
-                onPressed: authStore.enableSignupButton
+                onPressed: authStore.agreeTermsCheckboxValue
                     ? () async {
                         if (await authStore.signup(
                             usernameController.text,
                             passwordController.text,
                             confirmPasswordController.text)) {
+                          authStore.agreeTermsCheckboxValue = false;
                           Modular.to.navigate('/');
                         }
                       }
@@ -132,10 +151,28 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
             const SizedBox(height: 16),
-            const Text(
-              'OR',
-              style: TextStyle(fontSize: 16),
-              textAlign: TextAlign.center,
+            Row(
+              children: [
+                Expanded(
+                  child: Divider(
+                    thickness: 1,
+                    color: Colors.grey[400],
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'or',
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                ),
+                Expanded(
+                  child: Divider(
+                    thickness: 1,
+                    color: Colors.grey[400],
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 16),
             ElevatedButton.icon(
@@ -147,6 +184,7 @@ class _SignUpPageState extends State<SignUpPage> {
             TextButton(
               onPressed: () {
                 Modular.to.navigate('/');
+                authStore.agreeTermsCheckboxValue = false;
               },
               child: const Text('Already have an account? Sign In'),
             ),

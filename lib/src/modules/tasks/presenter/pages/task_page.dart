@@ -89,6 +89,12 @@ class _TaskPageState extends State<TaskPage> {
                     ? () async {
                         await taskStore.addTask(
                             taskController.text, widget.user?.id ?? '-1');
+                        ScaffoldMessenger.of(_).showSnackBar(
+                          const SnackBar(
+                            content: Text('Task created successfully!'),
+                            duration: Duration(seconds: 1),
+                          ),
+                        );
                         taskController.text = '';
                       }
                     : null,
@@ -114,6 +120,9 @@ class _TaskPageState extends State<TaskPage> {
                           icon: const Icon(Icons.delete),
                           onPressed: () async {
                             await taskStore.removeTaskById(actualTask.id);
+                            ScaffoldMessenger.of(_).showSnackBar(const SnackBar(
+                                content: Text('Task removed successfully!'),
+                                duration: Duration(seconds: 1)));
                           },
                         ),
                       ),

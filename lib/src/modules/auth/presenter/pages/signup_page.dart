@@ -142,6 +142,8 @@ class _SignUpPageState extends State<SignUpPage> {
                             passwordController.text,
                             confirmPasswordController.text)) {
                           authStore.agreeTermsCheckboxValue = false;
+                          ScaffoldMessenger.of(_).showSnackBar(const SnackBar(
+                              content: Text('User created successfully!')));
                           Modular.to.navigate('/');
                         }
                       }

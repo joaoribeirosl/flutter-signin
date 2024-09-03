@@ -13,8 +13,6 @@ class SigninUseCase implements ISigninUseCase {
 
   @override
   Future<(IAuthError?, User?)> call(User user) async {
-    // user.name.isEmpty
-    //   (erro, null);
     return await _repository.login(user);
   }
 }

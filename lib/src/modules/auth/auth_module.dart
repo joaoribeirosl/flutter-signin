@@ -1,12 +1,16 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin/src/modules/auth/domain/repositories/auth_repository.dart';
+import 'package:flutter_signin/src/modules/auth/domain/usecases/reset_password_use_case.dart';
 import 'package:flutter_signin/src/modules/auth/domain/usecases/signin_use_case.dart';
 import 'package:flutter_signin/src/modules/auth/domain/usecases/signup_use_case.dart';
+import 'package:flutter_signin/src/modules/auth/external/datasource/reset_password_datasource.dart';
 import 'package:flutter_signin/src/modules/auth/external/datasource/signin_datasource.dart';
 import 'package:flutter_signin/src/modules/auth/external/datasource/signup_datasource.dart';
+import 'package:flutter_signin/src/modules/auth/infra/datasource/reset_password_datasource_interface.dart';
 import 'package:flutter_signin/src/modules/auth/infra/datasource/signin_datasource_interface.dart';
 import 'package:flutter_signin/src/modules/auth/infra/datasource/signup_datasource_interface.dart';
 import 'package:flutter_signin/src/modules/auth/infra/repositories/auth_repository.dart';
+import 'package:flutter_signin/src/modules/auth/presenter/pages/reset_password_page.dart';
 import 'package:flutter_signin/src/modules/auth/presenter/pages/signin_page.dart';
 import 'package:flutter_signin/src/modules/auth/presenter/pages/signup_page.dart';
 import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
@@ -20,11 +24,13 @@ class AuthModule extends Module {
 
     i.add<ISigninDatasource>(SigninDatasource.new);
     i.add<ISignupDatasource>(SignupDatasource.new);
+    i.add<IResetPasswordDatasource>(ResetPasswordDatasource.new);
 
     i.add<IAuthRepository>(AuthRepository.new);
 
     i.add<ISigninUseCase>(SigninUseCase.new);
     i.add<ISignupUseCase>(SignupUseCase.new);
+    i.add<IResetPasswordUseCase>(ResetPasswordUseCase.new);
 
     i.addSingleton(AuthStore.new);
   }
@@ -33,6 +39,8 @@ class AuthModule extends Module {
   void routes(RouteManager r) {
     r.child(Modular.initialRoute, child: (context) => const SignInPage());
     r.child('/signup_page/', child: (context) => const SignUpPage());
+    r.child('/forgot_password_page/',
+        child: (context) => const ResetPasswordPage());
     r.module('/task_module/', module: TaskModule());
   }
 }

@@ -3,17 +3,18 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
 
-class SignInPage extends StatefulWidget {
-  const SignInPage({super.key});
+class ResetPasswordPage extends StatefulWidget {
+  const ResetPasswordPage({super.key});
+
   @override
-  State<SignInPage> createState() => _SignInPageState();
+  State<ResetPasswordPage> createState() => _ForgotPasswordState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _ForgotPasswordState extends State<ResetPasswordPage> {
   late final AuthStore authStore;
-
   final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
+  final newPasswordController = TextEditingController();
+  final confirmNewPasswordController = TextEditingController();
 
   @override
   void initState() {
@@ -24,21 +25,27 @@ class _SignInPageState extends State<SignInPage> {
   @override
   void dispose() {
     usernameController.dispose();
-    passwordController.dispose();
+    newPasswordController.dispose();
+    confirmNewPasswordController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_sharp),
+          tooltip: 'back',
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Text(
-              'Welcome back',
+              'Forgot Password?',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -47,7 +54,7 @@ class _SignInPageState extends State<SignInPage> {
             ),
             const SizedBox(height: 8),
             const Text(
-              'Enter your credentials to login',
+              'No worries, we\'ll send you reset instructions',
               style: TextStyle(fontSize: 15),
               textAlign: TextAlign.center,
             ),
@@ -56,20 +63,19 @@ class _SignInPageState extends State<SignInPage> {
               controller: usernameController,
               decoration: const InputDecoration(
                 labelText: 'Username',
+                helperText: 'Inform your username to reset your password',
                 prefixIcon: Icon(Icons.person),
                 border: OutlineInputBorder(),
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 32),
             Observer(
               builder: (_) => TextField(
-                controller: passwordController,
+                controller: newPasswordController,
                 obscureText: authStore.showPassword ? false : true,
-                enableSuggestions: false,
-                autocorrect: false,
-                onChanged: (value) => authStore.toggleEnableSignin(value),
                 decoration: InputDecoration(
                   labelText: 'Password',
+                  helperText: "Password must contain at least 6 characters",
                   prefixIcon: const Icon(Icons.lock),
                   border: const OutlineInputBorder(),
                   suffixIcon: IconButton(
@@ -83,36 +89,19 @@ class _SignInPageState extends State<SignInPage> {
                 ),
               ),
             ),
-            const SizedBox(height: 24),
-            Observer(
-              builder: (_) => ElevatedButton(
-                onPressed: authStore.enableSigninButton
-                    ? () async {
-                        if (await authStore.login(
-                            usernameController.text, passwordController.text)) {
-                          authStore.enableSigninButton = false;
-                          Modular.to.navigate('/task_module/',
-                              arguments: authStore.actualUser);
-                        }
-                      }
-                    : null,
-                child: const Text('Login'),
+            const SizedBox(height: 16),
+            TextField(
+              controller: confirmNewPasswordController,
+              obscureText: authStore.showPassword ? false : true,
+              decoration: const InputDecoration(
+                labelText: 'Confirm Password',
+                prefixIcon: Icon(Icons.lock_outline),
+                border: OutlineInputBorder(),
               ),
             ),
-            const SizedBox(height: 15),
-            TextButton(
-              onPressed: () {
-                Modular.to.pushNamed('/forgot_password_page/');
-              },
-              child: const Text('Forgot Password?'),
-            ),
-            const SizedBox(height: 16),
-            TextButton(
-              onPressed: () {
-                Modular.to.pushNamed('/signup_page/');
-              },
-              child: const Text('Don\'t have an account? Sign Up'),
-            ),
+            const SizedBox(height: 32),
+            ElevatedButton(
+                onPressed: () {}, child: const Text('Reset Password'))
           ],
         ),
       ),

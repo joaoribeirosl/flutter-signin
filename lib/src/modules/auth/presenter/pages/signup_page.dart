@@ -19,9 +19,6 @@ class _SignUpPageState extends State<SignUpPage> {
   void initState() {
     super.initState();
     authStore = context.read<AuthStore>();
-    usernameController.addListener(_usernamePrinter);
-    passwordController.addListener(_passwordPrinter);
-    confirmPasswordController.addListener(_confirmPasswordPrinter);
   }
 
   @override
@@ -32,24 +29,16 @@ class _SignUpPageState extends State<SignUpPage> {
     super.dispose();
   }
 
-  void _usernamePrinter() {
-    final text = usernameController.text;
-    print('Second text field: $text');
-  }
-
-  void _passwordPrinter() {
-    final text = passwordController.text;
-    print('Second text field: $text');
-  }
-
-  void _confirmPasswordPrinter() {
-    final text = confirmPasswordController.text;
-    print('Second text field: $text');
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_sharp),
+          tooltip: 'back',
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

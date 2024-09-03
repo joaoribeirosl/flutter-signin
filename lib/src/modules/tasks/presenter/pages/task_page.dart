@@ -21,21 +21,14 @@ class _TaskPageState extends State<TaskPage> {
   void initState() {
     super.initState();
     taskStore = context.read<TaskStore>();
-    taskController.addListener(_taskPrinter);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      taskStore.getAllTasks(widget.user!.id);
-    });
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => taskStore.getAllTasks(widget.user!.id));
   }
 
   @override
   void dispose() {
     taskController.dispose();
     super.dispose();
-  }
-
-  void _taskPrinter() {
-    final text = taskController.text;
-    print('Second text field: $text');
   }
 
   @override

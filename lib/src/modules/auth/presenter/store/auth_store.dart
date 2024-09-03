@@ -57,4 +57,9 @@ abstract class _AuthStore with Store {
     }
     return false;
   }
+
+  // Future<bool> resetPassword(
+  //     String username, String newPassword, String confirmNewPassword) {
+  //   // check if user exists in database and if exist return User
+  // }
 }

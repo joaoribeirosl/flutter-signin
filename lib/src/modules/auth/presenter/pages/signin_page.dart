@@ -109,6 +109,8 @@ class _SignInPageState extends State<SignInPage> {
             const SizedBox(height: 16),
             TextButton(
               onPressed: () {
+                usernameController.text = '';
+                passwordController.text = '';
                 Modular.to.pushNamed('/signup_page/');
               },
               child: const Text('Don\'t have an account? Sign Up'),

@@ -5,4 +5,5 @@ abstract class IAuthRepository {
   Future<(IAuthError?, User?)> login(User user);
   Future<(IAuthError?, bool?)> signup(User user);
   Future<(IAuthError?, bool?)> resetPassword(String newPassword);
+  Future<(IAuthError?, User?)> userExists(String username);
 }

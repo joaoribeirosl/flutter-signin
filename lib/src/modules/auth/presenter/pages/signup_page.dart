@@ -34,10 +34,12 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_sharp),
-          tooltip: 'back',
-          onPressed: () => Navigator.pop(context),
-        ),
+            icon: const Icon(Icons.arrow_back_ios_sharp),
+            tooltip: 'back',
+            onPressed: () {
+              authStore.agreeTermsCheckboxValue = false;
+              Navigator.pop(context);
+            }),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -130,9 +132,9 @@ class _SignUpPageState extends State<SignUpPage> {
                             usernameController.text,
                             passwordController.text,
                             confirmPasswordController.text)) {
-                          authStore.agreeTermsCheckboxValue = false;
                           ScaffoldMessenger.of(_).showSnackBar(const SnackBar(
                               content: Text('User created successfully!')));
+                          authStore.agreeTermsCheckboxValue = false;
                           Modular.to.navigate('/');
                         }
                       }
@@ -173,8 +175,8 @@ class _SignUpPageState extends State<SignUpPage> {
             const SizedBox(height: 16),
             TextButton(
               onPressed: () {
-                Modular.to.navigate('/');
                 authStore.agreeTermsCheckboxValue = false;
+                Modular.to.navigate('/');
               },
               child: const Text('Already have an account? Sign In'),
             ),

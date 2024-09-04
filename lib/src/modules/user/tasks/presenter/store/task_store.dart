@@ -1,7 +1,7 @@
-import 'package:flutter_signin/src/modules/tasks/domain/usecases/add_task_use_case.dart';
-import 'package:flutter_signin/src/modules/tasks/domain/usecases/get_all_tasks_use_case.dart';
-import 'package:flutter_signin/src/modules/tasks/domain/usecases/remove_task_by_id_use_case.dart';
-import 'package:flutter_signin/src/modules/tasks/infra/proto/tasks.pb.dart';
+import 'package:flutter_signin/src/modules/user/tasks/domain/usecases/add_task_use_case.dart';
+import 'package:flutter_signin/src/modules/user/tasks/domain/usecases/get_all_tasks_use_case.dart';
+import 'package:flutter_signin/src/modules/user/tasks/domain/usecases/remove_task_by_id_use_case.dart';
+import 'package:flutter_signin/src/modules/user/tasks/infra/proto/tasks.pb.dart';
 import 'package:mobx/mobx.dart';
 
 part 'task_store.g.dart';

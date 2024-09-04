@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
-import 'package:flutter_signin/src/modules/tasks/presenter/store/task_store.dart';
+import 'package:flutter_signin/src/modules/user/tasks/presenter/store/task_store.dart';
 
 class TaskPage extends StatefulWidget {
   final User? user;

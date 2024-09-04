@@ -17,7 +17,7 @@ import 'package:flutter_signin/src/modules/auth/presenter/pages/reset_password_p
 import 'package:flutter_signin/src/modules/auth/presenter/pages/signin_page.dart';
 import 'package:flutter_signin/src/modules/auth/presenter/pages/signup_page.dart';
 import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
-import 'package:flutter_signin/src/modules/tasks/task_module.dart';
+import 'package:flutter_signin/src/modules/user/tasks/task_module.dart';
 import 'package:http/http.dart' as http;
 
 class AuthModule extends Module {

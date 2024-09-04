@@ -1,5 +1,5 @@
-import 'package:flutter_signin/src/modules/tasks/domain/errors/task_error.dart';
-import 'package:flutter_signin/src/modules/tasks/domain/repositories/task_respository.dart';
+import 'package:flutter_signin/src/modules/user/tasks/domain/errors/task_error.dart';
+import 'package:flutter_signin/src/modules/user/tasks/domain/repositories/task_respository.dart';
 
 abstract class IRemoveTaskByIdUseCase {
   Future<(ITaskError?, bool?)> call(String idTask);

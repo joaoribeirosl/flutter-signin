@@ -1,10 +1,10 @@
-import 'package:flutter_signin/src/modules/tasks/domain/errors/task_error.dart';
-import 'package:flutter_signin/src/modules/tasks/domain/repositories/task_respository.dart';
-import 'package:flutter_signin/src/modules/tasks/infra/adapter/task_adapter.dart';
-import 'package:flutter_signin/src/modules/tasks/infra/datasource/add_task_datasource_interface.dart';
-import 'package:flutter_signin/src/modules/tasks/infra/datasource/get_all_tasks_datasource_interface.dart';
-import 'package:flutter_signin/src/modules/tasks/infra/datasource/remove_task_by_id_use_case_interface.dart';
-import 'package:flutter_signin/src/modules/tasks/infra/proto/tasks.pb.dart';
+import 'package:flutter_signin/src/modules/user/tasks/domain/errors/task_error.dart';
+import 'package:flutter_signin/src/modules/user/tasks/domain/repositories/task_respository.dart';
+import 'package:flutter_signin/src/modules/user/tasks/infra/adapter/task_adapter.dart';
+import 'package:flutter_signin/src/modules/user/tasks/infra/datasource/add_task_datasource_interface.dart';
+import 'package:flutter_signin/src/modules/user/tasks/infra/datasource/get_all_tasks_datasource_interface.dart';
+import 'package:flutter_signin/src/modules/user/tasks/infra/datasource/remove_task_by_id_use_case_interface.dart';
+import 'package:flutter_signin/src/modules/user/tasks/infra/proto/tasks.pb.dart';
 
 class TaskRepository implements ITaskRepository {
   final IAddTaskDatasource _addTaskDatasource;

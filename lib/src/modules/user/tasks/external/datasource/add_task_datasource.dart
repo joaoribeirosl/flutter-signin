@@ -1,8 +1,8 @@
 import 'dart:typed_data';
-import 'package:flutter_signin/src/modules/tasks/domain/errors/task_error.dart';
-import 'package:flutter_signin/src/modules/tasks/external/server_address.dart';
-import 'package:flutter_signin/src/modules/tasks/infra/adapter/task_adapter.dart';
-import 'package:flutter_signin/src/modules/tasks/infra/datasource/add_task_datasource_interface.dart';
+import 'package:flutter_signin/src/modules/user/tasks/domain/errors/task_error.dart';
+import 'package:flutter_signin/src/modules/user/tasks/external/server_address.dart';
+import 'package:flutter_signin/src/modules/user/tasks/infra/adapter/task_adapter.dart';
+import 'package:flutter_signin/src/modules/user/tasks/infra/datasource/add_task_datasource_interface.dart';
 import 'package:http/http.dart' as http;
 
 class AddTaskDatasource implements IAddTaskDatasource {

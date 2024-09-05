@@ -91,7 +91,7 @@ class _SignInPageState extends State<SignInPage> {
                         if (await authStore.login(
                             usernameController.text, passwordController.text)) {
                           authStore.enableSigninButton = false;
-                          Modular.to.navigate('/task_module/',
+                          Modular.to.navigate('/user_module/',
                               arguments: authStore.actualUser);
                         }
                       }

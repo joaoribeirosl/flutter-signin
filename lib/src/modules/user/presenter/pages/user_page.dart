@@ -18,8 +18,8 @@ class _UserPageState extends State<UserPage> with WindowListener {
     windowManager.addListener(this);
     userStore = context.read<UserStore>();
     Modular.to.navigate('/task_module/');
-    // store.changeRoute('Devices', 'device_module');
-    // store.getExecutionState();
+    // userStore.changeRoute('Task', 'task_module');
+
     super.initState();
   }
 
@@ -27,6 +27,9 @@ class _UserPageState extends State<UserPage> with WindowListener {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
+      body: const Column(
+        children: [RouterOutlet()],
+      ),
     );
   }
 }

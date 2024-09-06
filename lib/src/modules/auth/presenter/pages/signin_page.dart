@@ -76,9 +76,7 @@ class _SignInPageState extends State<SignInPage> {
                     icon: Icon(authStore.showPassword
                         ? Icons.visibility
                         : Icons.visibility_off),
-                    onPressed: () {
-                      authStore.toggleShowPassword();
-                    },
+                    onPressed: () => authStore.toggleShowPassword(),
                   ),
                 ),
               ),

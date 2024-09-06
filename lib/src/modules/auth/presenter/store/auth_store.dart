@@ -68,7 +68,8 @@ abstract class _AuthStore with Store {
     final user = await userExists(username);
     if (user == true) {
       if (confirmNewPassword == newPassword) {
-        final res = await _resetPasswordUseCase.call(newPassword);
+        await _resetPasswordUseCase.call(newPassword);
+        actualUser.password = newPassword;
         return true;
       }
     }

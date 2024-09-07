@@ -39,30 +39,30 @@ class _TaskPageState extends State<TaskPage> {
           'Welcome ${widget.user?.name}',
         ),
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 213, 131, 150),
-              ),
-              child: Text(
-                'Menu',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            ListTile(
-              leading: const Icon(Icons.logout),
-              title: const Text('logout'),
-              onTap: () => Modular.to.navigate('/'),
-            ),
-          ],
-        ),
-      ),
+      // drawer: Drawer(
+      //   child: ListView(
+      //     padding: EdgeInsets.zero,
+      //     children: [
+      //       const DrawerHeader(
+      //         decoration: BoxDecoration(
+      //           color: Color.fromARGB(255, 213, 131, 150),
+      //         ),
+      //         child: Text(
+      //           'Menu',
+      //           style: TextStyle(
+      //             color: Colors.white,
+      //             fontSize: 24,
+      //           ),
+      //         ),
+      //       ),
+      //       ListTile(
+      //         leading: const Icon(Icons.logout),
+      //         title: const Text('logout'),
+      //         onTap: () => Modular.to.navigate('/'),
+      //       ),
+      //     ],
+      //   ),
+      // ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

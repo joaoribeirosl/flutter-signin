@@ -19,8 +19,8 @@ class UserModule extends Module {
       Modular.initialRoute,
       child: (context) => const UserPage(),
       children: [
-        ModuleRoute('/task_module/', module: TaskModule()),
-        ModuleRoute('/profile_module/', module: ProfileModule()),
+        ModuleRoute('/task', module: TaskModule()),
+        ModuleRoute('/profile', module: ProfileModule()),
       ],
     );
   }

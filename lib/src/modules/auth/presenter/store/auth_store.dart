@@ -3,6 +3,7 @@ import 'package:flutter_signin/src/modules/auth/domain/usecases/signin_use_case.
 import 'package:flutter_signin/src/modules/auth/domain/usecases/signup_use_case.dart';
 import 'package:flutter_signin/src/modules/auth/domain/usecases/user_exists_use_case.dart';
 import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
+import 'package:flutter_signin/src/modules/auth/presenter/state/auth_state.dart';
 import 'package:mobx/mobx.dart';
 
 part 'auth_store.g.dart';
@@ -27,6 +28,8 @@ abstract class _AuthStore with Store {
 
   final actualUser = User();
 
+  final state = AuthState();
+
   @observable
   bool enableSigninButton = false;
 
@@ -38,8 +41,8 @@ abstract class _AuthStore with Store {
   @observable
   bool agreeTermsCheckboxValue = false;
 
-  Future<bool> login(String userName, String password) async {
-    actualUser.name = userName;
+  Future<bool> login(String username, String password) async {
+    actualUser.name = username;
     actualUser.password = password;
     final res = await _loginUseCase.call(actualUser);
     if (res.$2 != null) {
@@ -50,11 +53,11 @@ abstract class _AuthStore with Store {
   }
 
   Future<bool> signup(
-      String userName, String password, String confirmPassword) async {
+      String username, String password, String confirmPassword) async {
     if (password.length >= 6) {
       if (confirmPassword == password) {
         final res =
-            await _signupUseCase.call(User(name: userName, password: password));
+            await _signupUseCase.call(User(name: username, password: password));
         if (res.$2 != null) {
           return true;
         }

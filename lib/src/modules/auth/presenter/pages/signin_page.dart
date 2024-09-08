@@ -86,16 +86,39 @@ class _SignInPageState extends State<SignInPage> {
               builder: (_) => ElevatedButton(
                 onPressed: authStore.enableSigninButton
                     ? () async {
-                        if (await authStore.login(
-                            usernameController.text, passwordController.text)) {
+                        authStore.state.clearError();
+                        bool success = await authStore.login(
+                            usernameController.text, passwordController.text);
+
+                        if (success) {
                           authStore.enableSigninButton = false;
                           Modular.to.navigate('/user_module/',
                               arguments: authStore.actualUser);
+                        } else {
+                          authStore.state.setError('User not found!');
                         }
                       }
                     : null,
                 child: const Text('Login'),
               ),
+            ),
+            Observer(
+              builder: (_) {
+                if (authStore.state.errorState != null) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        duration: const Duration(seconds: 1),
+                        content: Text(
+                          authStore.state.errorState!,
+                          style: const TextStyle(color: Colors.red),
+                        ),
+                      ),
+                    );
+                  });
+                }
+                return const SizedBox.shrink();
+              },
             ),
             const SizedBox(height: 15),
             TextButton(

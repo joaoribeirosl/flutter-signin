@@ -19,9 +19,6 @@ class _SignInPageState extends State<SignInPage> {
   void initState() {
     super.initState();
     authStore = context.read<AuthStore>();
-
-    usernameController.addListener(_usernamePrinter);
-    passwordController.addListener(_passwordPrinter);
   }
 
   @override
@@ -29,16 +26,6 @@ class _SignInPageState extends State<SignInPage> {
     usernameController.dispose();
     passwordController.dispose();
     super.dispose();
-  }
-
-  void _usernamePrinter() {
-    final text = usernameController.text;
-    print('Second text field: $text');
-  }
-
-  void _passwordPrinter() {
-    final text = passwordController.text;
-    print('Second text field: $text');
   }
 
   @override
@@ -80,7 +67,7 @@ class _SignInPageState extends State<SignInPage> {
                 obscureText: authStore.showPassword ? false : true,
                 enableSuggestions: false,
                 autocorrect: false,
-                onChanged: (value) => authStore.toggleEnablePassword(value),
+                onChanged: (value) => authStore.toggleEnableSignin(value),
                 decoration: InputDecoration(
                   labelText: 'Password',
                   prefixIcon: const Icon(Icons.lock),
@@ -89,9 +76,7 @@ class _SignInPageState extends State<SignInPage> {
                     icon: Icon(authStore.showPassword
                         ? Icons.visibility
                         : Icons.visibility_off),
-                    onPressed: () {
-                      authStore.toggleShowPassword();
-                    },
+                    onPressed: () => authStore.toggleShowPassword(),
                   ),
                 ),
               ),
@@ -99,28 +84,55 @@ class _SignInPageState extends State<SignInPage> {
             const SizedBox(height: 24),
             Observer(
               builder: (_) => ElevatedButton(
-                onPressed: authStore.enableButton
+                onPressed: authStore.enableSigninButton
                     ? () async {
-                        if (await authStore.login(
-                            usernameController.text, passwordController.text)) {
-                          authStore.enableButton = false;
-                          Modular.to.navigate('/task_module/',
+                        authStore.state.clearError();
+                        bool success = await authStore.login(
+                            usernameController.text, passwordController.text);
+
+                        if (success) {
+                          authStore.enableSigninButton = false;
+                          Modular.to.navigate('/user_module/',
                               arguments: authStore.actualUser);
-                        } else {}
+                        } else {
+                          authStore.state.setError('User not found!');
+                        }
                       }
                     : null,
                 child: const Text('Login'),
               ),
             ),
+            Observer(
+              builder: (_) {
+                if (authStore.state.errorState != null) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        duration: const Duration(seconds: 1),
+                        content: Text(
+                          authStore.state.errorState!,
+                          style: const TextStyle(color: Colors.red),
+                        ),
+                      ),
+                    );
+                  });
+                }
+                return const SizedBox.shrink();
+              },
+            ),
             const SizedBox(height: 15),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Modular.to.pushNamed('/forgot_password_page/');
+              },
               child: const Text('Forgot Password?'),
             ),
             const SizedBox(height: 16),
             TextButton(
               onPressed: () {
-                Modular.to.navigate('/signup_page/');
+                usernameController.text = '';
+                passwordController.text = '';
+                Modular.to.pushNamed('/signup_page/');
               },
               child: const Text('Don\'t have an account? Sign Up'),
             ),

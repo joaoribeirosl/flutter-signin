@@ -19,9 +19,6 @@ class _SignUpPageState extends State<SignUpPage> {
   void initState() {
     super.initState();
     authStore = context.read<AuthStore>();
-    usernameController.addListener(_usernamePrinter);
-    passwordController.addListener(_passwordPrinter);
-    confirmPasswordController.addListener(_confirmPasswordPrinter);
   }
 
   @override
@@ -32,24 +29,18 @@ class _SignUpPageState extends State<SignUpPage> {
     super.dispose();
   }
 
-  void _usernamePrinter() {
-    final text = usernameController.text;
-    print('Second text field: $text');
-  }
-
-  void _passwordPrinter() {
-    final text = passwordController.text;
-    print('Second text field: $text');
-  }
-
-  void _confirmPasswordPrinter() {
-    final text = confirmPasswordController.text;
-    print('Second text field: $text');
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios_sharp),
+            tooltip: 'back',
+            onPressed: () {
+              authStore.agreeTermsCheckboxValue = false;
+              Navigator.pop(context);
+            }),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -84,7 +75,6 @@ class _SignUpPageState extends State<SignUpPage> {
               builder: (_) => TextField(
                 controller: passwordController,
                 obscureText: authStore.showPassword ? false : true,
-                onChanged: (value) => authStore.toggleEnablePassword(value),
                 enableSuggestions: false,
                 autocorrect: false,
                 decoration: InputDecoration(
@@ -104,41 +94,88 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
             const SizedBox(height: 16),
-            TextField(
-              controller: confirmPasswordController,
-              obscureText: authStore.showPassword ? false : true,
-              decoration: const InputDecoration(
-                labelText: 'Confirm Password',
-                prefixIcon: Icon(Icons.lock_outline),
-                border: OutlineInputBorder(),
+            Observer(
+              builder: (_) => TextField(
+                controller: confirmPasswordController,
+                obscureText: authStore.showPassword ? false : true,
+                decoration: const InputDecoration(
+                  labelText: 'Confirm Password',
+                  prefixIcon: Icon(Icons.lock_outline),
+                  border: OutlineInputBorder(),
+                ),
               ),
             ),
             const SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: () async {
-                if (await authStore.signup(usernameController.text,
-                    passwordController.text, confirmPasswordController.text)) {
-                  authStore.enableButton = false;
-                  Modular.to.navigate('/');
-                }
-              },
-              child: const Text('Sign Up'),
+            Row(
+              children: [
+                Observer(
+                  builder: (_) => Checkbox(
+                    value: authStore.agreeTermsCheckboxValue,
+                    onChanged: (value) =>
+                        authStore.agreeTermsCheckboxValue = value ?? false,
+                  ),
+                ),
+                const Expanded(
+                  child: Text(
+                    'I Agree with terms of Service and Privacy Policy',
+                    style: TextStyle(fontSize: 14),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+            Observer(
+              builder: (_) => ElevatedButton(
+                onPressed: authStore.agreeTermsCheckboxValue
+                    ? () async {
+                        if (await authStore.signup(
+                            usernameController.text,
+                            passwordController.text,
+                            confirmPasswordController.text)) {
+                          ScaffoldMessenger.of(_).showSnackBar(const SnackBar(
+                              content: Text('User created successfully!')));
+                          authStore.agreeTermsCheckboxValue = false;
+                          Modular.to.navigate('/');
+                        }
+                      }
+                    : null,
+                child: const Text('Sign Up'),
+              ),
             ),
             const SizedBox(height: 16),
-            const Text(
-              'OR',
-              style: TextStyle(fontSize: 16),
-              textAlign: TextAlign.center,
+            Row(
+              children: [
+                Expanded(
+                  child: Divider(
+                    thickness: 1,
+                    color: Colors.grey[400],
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'or',
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                ),
+                Expanded(
+                  child: Divider(
+                    thickness: 1,
+                    color: Colors.grey[400],
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 16),
             ElevatedButton.icon(
               onPressed: () {},
               icon: const Icon(Icons.login),
-              label: const Text('Sign in with Google'),
+              label: const Text('Sign up with Google'),
             ),
             const SizedBox(height: 16),
             TextButton(
               onPressed: () {
+                authStore.agreeTermsCheckboxValue = false;
                 Modular.to.navigate('/');
               },
               child: const Text('Already have an account? Sign In'),

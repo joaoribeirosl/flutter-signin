@@ -25,19 +25,36 @@ mixin _$AuthStore on _AuthStore, Store {
     });
   }
 
-  late final _$enableButtonAtom =
-      Atom(name: '_AuthStore.enableButton', context: context);
+  late final _$enableSigninButtonAtom =
+      Atom(name: '_AuthStore.enableSigninButton', context: context);
 
   @override
-  bool get enableButton {
-    _$enableButtonAtom.reportRead();
-    return super.enableButton;
+  bool get enableSigninButton {
+    _$enableSigninButtonAtom.reportRead();
+    return super.enableSigninButton;
   }
 
   @override
-  set enableButton(bool value) {
-    _$enableButtonAtom.reportWrite(value, super.enableButton, () {
-      super.enableButton = value;
+  set enableSigninButton(bool value) {
+    _$enableSigninButtonAtom.reportWrite(value, super.enableSigninButton, () {
+      super.enableSigninButton = value;
+    });
+  }
+
+  late final _$agreeTermsCheckboxValueAtom =
+      Atom(name: '_AuthStore.agreeTermsCheckboxValue', context: context);
+
+  @override
+  bool get agreeTermsCheckboxValue {
+    _$agreeTermsCheckboxValueAtom.reportRead();
+    return super.agreeTermsCheckboxValue;
+  }
+
+  @override
+  set agreeTermsCheckboxValue(bool value) {
+    _$agreeTermsCheckboxValueAtom
+        .reportWrite(value, super.agreeTermsCheckboxValue, () {
+      super.agreeTermsCheckboxValue = value;
     });
   }
 
@@ -56,11 +73,11 @@ mixin _$AuthStore on _AuthStore, Store {
   }
 
   @override
-  void toggleEnablePassword(String password) {
+  void toggleEnableSignin(String password) {
     final _$actionInfo = _$_AuthStoreActionController.startAction(
-        name: '_AuthStore.toggleEnablePassword');
+        name: '_AuthStore.toggleEnableSignin');
     try {
-      return super.toggleEnablePassword(password);
+      return super.toggleEnableSignin(password);
     } finally {
       _$_AuthStoreActionController.endAction(_$actionInfo);
     }
@@ -70,7 +87,8 @@ mixin _$AuthStore on _AuthStore, Store {
   String toString() {
     return '''
 showPassword: ${showPassword},
-enableButton: ${enableButton}
+enableSigninButton: ${enableSigninButton},
+agreeTermsCheckboxValue: ${agreeTermsCheckboxValue}
     ''';
   }
 }

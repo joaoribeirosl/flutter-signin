@@ -2,17 +2,17 @@ import 'package:flutter_signin/src/modules/auth/domain/errors/auth_error.dart';
 import 'package:flutter_signin/src/modules/auth/domain/repositories/auth_repository.dart';
 import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
 
-abstract class ISigninUseCase {
-  Future<(IAuthError?, User?)> call(User user);
+abstract class IUserExistsUseCase {
+  Future<(IAuthError?, User?)> call(String username);
 }
 
-class SigninUseCase implements ISigninUseCase {
+class UserExistsUseCase implements IUserExistsUseCase {
   final IAuthRepository _repository;
 
-  SigninUseCase(this._repository);
+  UserExistsUseCase(this._repository);
 
   @override
-  Future<(IAuthError?, User?)> call(User user) async {
-    return await _repository.login(user);
+  Future<(IAuthError?, User?)> call(String username) async {
+    return await _repository.userExists(username);
   }
 }

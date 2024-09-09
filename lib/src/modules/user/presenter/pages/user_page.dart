@@ -22,7 +22,7 @@ class _UserPageState extends State<UserPage> with WindowListener {
     userStore = context.read<UserStore>();
     authStore = context.read<AuthStore>();
     Modular.to.navigate('/user_module/task/', arguments: authStore.actualUser);
-    userStore.changeRoute('Task', 'task');
+    // userStore.changeRoute('Task', 'task');
 
     super.initState();
   }
@@ -30,11 +30,10 @@ class _UserPageState extends State<UserPage> with WindowListener {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: const Column(
+      body: Row(
         children: [
-          SideMenu(),
-          Expanded(
+          SideMenu(authStore: authStore),
+          const Expanded(
             child: RouterOutlet(),
           ),
         ],

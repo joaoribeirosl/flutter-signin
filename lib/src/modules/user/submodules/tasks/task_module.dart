@@ -10,7 +10,8 @@ import 'package:flutter_signin/src/modules/user/submodules/tasks/infra/datasourc
 import 'package:flutter_signin/src/modules/user/submodules/tasks/infra/datasource/get_all_tasks_datasource_interface.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/infra/datasource/remove_task_by_id_use_case_interface.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/infra/repositories/task_repository.dart';
-import 'package:flutter_signin/src/modules/user/submodules/tasks/presenter/pages/task_page.dart';
+import 'package:flutter_signin/src/modules/user/submodules/tasks/presenter/pages/create_task_page.dart';
+import 'package:flutter_signin/src/modules/user/submodules/tasks/presenter/pages/get_task_page.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/presenter/store/task_store.dart';
 import 'package:http/http.dart' as http;
 
@@ -34,8 +35,11 @@ class TaskModule extends Module {
 
   @override
   void routes(RouteManager r) {
-    r.child(Modular.initialRoute,
-        child: (context) => TaskPage(user: r.args.data),
-        transition: TransitionType.fadeIn);
+    r.child(
+      Modular.initialRoute,
+      child: (context) => GetTaskPage(user: r.args.data),
+    );
+    r.child('/create_task_page/',
+        child: (context) => CreateTaskPage(user: r.args.data));
   }
 }

@@ -1,53 +1,81 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
 
 class SideMenu extends StatelessWidget {
-  const SideMenu({super.key});
+  final AuthStore authStore;
+  const SideMenu({super.key, required this.authStore});
 
   @override
   Widget build(BuildContext context) {
     return Material(
       child: Container(
-        width: 75,
-        alignment: Alignment.topCenter,
-        padding: const EdgeInsets.symmetric(vertical: 32),
-        child: const Padding(
-          padding: EdgeInsets.only(left: 8.0, right: 4.0),
+        color: const Color.fromRGBO(173, 82, 120, 1),
+        width: 80,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 4.0, right: 4.0),
           child: Column(
             children: [
-              SizedBox(height: 24),
-              // Logo do menu
-              Column(
-                children: [
-                  Icon(
-                    Icons.menu,
-                    size: 50,
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    "Menu",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                ],
+              const SizedBox(height: 20),
+              const Text(
+                "Menu",
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
               ),
-              // const SizedBox(height: 40),
-              // Expanded(
-              //   child: Column(
-              //     mainAxisAlignment: MainAxisAlignment.start,
-              //     children: [
-              //       // Task Button
-              //       IconButton(
-              //         icon: const Icon(Icons.check_circle_outline),
-              //         onPressed: () {},
-              //       ),
-              //       const SizedBox(height: 24),
-              //       // Profile Button
-              //       IconButton(
-              //         icon: const Icon(Icons.person_outline),
-              //         onPressed: () {},
-              //       ),
-              //     ],
-              //   ),
-              // ),
+              const Image(
+                image: AssetImage("assets/URSO.gif"),
+                height: 150.0,
+                width: 150.0,
+              ),
+              const Column(
+                children: [],
+              ),
+              const SizedBox(height: 40),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    IconButton(
+                      icon: const Icon(
+                        Icons.check_box,
+                        color: Colors.white,
+                      ),
+                      onPressed: () => Modular.to.navigate(
+                          '/user_module/task/create_task_page/',
+                          arguments: authStore.actualUser),
+                    ),
+                    const SizedBox(height: 24),
+                    IconButton(
+                      icon: const Icon(
+                        Icons.check_circle_outline,
+                        color: Colors.white,
+                      ),
+                      onPressed: () => Modular.to.navigate('/user_module/task/',
+                          arguments: authStore.actualUser),
+                    ),
+                    const SizedBox(height: 24),
+                    IconButton(
+                      icon: const Icon(
+                        Icons.person_outline,
+                        color: Colors.white,
+                      ),
+                      onPressed: () => Modular.to.navigate(
+                          '/user_module/profile/',
+                          arguments: authStore.actualUser),
+                    ),
+                    const SizedBox(height: 24),
+                    IconButton(
+                      icon: const Icon(
+                        Icons.logout,
+                        color: Colors.white,
+                      ),
+                      onPressed: () => Modular.to.navigate('/'),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

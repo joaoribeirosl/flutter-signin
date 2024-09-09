@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
 
 class SideMenu extends StatelessWidget {
-  const SideMenu({super.key});
+  final AuthStore authStore;
+  const SideMenu({super.key, required this.authStore});
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +39,21 @@ class SideMenu extends StatelessWidget {
                   children: [
                     IconButton(
                       icon: const Icon(
+                        Icons.check_box,
+                        color: Colors.white,
+                      ),
+                      onPressed: () => Modular.to.navigate(
+                          '/user_module/task/create_task_page/',
+                          arguments: authStore.actualUser),
+                    ),
+                    const SizedBox(height: 24),
+                    IconButton(
+                      icon: const Icon(
                         Icons.check_circle_outline,
                         color: Colors.white,
                       ),
-                      onPressed: () {},
+                      onPressed: () => Modular.to.navigate('/user_module/task/',
+                          arguments: authStore.actualUser),
                     ),
                     const SizedBox(height: 24),
                     IconButton(
@@ -48,7 +61,9 @@ class SideMenu extends StatelessWidget {
                         Icons.person_outline,
                         color: Colors.white,
                       ),
-                      onPressed: () {},
+                      onPressed: () => Modular.to.navigate(
+                          '/user_module/profile/',
+                          arguments: authStore.actualUser),
                     ),
                     const SizedBox(height: 24),
                     IconButton(

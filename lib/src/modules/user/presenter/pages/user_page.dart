@@ -29,11 +29,11 @@ class _UserPageState extends State<UserPage> with WindowListener {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Row(
         children: [
-          SideMenu(),
-          Expanded(
+          SideMenu(authStore: authStore),
+          const Expanded(
             child: RouterOutlet(),
           ),
         ],

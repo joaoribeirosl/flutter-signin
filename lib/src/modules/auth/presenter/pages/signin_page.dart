@@ -95,7 +95,8 @@ class _SignInPageState extends State<SignInPage> {
                           Modular.to.navigate('/user_module/',
                               arguments: authStore.actualUser);
                         } else {
-                          authStore.state.setError('User not found!');
+                          authStore.state
+                              .setError('Incorrect username or password!');
                         }
                       }
                     : null,

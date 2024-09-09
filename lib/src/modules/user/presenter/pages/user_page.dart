@@ -30,8 +30,7 @@ class _UserPageState extends State<UserPage> with WindowListener {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      // appBar: AppBar(),
-      body: Column(
+      body: Row(
         children: [
           SideMenu(),
           Expanded(

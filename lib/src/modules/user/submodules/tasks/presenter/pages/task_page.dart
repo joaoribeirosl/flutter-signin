@@ -35,34 +35,8 @@ class _TaskPageState extends State<TaskPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Welcome ${widget.user?.name}',
-        ),
+        title: Text('Welcome ${widget.user?.name}'),
       ),
-      // drawer: Drawer(
-      //   child: ListView(
-      //     padding: EdgeInsets.zero,
-      //     children: [
-      //       const DrawerHeader(
-      //         decoration: BoxDecoration(
-      //           color: Color.fromARGB(255, 213, 131, 150),
-      //         ),
-      //         child: Text(
-      //           'Menu',
-      //           style: TextStyle(
-      //             color: Colors.white,
-      //             fontSize: 24,
-      //           ),
-      //         ),
-      //       ),
-      //       ListTile(
-      //         leading: const Icon(Icons.logout),
-      //         title: const Text('logout'),
-      //         onTap: () => Modular.to.navigate('/'),
-      //       ),
-      //     ],
-      //   ),
-      // ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -72,6 +46,7 @@ class _TaskPageState extends State<TaskPage> {
               controller: taskController,
               onChanged: (value) => taskStore.toggleEnableTaskButton(value),
               decoration: const InputDecoration(
+                border: OutlineInputBorder(),
                 labelText: 'Task',
               ),
             ),

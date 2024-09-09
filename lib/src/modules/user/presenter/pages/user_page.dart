@@ -22,7 +22,7 @@ class _UserPageState extends State<UserPage> with WindowListener {
     userStore = context.read<UserStore>();
     authStore = context.read<AuthStore>();
     Modular.to.navigate('/user_module/task/', arguments: authStore.actualUser);
-    userStore.changeRoute('Task', 'task');
+    // userStore.changeRoute('Task', 'task');
 
     super.initState();
   }

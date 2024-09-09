@@ -8,7 +8,6 @@ class SideMenu extends StatelessWidget {
     return Material(
       child: Container(
         width: 75,
-        alignment: Alignment.topCenter,
         padding: const EdgeInsets.symmetric(vertical: 32),
         child: const Padding(
           padding: EdgeInsets.only(left: 8.0, right: 4.0),

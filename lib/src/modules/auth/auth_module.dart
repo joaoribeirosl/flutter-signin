@@ -17,6 +17,9 @@ import 'package:flutter_signin/src/modules/auth/presenter/pages/reset_password_p
 import 'package:flutter_signin/src/modules/auth/presenter/pages/signin_page.dart';
 import 'package:flutter_signin/src/modules/auth/presenter/pages/signup_page.dart';
 import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
+import 'package:flutter_signin/src/modules/auth/presenter/store/reset_password_store.dart';
+import 'package:flutter_signin/src/modules/auth/presenter/store/signin_store.dart';
+import 'package:flutter_signin/src/modules/auth/presenter/store/signup_store.dart';
 import 'package:flutter_signin/src/modules/user/user_module.dart';
 import 'package:http/http.dart' as http;
 
@@ -38,6 +41,9 @@ class AuthModule extends Module {
     i.add<IUserExistsUseCase>(UserExistsUseCase.new);
 
     i.addSingleton(AuthStore.new);
+    i.addSingleton(SigninStore.new);
+    i.addSingleton(SignupStore.new);
+    i.addSingleton(ResetPasswordStore.new);
   }
 
   @override

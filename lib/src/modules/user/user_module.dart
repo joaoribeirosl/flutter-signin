@@ -17,7 +17,9 @@ class UserModule extends Module {
   void routes(RouteManager r) {
     r.child(
       Modular.initialRoute,
-      child: (context) => const UserPage(),
+      child: (context) => UserPage(
+        user: r.args.data,
+      ),
       children: [
         ModuleRoute('/task/', module: TaskModule()),
         ModuleRoute('/profile/', module: ProfileModule()),

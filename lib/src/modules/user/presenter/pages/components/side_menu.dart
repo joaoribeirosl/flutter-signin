@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
+import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
 
 class SideMenu extends StatelessWidget {
-  final AuthStore authStore;
-  const SideMenu({super.key, required this.authStore});
+  final User? user;
+  const SideMenu({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class SideMenu extends StatelessWidget {
                   ),
                   onPressed: () => Modular.to.navigate(
                       '/user_module/task/create_task_page/',
-                      arguments: authStore.actualUser),
+                      arguments: user),
                   label: const Text(
                     'Create Task',
                     style: TextStyle(color: Colors.white),
@@ -51,8 +51,8 @@ class SideMenu extends StatelessWidget {
                     Icons.check_circle_outline,
                     color: Colors.white,
                   ),
-                  onPressed: () => Modular.to.navigate('/user_module/task/',
-                      arguments: authStore.actualUser),
+                  onPressed: () => Modular.to
+                      .navigate('/user_module/task/', arguments: user),
                   label: const Text(
                     'Task List',
                     style: TextStyle(color: Colors.white),
@@ -64,8 +64,8 @@ class SideMenu extends StatelessWidget {
                     Icons.person_outline,
                     color: Colors.white,
                   ),
-                  onPressed: () => Modular.to.navigate('/user_module/profile/',
-                      arguments: authStore.actualUser),
+                  onPressed: () => Modular.to
+                      .navigate('/user_module/profile/', arguments: user),
                   label: const Text(
                     'Profile',
                     style: TextStyle(color: Colors.white),

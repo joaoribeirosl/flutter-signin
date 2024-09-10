@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
 import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  final User? user;
+  const ProfilePage({super.key, required this.user});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -36,7 +38,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
           Text(
-            ' ${authStore.actualUser.name}',
+            ' ${widget.user!.name}',
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           )
         ]),

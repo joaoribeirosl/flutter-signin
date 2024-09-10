@@ -10,6 +10,7 @@ class ProfileModule extends Module {
 
   @override
   void routes(RouteManager r) {
-    r.child(Modular.initialRoute, child: (context) => const ProfilePage());
+    r.child(Modular.initialRoute,
+        child: (context) => ProfilePage(user: r.args.data));
   }
 }

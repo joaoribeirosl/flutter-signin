@@ -38,6 +38,14 @@ abstract class _AuthStore with Store {
     enableSigninButton = password.isNotEmpty;
   }
 
+  String shortenedName(String username) {
+    int maxLength = 10;
+    if (username.length > maxLength) {
+      return '${username.substring(0, maxLength)}...';
+    }
+    return username;
+  }
+
   @observable
   bool agreeTermsCheckboxValue = false;
 

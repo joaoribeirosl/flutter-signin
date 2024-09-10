@@ -11,7 +11,7 @@ class SideMenu extends StatelessWidget {
     return Material(
       child: Container(
         color: const Color.fromRGBO(173, 82, 120, 1),
-        width: 80,
+        width: 130,
         child: Padding(
           padding: const EdgeInsets.only(left: 4.0, right: 4.0),
           child: Column(
@@ -29,49 +29,79 @@ class SideMenu extends StatelessWidget {
                 height: 150.0,
                 width: 150.0,
               ),
-              const Column(
-                children: [],
-              ),
               const SizedBox(height: 40),
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    IconButton(
-                      icon: const Icon(
-                        Icons.check_box,
-                        color: Colors.white,
-                      ),
-                      onPressed: () => Modular.to.navigate(
-                          '/user_module/task/create_task_page/',
-                          arguments: authStore.actualUser),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.check_box,
+                          color: Colors.white,
+                        ),
+                        TextButton(
+                          onPressed: () => Modular.to.navigate(
+                              '/user_module/task/create_task_page/',
+                              arguments: authStore.actualUser),
+                          child: const Text(
+                            'Create Task',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 24),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.check_circle_outline,
-                        color: Colors.white,
-                      ),
-                      onPressed: () => Modular.to.navigate('/user_module/task/',
-                          arguments: authStore.actualUser),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.check_circle_outline,
+                          color: Colors.white,
+                        ),
+                        TextButton(
+                          onPressed: () => Modular.to.navigate(
+                              '/user_module/task/',
+                              arguments: authStore.actualUser),
+                          child: const Text(
+                            'Task List',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 24),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.person_outline,
-                        color: Colors.white,
-                      ),
-                      onPressed: () => Modular.to.navigate(
-                          '/user_module/profile/',
-                          arguments: authStore.actualUser),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.person_outline,
+                          color: Colors.white,
+                        ),
+                        TextButton(
+                          onPressed: () => Modular.to.navigate(
+                              '/user_module/profile/',
+                              arguments: authStore.actualUser),
+                          child: const Text(
+                            'Profile',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 24),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.logout,
-                        color: Colors.white,
-                      ),
-                      onPressed: () => Modular.to.navigate('/'),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.logout,
+                          color: Colors.white,
+                        ),
+                        TextButton(
+                          onPressed: () => Modular.to.navigate('/'),
+                          child: const Text(
+                            'Logout',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

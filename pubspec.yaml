@@ -3,7 +3,7 @@ description: "Learn Flutter Project."
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.4.4 <4.0.0"
+  sdk: ">=3.4.1 <4.0.0"
 
 dependencies:
   flutter:

@@ -1,16 +1,16 @@
 import 'package:mobx/mobx.dart';
 
-part 'auth_state.g.dart';
+part 'signup_state.g.dart';
 
-abstract class IAuthState {
+abstract class ISignupState {
   void clearError();
   void setError(String message);
 }
 
 // ignore: library_private_types_in_public_api
-class AuthState = _AuthState with _$AuthState;
+class SignupState = _SignupState with _$SignupState;
 
-abstract class _AuthState with Store implements IAuthState {
+abstract class _SignupState with Store implements ISignupState {
   @observable
   String? errorState;
 

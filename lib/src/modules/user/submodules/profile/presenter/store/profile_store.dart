@@ -1,4 +1,3 @@
-import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
 import 'package:mobx/mobx.dart';
 
 part 'profile_store.g.dart';

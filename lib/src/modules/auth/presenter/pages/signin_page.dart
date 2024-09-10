@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
+import 'package:flutter_signin/src/modules/auth/presenter/store/signin_store.dart';
 import 'package:mobx/mobx.dart';
 
 class SignInPage extends StatefulWidget {
@@ -11,7 +11,7 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  late final AuthStore authStore;
+  late final SigninStore signinStore;
 
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
@@ -19,7 +19,7 @@ class _SignInPageState extends State<SignInPage> {
   @override
   void initState() {
     super.initState();
-    authStore = context.read<AuthStore>();
+    signinStore = context.read<SigninStore>();
   }
 
   @override
@@ -36,7 +36,7 @@ class _SignInPageState extends State<SignInPage> {
         padding: const EdgeInsets.all(16.0),
         child: ReactionBuilder(
           builder: (context) => reaction(
-            (p0) => authStore.state.errorState,
+            (p0) => signinStore.state.errorState,
             (p0) {
               if (p0 != null) {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -80,19 +80,19 @@ class _SignInPageState extends State<SignInPage> {
               Observer(
                 builder: (_) => TextField(
                   controller: passwordController,
-                  obscureText: authStore.showPassword ? false : true,
+                  obscureText: signinStore.showPassword ? false : true,
                   enableSuggestions: false,
                   autocorrect: false,
-                  onChanged: (value) => authStore.toggleEnableSignin(value),
+                  onChanged: (value) => signinStore.toggleEnableSignin(value),
                   decoration: InputDecoration(
                     labelText: 'Password',
                     prefixIcon: const Icon(Icons.lock),
                     border: const OutlineInputBorder(),
                     suffixIcon: IconButton(
-                      icon: Icon(authStore.showPassword
+                      icon: Icon(signinStore.showPassword
                           ? Icons.visibility
                           : Icons.visibility_off),
-                      onPressed: () => authStore.toggleShowPassword(),
+                      onPressed: () => signinStore.toggleShowPassword(),
                     ),
                   ),
                 ),
@@ -100,18 +100,18 @@ class _SignInPageState extends State<SignInPage> {
               const SizedBox(height: 24),
               Observer(
                 builder: (_) => ElevatedButton(
-                  onPressed: authStore.enableSigninButton
+                  onPressed: signinStore.enableSigninButton
                       ? () async {
-                          authStore.state.clearError();
-                          bool success = await authStore.login(
+                          signinStore.state.clearError();
+                          bool success = await signinStore.login(
                               usernameController.text, passwordController.text);
 
                           if (success) {
-                            authStore.enableSigninButton = false;
+                            signinStore.enableSigninButton = false;
                             Modular.to.navigate('/user_module/',
-                                arguments: authStore.actualUser);
+                                arguments: signinStore.actualUser);
                           } else {
-                            authStore.state
+                            signinStore.state
                                 .setError('Incorrect username or password!');
                           }
                         }

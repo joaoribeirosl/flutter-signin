@@ -23,10 +23,23 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [Text(' ${authStore.actualUser.name}')]),
+        child: Column(children: [
+          Center(
+            child: Container(
+              decoration: const BoxDecoration(
+                  color: Colors.white, shape: BoxShape.circle),
+              child: const Image(
+                image: AssetImage('assets/nopic.png'),
+                width: 100,
+                height: 100,
+              ),
+            ),
+          ),
+          Text(
+            ' ${authStore.actualUser.name}',
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          )
+        ]),
       ),
     );
   }

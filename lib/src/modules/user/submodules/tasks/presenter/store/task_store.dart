@@ -17,14 +17,6 @@ abstract class _TaskStore with Store {
   _TaskStore(this._addTaskUseCase, this._getAllTasksUseCase,
       this._removeTaskByIdUseCase);
 
-  // @observable
-  // int _totalTasks = 0;
-
-  // @action
-  // void incrementTask() {
-  //   _totalTasks++;
-  // }
-
   @observable
   bool enableButton = false;
 

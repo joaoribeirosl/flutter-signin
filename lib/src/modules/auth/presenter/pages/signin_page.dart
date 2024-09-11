@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_signin/src/modules/auth/presenter/pages/components/auth_toast_message.dart';
 import 'package:flutter_signin/src/modules/auth/presenter/store/signin_store.dart';
 import 'package:mobx/mobx.dart';
 
@@ -39,13 +40,7 @@ class _SignInPageState extends State<SignInPage> {
             (p0) => signinStore.state.errorState,
             (p0) {
               if (p0 != null) {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  duration: const Duration(seconds: 1),
-                  content: Text(
-                    p0,
-                    style: const TextStyle(color: Colors.red),
-                  ),
-                ));
+                AuthToastMessage.showToast(p0, context, 'error');
               }
             },
           ),

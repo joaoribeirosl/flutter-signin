@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
+import 'package:flutter_signin/src/modules/user/submodules/tasks/presenter/pages/components/task_toast_message.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/presenter/store/task_store.dart';
 
 class GetTaskPage extends StatefulWidget {
@@ -14,13 +15,11 @@ class GetTaskPage extends StatefulWidget {
 
 class _TaskPageState extends State<GetTaskPage> {
   late final TaskStore taskStore;
-  // late final UserStore userStore;
 
   @override
   void initState() {
     super.initState();
     taskStore = context.read<TaskStore>();
-    // userStore = context.read<UserStore>();
     WidgetsBinding.instance
         .addPostFrameCallback((_) => taskStore.getAllTasks(widget.user!.id));
   }
@@ -58,9 +57,9 @@ class _TaskPageState extends State<GetTaskPage> {
                           icon: const Icon(Icons.delete),
                           onPressed: () async {
                             await taskStore.removeTaskById(actualTask.id);
-                            ScaffoldMessenger.of(_).showSnackBar(const SnackBar(
-                                content: Text('Task removed successfully!'),
-                                duration: Duration(seconds: 1)));
+
+                            TaskToastMessage.showToast(
+                                'Task removed successfully!', context);
                           },
                         ),
                       ),

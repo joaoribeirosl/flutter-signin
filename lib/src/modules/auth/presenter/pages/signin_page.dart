@@ -40,7 +40,7 @@ class _SignInPageState extends State<SignInPage> {
             (p0) => signinStore.state.errorState,
             (p0) {
               if (p0 != null) {
-                AuthToastMessage.showToast(p0, context, 'error');
+                AuthToastMessage.showToast(p0, context, true);
               }
             },
           ),

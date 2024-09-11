@@ -49,7 +49,7 @@ class _SignUpPageState extends State<SignUpPage> {
           builder: (context) =>
               reaction((p0) => signupStore.state.errorState, (p0) {
             if (p0 != null) {
-              AuthToastMessage.showToast(p0, context, 'error');
+              AuthToastMessage.showToast(p0, context, true);
             }
           }),
           child: Column(

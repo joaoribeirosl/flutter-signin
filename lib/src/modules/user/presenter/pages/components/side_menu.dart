@@ -34,7 +34,7 @@ class SideMenu extends StatelessWidget {
               children: [
                 TextButton.icon(
                   icon: const Icon(
-                    Icons.check,
+                    Icons.add_circle,
                     color: Colors.white,
                   ),
                   onPressed: () => Modular.to.navigate(

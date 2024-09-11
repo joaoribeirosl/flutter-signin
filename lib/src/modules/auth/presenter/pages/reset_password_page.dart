@@ -27,7 +27,7 @@ class _ForgotPasswordState extends State<ResetPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
         // appBar: AppBar(
         //   leading: IconButton(
         //     icon: const Icon(Icons.arrow_back_ios_sharp),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class TaskToastMessage {
+class TaskToastManager {
   static void showToast(String message, BuildContext context,
       [bool? errorMessage = false]) async {
     WidgetsBinding.instance.addPostFrameCallback((_) {

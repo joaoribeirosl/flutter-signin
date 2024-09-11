@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
-import 'package:flutter_signin/src/modules/user/submodules/tasks/presenter/pages/components/task_toast_message.dart';
+import 'package:flutter_signin/src/modules/user/submodules/tasks/presenter/pages/components/task_toast_manager.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/presenter/store/task_store.dart';
 
 class GetTaskPage extends StatefulWidget {
@@ -58,7 +58,7 @@ class _TaskPageState extends State<GetTaskPage> {
                           onPressed: () async {
                             await taskStore.removeTaskById(actualTask.id);
 
-                            TaskToastMessage.showToast(
+                            TaskToastManager.showToast(
                                 'Task removed successfully!', context);
                           },
                         ),

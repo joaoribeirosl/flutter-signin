@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
 
 class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({super.key});
@@ -10,7 +8,6 @@ class ResetPasswordPage extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ResetPasswordPage> {
-  late final AuthStore authStore;
   final usernameController = TextEditingController();
   final newPasswordController = TextEditingController();
   final confirmNewPasswordController = TextEditingController();
@@ -18,7 +15,6 @@ class _ForgotPasswordState extends State<ResetPasswordPage> {
   @override
   void initState() {
     super.initState();
-    authStore = context.read<AuthStore>();
   }
 
   @override

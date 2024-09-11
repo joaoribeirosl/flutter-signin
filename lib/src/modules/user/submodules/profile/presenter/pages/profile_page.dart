@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
-import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
 
 class ProfilePage extends StatefulWidget {
   final User? user;
@@ -12,12 +10,9 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  late final AuthStore authStore;
-
   @override
   void initState() {
     super.initState();
-    authStore = context.read<AuthStore>();
   }
 
   @override

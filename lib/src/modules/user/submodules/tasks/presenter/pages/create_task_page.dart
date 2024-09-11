@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
-import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
+import 'package:flutter_signin/src/modules/user/presenter/store/user_store.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/presenter/store/task_store.dart';
 
 class CreateTaskPage extends StatefulWidget {
@@ -15,7 +15,7 @@ class CreateTaskPage extends StatefulWidget {
 
 class _CreateTaskPageState extends State<CreateTaskPage> {
   late final TaskStore taskStore;
-  late final AuthStore authStore;
+  late final UserStore userStore;
 
   final taskController = TextEditingController();
 
@@ -23,7 +23,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
   void initState() {
     super.initState();
     taskStore = context.read<TaskStore>();
-    authStore = context.read<AuthStore>();
+    userStore = context.read<UserStore>();
   }
 
   @override
@@ -36,7 +36,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Welcome ${authStore.shortenedName(widget.user!.name)}'),
+        title: Text('Welcome ${userStore.shortenedName(widget.user!.name)}'),
         centerTitle: true,
       ),
       body: Padding(

@@ -61,4 +61,12 @@ abstract class _TaskStore with Store {
     }
     return false;
   }
+
+  String shortenedName(String username) {
+    int maxLength = 10;
+    if (username.length > maxLength) {
+      return '${username.substring(0, maxLength)}...';
+    }
+    return username;
+  }
 }

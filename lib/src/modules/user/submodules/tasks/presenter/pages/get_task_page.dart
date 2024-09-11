@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
-import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/presenter/store/task_store.dart';
 
 class GetTaskPage extends StatefulWidget {
@@ -15,13 +14,13 @@ class GetTaskPage extends StatefulWidget {
 
 class _TaskPageState extends State<GetTaskPage> {
   late final TaskStore taskStore;
-  late final AuthStore authStore;
+  // late final UserStore userStore;
 
   @override
   void initState() {
     super.initState();
     taskStore = context.read<TaskStore>();
-    authStore = context.read<AuthStore>();
+    // userStore = context.read<UserStore>();
     WidgetsBinding.instance
         .addPostFrameCallback((_) => taskStore.getAllTasks(widget.user!.id));
   }
@@ -42,7 +41,7 @@ class _TaskPageState extends State<GetTaskPage> {
           children: [
             const SizedBox(height: 16),
             Text(
-              '${authStore.shortenedName(widget.user!.name)}\'s Task List:',
+              '${taskStore.shortenedName(widget.user!.name)}\'s Task List:',
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 24),

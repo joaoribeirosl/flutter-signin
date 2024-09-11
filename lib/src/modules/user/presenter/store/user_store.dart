@@ -41,4 +41,12 @@ abstract class _UserStore with Store {
     }
     return path;
   }
+
+  String shortenedName(String username) {
+    int maxLength = 10;
+    if (username.length > maxLength) {
+      return '${username.substring(0, maxLength)}...';
+    }
+    return username;
+  }
 }

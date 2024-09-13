@@ -20,8 +20,12 @@ class _TaskPageState extends State<GetTaskPage> {
   void initState() {
     super.initState();
     taskStore = context.read<TaskStore>();
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) => taskStore.getAllTasks(widget.user!.id));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      taskStore.sendTaskIo(widget.user!.id);
+      taskStore.getAllTasks(widget.user!.id);
+      // var count = taskStore.getTaskCount();
+      // print(count);
+    });
   }
 
   @override

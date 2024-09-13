@@ -1,36 +1,68 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/external/server_address.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/infra/socket_client_interface.dart';
-import 'package:socket_io_client/socket_io_client.dart';
+import 'package:socket_io_client/socket_io_client.dart' as io;
 
 class SocketClient implements ISocketClient {
-  final Socket socket = io(counterTasksRoute, {
-    'transports': ['websocket'],
-    'autoConnect': false,
-  });
-  
+  late final io.Socket socket;
+
+  final Map<String, Function> handlersConnect = <String, Function>{};
+  final Map<String, Function> handlersDisconnect = <String, Function>{};
 
   SocketClient() {
+    connectToServer();
+  }
+
+  @override
+  Future<void> connectToServer() async {
+    socket = io.io(counterTasksRoute, {
+      'transports': ['websocket'],
+      'autoConnect': false,
+    });
     socket.connect();
+    socket.onConnect((data) => _runOnSocketConnect(data));
+    socket.onDisconnect((data) => _runOnSocketDisconnect(data));
   }
 
-  bool socketConnected() {
-    return socket.connected;
-  }
-
-  void sendMessage(String event, dynamic message) {
+  @override
+  void emitData(String event, dynamic message) {
     socket.emit(event, message);
   }
 
-  void receiveSimpleMessage(String event, Function function) {
+  @override
+  void listenEvent(String event, Function function) {
     socket.on(event, (data) => function(data));
   }
 
-  void onSocketDisconnect(Function function) {
-    socket.onDisconnect((data) => function(data));
+  @override
+  void disposeEvent(String event) {
+    socket.off(event);
   }
 
-  void onSocketConnect(Function function) {
-    socket.onConnect((data) => function(data));
+  @override
+  void onSocketConnectHandler(Function function, String handler) {
+    handlersConnect.addAll({handler: function});
+    debugPrint('Listener connect: $handler');
+  }
+
+  @override
+  void onSocketConnectDispose(String handler) {
+    handlersConnect.remove(handler);
+    debugPrint('Dispose connect: $handler');
+  }
+
+  void _runOnSocketConnect(data) {
+    for (Function function in handlersConnect.values) {
+      function(data);
+    }
+    debugPrint('Handlers connect: ${handlersConnect.length}');
+  }
+
+  void _runOnSocketDisconnect(data) {
+    for (Function function in handlersDisconnect.values) {
+      function(data);
+    }
+    debugPrint('Handlers disconnect: ${handlersConnect.length}');
   }
 
   @override
@@ -49,6 +81,11 @@ class SocketClient implements ISocketClient {
   }
 
   @override
+  bool sockectConnected() {
+    return socket.connected;
+  }
+
+  @override
   void disconnect() {
     socket.disconnect();
   }
@@ -59,37 +96,14 @@ class SocketClient implements ISocketClient {
   }
 
   @override
-  Future<void> connectToServer() {
-    throw UnimplementedError();
+  void onSocketDisconnectDispose(String handler) {
+    handlersDisconnect.remove(handler);
+    debugPrint('Dispose disconnect: $handler');
   }
 
   @override
-  void disposeEvent(String event) {}
-
-  @override
-  void emitData(String event, message) {}
-
-  @override
-  void listenEvent(String event, Function function) {}
-
-  @override
-  void onSocketConnectDispose(String handler) {}
-
-  @override
-  void onSocketConnectHandler(Function function, String handler) {}
-
-  @override
-  void onSocketDisconnectDispose(String handler) {}
-
-  @override
-  void onSocketDisconnectHandler(Function function, String handler) {}
-
-  @override
-  void receiveAdapterMessage(
-      String event, Function functionAdapter, Function function) {}
-
-  @override
-  bool sockectConnected() {
-    throw UnimplementedError();
+  void onSocketDisconnectHandler(Function function, String handler) {
+    handlersDisconnect.addAll({handler: function});
+    debugPrint('Listener disconnect: $handler');
   }
 }

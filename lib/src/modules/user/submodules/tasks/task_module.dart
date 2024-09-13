@@ -6,10 +6,12 @@ import 'package:flutter_signin/src/modules/user/submodules/tasks/domain/usecases
 import 'package:flutter_signin/src/modules/user/submodules/tasks/external/datasource/add_task_datasource.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/external/datasource/get_all_tasks_datasource.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/external/datasource/remove_task_by_id.dart';
+import 'package:flutter_signin/src/modules/user/submodules/tasks/external/socket_client.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/infra/datasource/add_task_datasource_interface.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/infra/datasource/get_all_tasks_datasource_interface.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/infra/datasource/remove_task_by_id_use_case_interface.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/infra/repositories/task_repository.dart';
+import 'package:flutter_signin/src/modules/user/submodules/tasks/infra/socket_client_interface.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/presenter/pages/create_task_page.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/presenter/pages/get_task_page.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/presenter/store/task_store.dart';
@@ -19,6 +21,7 @@ class TaskModule extends Module {
   @override
   void binds(Injector i) {
     i.add(http.Client.new);
+    i.addSingleton<ISocketClient>(SocketClient.new);
 
     i.add<IAddTaskDatasource>(AddTaskDatasource.new);
     i.add<IGetAllTasksDatasource>(GetAllTasksDatasource.new);

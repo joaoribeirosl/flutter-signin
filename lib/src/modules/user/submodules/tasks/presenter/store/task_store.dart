@@ -84,7 +84,8 @@ abstract class _TaskStore with Store {
     return _socketClient.listenEvent('update_response', test);
   }
 
-  String test() {
-    return 'como q escrev';
+  String test(String data) {
+    print(data);
+    return data;
   }
 }

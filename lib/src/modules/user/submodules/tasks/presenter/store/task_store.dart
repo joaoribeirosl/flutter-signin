@@ -81,11 +81,10 @@ abstract class _TaskStore with Store {
   }
 
   Future getTaskCount() async {
-    return _socketClient.listenEvent('update_response', test);
+    return _socketClient.listenEvent('update_response', taskCount);
   }
 
-  String test(String data) {
-    print(data);
+  String taskCount(String data) {
     return data;
   }
 }

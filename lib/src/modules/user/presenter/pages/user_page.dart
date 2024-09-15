@@ -7,7 +7,8 @@ import 'package:window_manager/window_manager.dart';
 
 class UserPage extends StatefulWidget {
   final User? user;
-  const UserPage({super.key, required this.user});
+  final String? taskCount;
+  const UserPage({super.key, required this.user, required this.taskCount});
 
   @override
   State<UserPage> createState() => _UserPageState();
@@ -31,7 +32,10 @@ class _UserPageState extends State<UserPage> with WindowListener {
     return Scaffold(
       body: Row(
         children: [
-          SideMenu(user: widget.user),
+          SideMenu(
+            user: widget.user,
+            taskCount: widget.taskCount!,
+          ),
           const Expanded(
             child: RouterOutlet(),
           ),

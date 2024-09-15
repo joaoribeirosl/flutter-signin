@@ -4,7 +4,8 @@ import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
 
 class SideMenu extends StatelessWidget {
   final User? user;
-  const SideMenu({super.key, required this.user});
+  final String taskCount;
+  const SideMenu({super.key, required this.user, required this.taskCount});
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +82,18 @@ class SideMenu extends StatelessWidget {
                   label: const Text(
                     'Logout',
                     style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                const SizedBox(height: 24),
+                TextButton.icon(
+                  icon: const Icon(
+                    Icons.task,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {},
+                  label: Text(
+                    'Tasks: $taskCount',
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ),
                 const SizedBox(height: 24),

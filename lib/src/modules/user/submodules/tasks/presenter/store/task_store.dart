@@ -2,7 +2,6 @@ import 'package:flutter_signin/src/modules/user/submodules/tasks/domain/usecases
 import 'package:flutter_signin/src/modules/user/submodules/tasks/domain/usecases/get_all_tasks_use_case.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/domain/usecases/remove_task_by_id_use_case.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/infra/proto/tasks.pb.dart';
-import 'package:flutter_signin/src/modules/user/submodules/tasks/infra/socket_client_interface.dart';
 import 'package:mobx/mobx.dart';
 
 part 'task_store.g.dart';
@@ -11,13 +10,12 @@ part 'task_store.g.dart';
 class TaskStore = _TaskStore with _$TaskStore;
 
 abstract class _TaskStore with Store {
-  final ISocketClient _socketClient;
   final IAddTaskUseCase _addTaskUseCase;
   final IGetAllTasksUseCase _getAllTasksUseCase;
   final IRemoveTaskByIdUseCase _removeTaskByIdUseCase;
 
   _TaskStore(this._addTaskUseCase, this._getAllTasksUseCase,
-      this._removeTaskByIdUseCase, this._socketClient);
+      this._removeTaskByIdUseCase);
 
   @observable
   bool enableButton = false;
@@ -70,21 +68,5 @@ abstract class _TaskStore with Store {
       return '${username.substring(0, maxLength)}...';
     }
     return username;
-  }
-
-  void connectSocket() async {
-    await _socketClient.connectToServer();
-  }
-
-  Future sendTaskIo(String idUser) async {
-    return _socketClient.emitData('update_request', idUser);
-  }
-
-  Future getTaskCount() async {
-    return _socketClient.listenEvent('update_response', taskCount);
-  }
-
-  String taskCount(String data) {
-    return data;
   }
 }

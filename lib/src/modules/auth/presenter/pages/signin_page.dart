@@ -106,9 +106,13 @@ class _SignInPageState extends State<SignInPage> {
                               usernameController.text, passwordController.text);
 
                           if (success) {
+                            signinStore.sendTaskIo(signinStore.actualUser.id);
+                            signinStore.showPassword = false;
                             signinStore.enableSigninButton = false;
-                            Modular.to.navigate('/user_module/',
-                                arguments: signinStore.actualUser);
+                            Modular.to.navigate('/user_module/', arguments: {
+                              'user': signinStore.actualUser,
+                              'taskCount': signinStore.getTaskCount(),
+                            });
                           } else {
                             signinStore.state
                                 .setError('Incorrect username or password!');

@@ -1,7 +1,7 @@
 abstract class ISocketClient {
   Future<void> connectToServer();
   void emitData(String event, dynamic message);
-  void listenEvent(String event, Function function);
+  void listenEvent(String event, Function(String) function);
   void disposeEvent(String event);
   void onSocketConnectError(Function function);
   void onSocketError(Function function);

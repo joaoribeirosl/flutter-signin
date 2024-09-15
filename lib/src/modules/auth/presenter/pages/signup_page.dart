@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_signin/src/modules/auth/presenter/pages/components/auth_toast_manager.dart';
 import 'package:flutter_signin/src/modules/auth/presenter/store/signup_store.dart';
 import 'package:mobx/mobx.dart';
 
@@ -48,13 +49,7 @@ class _SignUpPageState extends State<SignUpPage> {
           builder: (context) =>
               reaction((p0) => signupStore.state.errorState, (p0) {
             if (p0 != null) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                duration: const Duration(seconds: 1),
-                content: Text(
-                  p0,
-                  style: const TextStyle(color: Colors.red),
-                ),
-              ));
+              AuthToastManager.showToast(p0, context, true);
             }
           }),
           child: Column(
@@ -147,8 +142,8 @@ class _SignUpPageState extends State<SignUpPage> {
                               usernameController.text,
                               passwordController.text,
                               confirmPasswordController.text)) {
-                            ScaffoldMessenger.of(_).showSnackBar(const SnackBar(
-                                content: Text('User created successfully!')));
+                            AuthToastManager.showToast(
+                                'User created successfully!', context);
                             signupStore.agreeTermsCheckboxValue = false;
                             Modular.to.navigate('/');
                           } else {

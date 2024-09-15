@@ -18,7 +18,8 @@ class UserModule extends Module {
     r.child(
       Modular.initialRoute,
       child: (context) => UserPage(
-        user: r.args.data,
+        user: r.args.data['user'],
+        taskCount: r.args.data['taskCount'],
       ),
       children: [
         ModuleRoute('/task/', module: TaskModule()),

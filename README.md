@@ -13,3 +13,10 @@ This project follows the Clean Architecture principles, ensuring a clear separat
 
 ## Backend Repository
 https://github.com/jefferson-norberto2/api_tasks
+
+
+## To run this project
+
+1. ``flutter packages pub run build_runner build`` to generate mobx content.
+2. check your sdk version in ``pubspec.yaml`` 
+3. ``flutter run``

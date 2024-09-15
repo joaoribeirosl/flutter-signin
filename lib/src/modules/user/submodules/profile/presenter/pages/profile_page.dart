@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
-import 'package:flutter_signin/src/modules/auth/presenter/store/auth_store.dart';
 
 class ProfilePage extends StatefulWidget {
   final User? user;
@@ -12,12 +10,9 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  late final AuthStore authStore;
-
   @override
   void initState() {
     super.initState();
-    authStore = context.read<AuthStore>();
   }
 
   @override
@@ -28,19 +23,22 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(children: [
           Center(
             child: Container(
+              // width: MediaQuery.of(context).size.width,
               decoration: const BoxDecoration(
-                  color: Colors.white, shape: BoxShape.circle),
-              child: const Image(
-                image: AssetImage('assets/nopic.png'),
-                width: 100,
-                height: 100,
+                image: DecorationImage(
+                    alignment: Alignment(-.2, 0),
+                    image: AssetImage('assets/profile.png'),
+                    fit: BoxFit.fill),
+              ),
+              alignment: Alignment.bottomCenter,
+              padding: const EdgeInsets.only(bottom: 600),
+              child: Text(
+                widget.user!.name,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
             ),
           ),
-          Text(
-            ' ${widget.user!.name}',
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-          )
         ]),
       ),
     );

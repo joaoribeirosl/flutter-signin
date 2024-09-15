@@ -1,5 +1,6 @@
 import 'package:flutter_signin/src/modules/auth/domain/usecases/signin_use_case.dart';
 import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
+import 'package:flutter_signin/src/modules/auth/infra/socket_client_interface.dart';
 import 'package:flutter_signin/src/modules/auth/presenter/state/signin_state.dart';
 import 'package:mobx/mobx.dart';
 
@@ -10,8 +11,9 @@ class SigninStore = _SigninStore with _$SigninStore;
 
 abstract class _SigninStore with Store {
   final ISigninUseCase _loginUseCase;
+  final ISocketClient _socketClient;
 
-  _SigninStore(this._loginUseCase);
+  _SigninStore(this._loginUseCase, this._socketClient);
 
   @observable
   bool showPassword = false;
@@ -40,5 +42,21 @@ abstract class _SigninStore with Store {
       return true;
     }
     return false;
+  }
+
+  void connectSocket() async {
+    await _socketClient.connectToServer();
+  }
+
+  Future sendTaskIo(String idUser) async {
+    return _socketClient.emitData('update_request', idUser); // remove return?
+  }
+
+  Future getTaskCount() async {
+    return _socketClient.listenEvent('update_response', taskCount);
+  }
+
+  String taskCount(dynamic data) {
+    return data.toString();
   }
 }

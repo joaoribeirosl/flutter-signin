@@ -56,7 +56,7 @@ abstract class _SigninStore with Store {
     return _socketClient.listenEvent('update_response', taskCount);
   }
 
-  String taskCount(String data) {
-    return data;
+  String taskCount(dynamic data) {
+    return data.toString();
   }
 }

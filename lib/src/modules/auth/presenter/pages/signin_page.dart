@@ -111,7 +111,7 @@ class _SignInPageState extends State<SignInPage> {
                             signinStore.enableSigninButton = false;
                             Modular.to.navigate('/user_module/', arguments: {
                               'user': signinStore.actualUser,
-                              'taskCount': signinStore.getTaskCount(),
+                              'taskCount': '${signinStore.getTaskCount()}',
                             });
                           } else {
                             signinStore.state

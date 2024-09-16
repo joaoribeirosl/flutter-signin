@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_signin/src/modules/auth/external/server_address.dart';
-import 'package:flutter_signin/src/modules/auth/infra/socket_client_interface.dart';
+import 'package:flutter_signin/src/modules/user/external/server_address.dart';
+import 'package:flutter_signin/src/modules/user/infra/socket_client_interface.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 
 class SocketClient implements ISocketClient {
@@ -30,8 +30,8 @@ class SocketClient implements ISocketClient {
   }
 
   @override
-  void listenEvent(String event, Function(String) function) {
-    socket.on(event, (data) => function(data.toString()));
+  void listenEvent(String event, Function function) {
+    socket.on(event, (data) => function(data));
   }
 
   @override

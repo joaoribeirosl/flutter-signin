@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_signin/src/modules/user/infra/socket_client_interface.dart';
 import 'package:mobx/mobx.dart';
 
 part 'user_store.g.dart';
@@ -7,10 +8,17 @@ part 'user_store.g.dart';
 class UserStore = _UserStore with _$UserStore;
 
 abstract class _UserStore with Store {
+  final ISocketClient _socketClient;
+
+  _UserStore(this._socketClient);
+
   @observable
   String title = "";
 
   String oldRoute = "";
+
+  @observable
+  String taskCount = '';
 
   @action
   void changeRoute(String title, String route) {
@@ -48,5 +56,22 @@ abstract class _UserStore with Store {
       return '${username.substring(0, maxLength)}...';
     }
     return username;
+  }
+
+  void connectSocket() async {
+    await _socketClient.connectToServer();
+  }
+
+  Future sendTaskIo(String idUser) async {
+    return _socketClient.emitData('update_request', idUser); // remove return?
+  }
+
+  Future getTaskCount() async {
+    return _socketClient.listenEvent('update_response', taskCountIo);
+  }
+
+  String taskCountIo(String data) {
+    taskCount = data;
+    return data;
   }
 }

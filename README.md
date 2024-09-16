@@ -14,6 +14,48 @@ This project follows the Clean Architecture principles, ensuring a clear separat
 ## Backend Repository
 https://github.com/jefferson-norberto2/api_tasks
 
+## updates in API
+
+- in register_routes(self) method add this line: 
+```py
+self._app.add_url_rule('/remove_task_by_id', 'remove_task_by_id', self.remove_task_by_id, methods=['DELETE'])
+```
+
+- in get_tasks(self) method change the query to:
+```py
+query = f'''
+            SELECT * FROM {TASK_TABLE_NAME}
+            WHERE {USER}={id}
+            ORDER BY id DESC
+        '''
+```
+- add this method to remove_task_by_id:
+
+```py
+def remove_task_by_id(self):
+        id = request.headers.get('id')
+        id = int(id)  
+
+        database = Database(DATABASE_PATH)
+
+        query = f'''
+            DELETE FROM {TASK_TABLE_NAME}
+            WHERE id={id}
+        '''
+
+        task = database.fetch_all(query)
+        
+        self.total_tasks -= 1
+
+        self.socketio.emit('update_response', str(self.total_tasks), namespace='/counter')
+
+        if task:
+            return {'task': True}
+        else:
+            return 'Task not found'
+```
+
+
 
 ## To run this project
 

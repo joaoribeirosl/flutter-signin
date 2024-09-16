@@ -5,13 +5,12 @@ import 'package:mobx/mobx.dart';
 
 part 'signin_store.g.dart';
 
-// ignore: library_private_types_in_public_api
-class SigninStore = _SigninStore with _$SigninStore;
+class SigninStore = ISigninStore with _$SigninStore;
 
-abstract class _SigninStore with Store {
+abstract class ISigninStore with Store {
   final ISigninUseCase _loginUseCase;
 
-  _SigninStore(this._loginUseCase);
+  ISigninStore(this._loginUseCase);
 
   @observable
   bool showPassword = false;

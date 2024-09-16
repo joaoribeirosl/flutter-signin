@@ -2,14 +2,13 @@ import 'package:mobx/mobx.dart';
 
 part 'reset_password_store.g.dart';
 
-// ignore: library_private_types_in_public_api
-class ResetPasswordStore = _ResetPasswordStore with _$ResetPasswordStore;
+class ResetPasswordStore = IResetPasswordStore with _$ResetPasswordStore;
 
-abstract class _ResetPasswordStore with Store {
+abstract class IResetPasswordStore with Store {
   // final IResetPasswordUseCase _resetPasswordUseCase;
   // final IUserExistsUseCase _userExistsUseCase; // remove later when implemented
 
-  // _ResetPasswordStore(this._resetPasswordUseCase, this._userExistsUseCase);
+  // IResetPasswordStore(this._resetPasswordUseCase, this._userExistsUseCase);
 
   @observable
   bool showPassword = false;

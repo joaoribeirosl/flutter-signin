@@ -6,12 +6,12 @@ import 'package:mobx/mobx.dart';
 part 'signup_store.g.dart';
 
 // ignore: library_private_types_in_public_api
-class SignupStore = _SignupStore with _$SignupStore;
+class SignupStore = ISignupStore with _$SignupStore;
 
-abstract class _SignupStore with Store {
+abstract class ISignupStore with Store {
   final ISignupUseCase _signupUseCase;
 
-  _SignupStore(this._signupUseCase);
+  ISignupStore(this._signupUseCase);
 
   SignupState state = SignupState();
 

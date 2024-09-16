@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
+import 'package:flutter_signin/src/modules/user/submodules/tasks/presenter/pages/components/edit_task_modal.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/presenter/pages/components/task_toast_manager.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/presenter/store/task_store.dart';
 
@@ -54,14 +55,30 @@ class _TaskPageState extends State<GetTaskPage> {
                     return Card(
                       child: ListTile(
                         title: Text(actualTask.task),
-                        trailing: IconButton(
-                          icon: const Icon(Icons.delete),
-                          onPressed: () async {
-                            await taskStore.removeTaskById(actualTask.id);
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.edit),
+                              onPressed: () {
+                                showDialog(context: context, builder: (context) => const EditTaskModal(),).then((value) {
+                                  // getAllTasks
+                                },);
+                                // const EditTaskModal();
+                                // TaskToastManager.showToast(
+                                //     'Task edited successfully!', context);
+                              },
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.delete),
+                              onPressed: () async {
+                                await taskStore.removeTaskById(actualTask.id);
 
-                            TaskToastManager.showToast(
-                                'Task removed successfully!', context);
-                          },
+                                TaskToastManager.showToast(
+                                    'Task removed successfully!', context);
+                              },
+                            ),
+                          ],
                         ),
                       ),
                     );

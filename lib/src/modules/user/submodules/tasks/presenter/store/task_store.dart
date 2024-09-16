@@ -6,15 +6,14 @@ import 'package:mobx/mobx.dart';
 
 part 'task_store.g.dart';
 
-// ignore: library_private_types_in_public_api
-class TaskStore = _TaskStore with _$TaskStore;
+class TaskStore = ITaskStore with _$TaskStore;
 
-abstract class _TaskStore with Store {
+abstract class ITaskStore with Store {
   final IAddTaskUseCase _addTaskUseCase;
   final IGetAllTasksUseCase _getAllTasksUseCase;
   final IRemoveTaskByIdUseCase _removeTaskByIdUseCase;
 
-  _TaskStore(this._addTaskUseCase, this._getAllTasksUseCase,
+  ITaskStore(this._addTaskUseCase, this._getAllTasksUseCase,
       this._removeTaskByIdUseCase);
 
   @observable
@@ -25,19 +24,16 @@ abstract class _TaskStore with Store {
     enableButton = task.isNotEmpty;
   }
 
-  final actualTask = Task();
-
   @observable
-  List<Task> taskList = ObservableList<Task>();
+  var taskList = ObservableList<Task>();
 
   Future<bool> addTask(String task, String idUser) async {
-    actualTask.task = task;
-    actualTask.userId = idUser;
-    if (task != '') {
-      final res = await _addTaskUseCase.call(actualTask);
+    final currentTask = Task(userId: idUser, task: task);
+    if (task.isNotEmpty) {
+      final res = await _addTaskUseCase.call(currentTask);
       if (res.$2 != null) {
-        await getAllTasks(idUser);
-        return true;
+        enableButton = false;
+        return res.$2!;
       }
     }
     return false;

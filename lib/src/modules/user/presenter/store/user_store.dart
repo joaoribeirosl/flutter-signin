@@ -4,13 +4,12 @@ import 'package:mobx/mobx.dart';
 
 part 'user_store.g.dart';
 
-// ignore: library_private_types_in_public_api
-class UserStore = _UserStore with _$UserStore;
+class UserStore = IUserStore with _$UserStore;
 
-abstract class _UserStore with Store {
+abstract class IUserStore with Store {
   final ISocketClient _socketClient;
 
-  _UserStore(this._socketClient);
+  IUserStore(this._socketClient);
 
   @observable
   String title = "";
@@ -63,7 +62,7 @@ abstract class _UserStore with Store {
   }
 
   Future sendTaskIo(String idUser) async {
-    return _socketClient.emitData('update_request', idUser); // remove return?
+    _socketClient.emitData('update_request', idUser);
   }
 
   Future getTaskCount() async {

@@ -63,7 +63,7 @@ abstract class _UserStore with Store {
   }
 
   Future sendTaskIo(String idUser) async {
-    return _socketClient.emitData('update_request', idUser); // remove return?
+    _socketClient.emitData('update_request', idUser);
   }
 
   Future getTaskCount() async {

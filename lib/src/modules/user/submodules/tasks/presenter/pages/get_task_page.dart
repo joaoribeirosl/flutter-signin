@@ -65,13 +65,13 @@ class _TaskPageState extends State<GetTaskPage> {
                                   context: context,
                                   builder: (context) => EditTaskModal(
                                     taskText: actualTask.task,
-                                    onEdit: (p0) async => await taskStore
-                                        .editTaskById(p0, actualTask),
+                                    onEdit: (p0) async {
+                                      await taskStore.editTaskById(
+                                          p0, actualTask);
+                                      await taskStore
+                                          .getAllTasks(widget.user!.id);
+                                    },
                                   ),
-                                ).then(
-                                  (value) {
-                                    taskStore.getAllTasks(widget.user!.id);
-                                  },
                                 );
                               },
                             ),

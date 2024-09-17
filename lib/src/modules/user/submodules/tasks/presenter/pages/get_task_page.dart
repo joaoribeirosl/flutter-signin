@@ -61,12 +61,20 @@ class _TaskPageState extends State<GetTaskPage> {
                             IconButton(
                               icon: const Icon(Icons.edit),
                               onPressed: () {
-                                showDialog(context: context, builder: (context) => const EditTaskModal(),).then((value) {
-                                  // getAllTasks
-                                },);
-                                // const EditTaskModal();
-                                // TaskToastManager.showToast(
-                                //     'Task edited successfully!', context);
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => EditTaskModal(
+                                    taskText: actualTask.task,
+                                    onEdit: (p0) async => await taskStore
+                                        .editTaskById(p0, actualTask),
+                                  ),
+                                ).then(
+                                  (value) {
+                                    taskStore.getAllTasks(widget.user!.id);
+                                    TaskToastManager.showToast(
+                                        'Task edited successfully!', context);
+                                  },
+                                );
                               },
                             ),
                             IconButton(

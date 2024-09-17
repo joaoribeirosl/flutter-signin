@@ -1,4 +1,5 @@
 import 'package:flutter_signin/src/modules/user/submodules/tasks/domain/usecases/add_task_use_case.dart';
+import 'package:flutter_signin/src/modules/user/submodules/tasks/domain/usecases/edit_task_by_id_use_case.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/domain/usecases/get_all_tasks_use_case.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/domain/usecases/remove_task_by_id_use_case.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/infra/proto/tasks.pb.dart';
@@ -12,9 +13,10 @@ abstract class ITaskStore with Store {
   final IAddTaskUseCase _addTaskUseCase;
   final IGetAllTasksUseCase _getAllTasksUseCase;
   final IRemoveTaskByIdUseCase _removeTaskByIdUseCase;
+  final IEditTaskByIdUseCase _editTaskByIdUseCase;
 
   ITaskStore(this._addTaskUseCase, this._getAllTasksUseCase,
-      this._removeTaskByIdUseCase);
+      this._removeTaskByIdUseCase, this._editTaskByIdUseCase);
 
   @observable
   bool enableButton = false;
@@ -54,6 +56,17 @@ abstract class ITaskStore with Store {
     if (res.$2 != null) {
       taskList.removeWhere((task) => task.id == idTask);
       return true;
+    }
+    return false;
+  }
+
+  Future<bool> editTaskById(String newTask, Task task) async {
+    if (newTask.isNotEmpty) {
+      task.task = newTask;
+      final res = await _editTaskByIdUseCase.call(task);
+      if (res.$2 != null) {
+        return res.$2!;
+      }
     }
     return false;
   }

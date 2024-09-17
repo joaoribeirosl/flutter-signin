@@ -5,4 +5,5 @@ abstract class ITaskRepository {
   Future<(ITaskError?, bool?)> addTask(Task task);
   Future<(ITaskError?, List<Task>?)> getAllTasks(String idUser);
   Future<(ITaskError?, bool?)> removeTaskById(String idTask);
+  Future<(ITaskError?, bool?)> editTaskById(Task actualTask);
 }

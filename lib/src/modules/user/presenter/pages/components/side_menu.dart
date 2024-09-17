@@ -75,18 +75,6 @@ class SideMenu extends StatelessWidget {
                 const SizedBox(height: 24),
                 TextButton.icon(
                   icon: const Icon(
-                    Icons.logout,
-                    color: Colors.white,
-                  ),
-                  onPressed: () => Modular.to.navigate('/'),
-                  label: const Text(
-                    'Logout',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-                const SizedBox(height: 24),
-                TextButton.icon(
-                  icon: const Icon(
                     Icons.task,
                     color: Colors.white,
                   ),
@@ -94,6 +82,18 @@ class SideMenu extends StatelessWidget {
                   label: Text(
                     'Tasks: $taskCount',
                     style: const TextStyle(color: Colors.white),
+                  ),
+                ),
+                const SizedBox(height: 24),
+                TextButton.icon(
+                  icon: const Icon(
+                    Icons.logout,
+                    color: Colors.white,
+                  ),
+                  onPressed: () => Modular.to.navigate('/'),
+                  label: const Text(
+                    'Logout',
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
                 const SizedBox(height: 24),

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class EditTaskModal extends StatefulWidget {
-  const EditTaskModal({super.key});
+  final String taskText;
+  final Function(String) onEdit;
+  const EditTaskModal(
+      {super.key, required this.taskText, required this.onEdit});
 
   @override
   State<EditTaskModal> createState() => _EditTaskModalState();
@@ -13,7 +16,7 @@ class _EditTaskModalState extends State<EditTaskModal> {
   @override
   void initState() {
     super.initState();
-
+    editTaskController.text = widget.taskText;
   }
 
   @override
@@ -25,30 +28,34 @@ class _EditTaskModalState extends State<EditTaskModal> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-          title: const Text('Basic dialog title'),
-          content: TextField(
-            controller: editTaskController,
+      title: const Text('edit task:'),
+      content: TextField(
+        controller: editTaskController,
+        decoration: const InputDecoration(
+          border: OutlineInputBorder(),
+        ),
+      ),
+      actions: <Widget>[
+        TextButton(
+          style: TextButton.styleFrom(
+            textStyle: Theme.of(context).textTheme.labelLarge,
           ),
-          actions: <Widget>[
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
-              ),
-              child: const Text('Disable'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
-              ),
-              child: const Text('Enable'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
+          child: const Text('back'),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        TextButton(
+          style: TextButton.styleFrom(
+            textStyle: Theme.of(context).textTheme.labelLarge,
+          ),
+          child: const Text('confirm'),
+          onPressed: () {
+            widget.onEdit(editTaskController.text);
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
+    );
   }
 }

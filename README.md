@@ -16,9 +16,11 @@ https://github.com/jefferson-norberto2/api_tasks
 
 ## updates in API
 
-- in register_routes(self) method add this line: 
+- in register_routes(self) method add this: 
 ```py
 self._app.add_url_rule('/remove_task_by_id', 'remove_task_by_id', self.remove_task_by_id, methods=['DELETE'])
+
+self._app.add_url_rule('/edit_task_by_id', 'edit_task_by_id', self.edit_task_by_id, methods=['PUT'])
 ```
 
 - in get_tasks(self) method change the query to:
@@ -55,7 +57,29 @@ def remove_task_by_id(self):
             return 'Task not found'
 ```
 
+- add this method to edit task
 
+```py
+def edit_task_by_id(self):
+        data = request.data
+        new_task = self._task.FromString(data) 
+        id = int(new_task.id)
+        text = new_task.task
+        database = Database(DATABASE_PATH)
+        
+        query = f''' 
+            UPDATE {TASK_TABLE_NAME} 
+            SET {TASK}='{text}'
+            WHERE id={id}
+        '''
+        
+        task_to_edit = database.fetch_all(query)
+        
+        if task_to_edit:
+            return {'task': True}
+        else:
+            return 'Unable to edit' 
+```
 
 ## To run this project
 

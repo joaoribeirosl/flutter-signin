@@ -2,6 +2,7 @@ import 'package:flutter_signin/src/modules/user/submodules/tasks/domain/errors/t
 import 'package:flutter_signin/src/modules/user/submodules/tasks/domain/repositories/task_respository.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/infra/adapter/task_adapter.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/infra/datasource/add_task_datasource_interface.dart';
+import 'package:flutter_signin/src/modules/user/submodules/tasks/infra/datasource/edit_task_by_id_datasource_interface.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/infra/datasource/get_all_tasks_datasource_interface.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/infra/datasource/remove_task_by_id_use_case_interface.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/infra/proto/tasks.pb.dart';
@@ -10,9 +11,10 @@ class TaskRepository implements ITaskRepository {
   final IAddTaskDatasource _addTaskDatasource;
   final IGetAllTasksDatasource _getAllTasksDatasource;
   final IRemoveTaskByIdDatasource _removeTaskByIdDatasource;
+  final IEditTaskByIdDatasource _editTaskByIdDatasource;
 
   TaskRepository(this._addTaskDatasource, this._getAllTasksDatasource,
-      this._removeTaskByIdDatasource);
+      this._removeTaskByIdDatasource, this._editTaskByIdDatasource);
 
   @override
   Future<(ITaskError?, bool?)> addTask(Task data) async {
@@ -51,6 +53,20 @@ class TaskRepository implements ITaskRepository {
         return (null, true);
       }
       return (RemoveTaskError('task not found'), null);
+    } on ITaskError catch (e) {
+      return (e, null);
+    }
+  }
+
+  @override
+  Future<(ITaskError?, bool?)> editTaskById(Task actualTask) async {
+    try {
+      final actualTaskEncoded = TaskAdapter.protoToData(actualTask);
+      final res = await _editTaskByIdDatasource.editTaskById(actualTaskEncoded);
+      if (res != null) {
+        return (null, true);
+      }
+      return (EditTaskError('unable to edit task'), null);
     } on ITaskError catch (e) {
       return (e, null);
     }

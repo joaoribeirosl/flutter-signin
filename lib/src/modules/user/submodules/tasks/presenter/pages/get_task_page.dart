@@ -71,8 +71,6 @@ class _TaskPageState extends State<GetTaskPage> {
                                 ).then(
                                   (value) {
                                     taskStore.getAllTasks(widget.user!.id);
-                                    TaskToastManager.showToast(
-                                        'Task edited successfully!', context);
                                   },
                                 );
                               },

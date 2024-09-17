@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_signin/src/modules/user/submodules/tasks/presenter/pages/components/task_toast_manager.dart';
 
 class EditTaskModal extends StatefulWidget {
   final String taskText;
@@ -52,6 +53,7 @@ class _EditTaskModalState extends State<EditTaskModal> {
           child: const Text('confirm'),
           onPressed: () {
             widget.onEdit(editTaskController.text);
+            TaskToastManager.showToast('Task edited successfully!', context);
             Navigator.of(context).pop();
           },
         ),

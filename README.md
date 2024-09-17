@@ -31,7 +31,7 @@ query = f'''
             ORDER BY id DESC
         '''
 ```
-- add this method to remove_task_by_id:
+- add this method to remove a specific task:
 
 ```py
 def remove_task_by_id(self):
@@ -57,7 +57,7 @@ def remove_task_by_id(self):
             return 'Task not found'
 ```
 
-- add this method to edit task
+- add this method to edit a specific task
 
 ```py
 def edit_task_by_id(self):

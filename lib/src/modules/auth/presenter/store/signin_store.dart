@@ -32,6 +32,7 @@ abstract class ISigninStore with Store {
 
   void deactivateAfterNavigate() {
     showPassword = false;
+    enableSigninButton = false;
   }
 
   Future<bool> login(String username, String password) async {

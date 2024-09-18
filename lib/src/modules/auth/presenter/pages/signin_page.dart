@@ -102,8 +102,7 @@ class _SignInPageState extends State<SignInPage> {
                               usernameController.text, passwordController.text);
 
                           if (success) {
-                            signinStore.showPassword = false;
-                            signinStore.enableSigninButton = false;
+                            signinStore.deactivateAfterNavigate();
                             Modular.to.navigate(
                               '/user_module/',
                               arguments: signinStore.actualUser,
@@ -120,6 +119,7 @@ class _SignInPageState extends State<SignInPage> {
               const SizedBox(height: 15),
               TextButton(
                 onPressed: () {
+                  passwordController.text = '';
                   signinStore.deactivateAfterNavigate();
                   Modular.to.pushNamed('/forgot_password_page/');
                 },

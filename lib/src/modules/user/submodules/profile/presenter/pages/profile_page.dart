@@ -41,10 +41,16 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               alignment: Alignment.bottomCenter,
               padding: const EdgeInsets.only(bottom: 600),
-              child: Text(
-                widget.user!.name,
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              child: Container(
+                color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 50),
+                  child: Text(
+                    widget.user!.name,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
+                ),
               ),
             ),
           ),

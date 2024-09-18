@@ -90,10 +90,6 @@ class _SignInPageState extends State<SignInPage> {
                       onPressed: () => signinStore.toggleShowPassword(),
                     ),
                   ),
-                  // onSubmitted: (value) => signinStore.enableSigninButton  // press enter to login
-                  //     ? signinStore.login(
-                  //         usernameController.text, passwordController.text)
-                  //     : null,
                 ),
               ),
               const SizedBox(height: 24),

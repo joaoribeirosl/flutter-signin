@@ -61,7 +61,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                 onPressed: taskStore.enableButton
                     ? () async {
                         await taskStore.addTask(
-                            taskController.text, widget.user?.id ?? '-1');
+                            taskController.text, widget.user!.id);
                         TaskToastManager.showToast(
                             'Task created successfully!', context);
                         taskController.text = '';

@@ -24,6 +24,11 @@ abstract class ISignupStore with Store {
   @observable
   bool agreeTermsCheckboxValue = false;
 
+  void deactivateAfterNavigate() {
+    agreeTermsCheckboxValue = false;
+    showPassword = false;
+  }
+
   Future<bool> signup(
       String username, String password, String confirmPassword) async {
     if (password.length >= 6) {

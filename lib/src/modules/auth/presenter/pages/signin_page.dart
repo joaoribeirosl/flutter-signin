@@ -120,6 +120,7 @@ class _SignInPageState extends State<SignInPage> {
               const SizedBox(height: 15),
               TextButton(
                 onPressed: () {
+                  signinStore.deactivateAfterNavigate();
                   Modular.to.pushNamed('/forgot_password_page/');
                 },
                 child: const Text('Forgot Password?'),
@@ -129,6 +130,7 @@ class _SignInPageState extends State<SignInPage> {
                 onPressed: () {
                   usernameController.text = '';
                   passwordController.text = '';
+                  signinStore.deactivateAfterNavigate();
                   Modular.to.pushNamed('/signup_page/');
                 },
                 child: const Text('Don\'t have an account? Sign Up'),

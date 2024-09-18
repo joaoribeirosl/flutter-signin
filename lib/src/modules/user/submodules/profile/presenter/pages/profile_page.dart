@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class ProfilePage extends StatefulWidget {
   final User? user;
@@ -10,9 +11,18 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final audioPlayer = AudioPlayer();
+
   @override
   void initState() {
     super.initState();
+    audioPlayer.play(AssetSource('danilo.mp3'));
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    audioPlayer.stop();
   }
 
   @override
@@ -26,7 +36,7 @@ class _ProfilePageState extends State<ProfilePage> {
               decoration: const BoxDecoration(
                 image: DecorationImage(
                     alignment: Alignment(-.2, 0),
-                    image: AssetImage('assets/profile.png'),
+                    image: AssetImage('assets/danilo.png'),
                     fit: BoxFit.fill),
               ),
               alignment: Alignment.bottomCenter,

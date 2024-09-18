@@ -5,7 +5,6 @@ import 'package:mobx/mobx.dart';
 
 part 'signup_store.g.dart';
 
-// ignore: library_private_types_in_public_api
 class SignupStore = ISignupStore with _$SignupStore;
 
 abstract class ISignupStore with Store {
@@ -23,6 +22,11 @@ abstract class ISignupStore with Store {
 
   @observable
   bool agreeTermsCheckboxValue = false;
+
+  void deactivateAfterNavigate() {
+    agreeTermsCheckboxValue = false;
+    showPassword = false;
+  }
 
   Future<bool> signup(
       String username, String password, String confirmPassword) async {

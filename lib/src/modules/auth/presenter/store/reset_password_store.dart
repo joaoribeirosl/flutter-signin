@@ -6,7 +6,7 @@ class ResetPasswordStore = IResetPasswordStore with _$ResetPasswordStore;
 
 abstract class IResetPasswordStore with Store {
   // final IResetPasswordUseCase _resetPasswordUseCase;
-  // final IUserExistsUseCase _userExistsUseCase; // remove later when implemented
+  // final IUserExistsUseCase _userExistsUseCase;
 
   // IResetPasswordStore(this._resetPasswordUseCase, this._userExistsUseCase);
 

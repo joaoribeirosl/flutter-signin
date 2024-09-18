@@ -39,7 +39,7 @@ class _SignUpPageState extends State<SignUpPage> {
             icon: const Icon(Icons.arrow_back_ios_sharp),
             tooltip: 'back',
             onPressed: () {
-              signupStore.agreeTermsCheckboxValue = false;
+              signupStore.deactivateAfterNavigate();
               Navigator.pop(context);
             }),
       ),
@@ -144,11 +144,11 @@ class _SignUpPageState extends State<SignUpPage> {
                               confirmPasswordController.text)) {
                             AuthToastManager.showToast(
                                 'User created successfully!', context);
-                            signupStore.agreeTermsCheckboxValue = false;
+                            signupStore.deactivateAfterNavigate();
                             Modular.to.navigate('/');
                           } else {
-                            signupStore.state
-                                .setError('Incorrect password! Try again');
+                            signupStore.state.setError(
+                                'Invalid or incorrect password! Try again');
                           }
                         }
                       : null,
@@ -188,7 +188,7 @@ class _SignUpPageState extends State<SignUpPage> {
               const SizedBox(height: 16),
               TextButton(
                 onPressed: () {
-                  signupStore.agreeTermsCheckboxValue = false;
+                  signupStore.deactivateAfterNavigate();
                   Modular.to.navigate('/');
                 },
                 child: const Text('Already have an account? Sign In'),

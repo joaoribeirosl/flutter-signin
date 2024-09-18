@@ -26,9 +26,6 @@ abstract class ITaskStore with Store {
     enableButton = task.isNotEmpty;
   }
 
-  // @observable
-  // String colorOptions = ''; // TODO user can choose card color
-
   @observable
   var taskList = ObservableList<Task>();
 

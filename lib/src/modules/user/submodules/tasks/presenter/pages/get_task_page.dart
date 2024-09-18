@@ -59,54 +59,41 @@ class _TaskPageState extends State<GetTaskPage> {
                         child: FadeInAnimation(
                           duration: const Duration(seconds: 1),
                           child: Card(
-                            child: Container(
-                              decoration: const BoxDecoration(
-                                  gradient: LinearGradient(
-                                colors: <Color>[
-                                  Color(0xffac255e),
-                                  Color(0xffca485c),
-                                  Color(0xffe16b5c),
-                                  Color(0xfff39060),
-                                  Color(0xffffb56b),
-                                ],
-                              )),
-                              child: ListTile(
-                                title: Text(actualTask.task),
-                                textColor: Colors.white,
-                                trailing: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    IconButton(
-                                      icon: const Icon(Icons.edit),
-                                      onPressed: () {
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) => EditTaskModal(
-                                            newText: actualTask.task,
-                                            onEdit: (p0) async {
-                                              await taskStore.editTaskById(
-                                                  p0, actualTask);
-                                              await taskStore.getAllTasks(widget
-                                                  .user!
-                                                  .id); // TODO update screen w/o this get
-                                            },
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                    IconButton(
-                                      icon: const Icon(Icons.delete),
-                                      onPressed: () async {
-                                        await taskStore
-                                            .removeTaskById(actualTask.id);
+                            child: ListTile(
+                              title: Text(actualTask.task),
+                              trailing: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  IconButton(
+                                    icon: const Icon(Icons.edit),
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) => EditTaskModal(
+                                          newText: actualTask.task,
+                                          onEdit: (p0) async {
+                                            await taskStore.editTaskById(
+                                                p0, actualTask);
+                                            await taskStore.getAllTasks(widget
+                                                .user!
+                                                .id); // TODO update screen w/o this get
+                                          },
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  IconButton(
+                                    icon: const Icon(Icons.delete),
+                                    onPressed: () async {
+                                      await taskStore
+                                          .removeTaskById(actualTask.id);
 
-                                        TaskToastManager.showToast(
-                                            'Task removed successfully!',
-                                            context);
-                                      },
-                                    ),
-                                  ],
-                                ),
+                                      TaskToastManager.showToast(
+                                          'Task removed successfully!',
+                                          context);
+                                    },
+                                  ),
+                                ],
                               ),
                             ),
                           ),

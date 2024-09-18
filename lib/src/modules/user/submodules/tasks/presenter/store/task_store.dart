@@ -21,6 +21,9 @@ abstract class ITaskStore with Store {
   @observable
   bool enableButton = false;
 
+  @observable
+  String selectedColor = ''; // TODO circle avatar to select card color
+
   @action
   void toggleEnableTaskButton(String task) {
     enableButton = task.isNotEmpty;

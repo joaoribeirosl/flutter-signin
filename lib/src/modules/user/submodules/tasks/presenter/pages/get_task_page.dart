@@ -5,6 +5,7 @@ import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/presenter/pages/components/edit_task_modal.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/presenter/pages/components/task_toast_manager.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/presenter/store/task_store.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class GetTaskPage extends StatefulWidget {
   final User? user;
@@ -52,44 +53,51 @@ class _TaskPageState extends State<GetTaskPage> {
                   itemCount: taskStore.taskList.length,
                   itemBuilder: (context, index) {
                     final actualTask = taskStore.taskList[index];
-                    return Card(
-                      child: ListTile(
-                        title: Text(actualTask.task),
-                        trailing: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            IconButton(
-                              icon: const Icon(Icons.edit),
-                              onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => EditTaskModal(
-                                    taskText: actualTask.task,
-                                    onEdit: (p0) async => await taskStore
-                                        .editTaskById(p0, actualTask),
-                                  ),
-                                ).then(
-                                  (value) {
-                                    taskStore.getAllTasks(widget.user!.id);
-                                    TaskToastManager.showToast(
-                                        'Task edited successfully!', context);
-                                  },
-                                );
-                              },
-                            ),
-                            IconButton(
-                              icon: const Icon(Icons.delete),
-                              onPressed: () async {
-                                await taskStore.removeTaskById(actualTask.id);
+                    return AnimationConfiguration.staggeredList(
+                        position: index,
+                        child: SlideAnimation(
+                          child: FadeInAnimation(
+                            duration: const Duration(seconds: 1),
+                            child: Card(
+                              child: ListTile(
+                                title: Text(actualTask.task),
+                                trailing: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    IconButton(
+                                      icon: const Icon(Icons.edit),
+                                      onPressed: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) => EditTaskModal(
+                                            newText: actualTask.task,
+                                            onEdit: (p0) async {
+                                              await taskStore.editTaskById(
+                                                  p0, actualTask);
+                                              await taskStore
+                                                  .getAllTasks(widget.user!.id);
+                                            },
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                    IconButton(
+                                      icon: const Icon(Icons.delete),
+                                      onPressed: () async {
+                                        await taskStore
+                                            .removeTaskById(actualTask.id);
 
-                                TaskToastManager.showToast(
-                                    'Task removed successfully!', context);
-                              },
+                                        TaskToastManager.showToast(
+                                            'Task removed successfully!',
+                                            context);
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
-                          ],
-                        ),
-                      ),
-                    );
+                          ),
+                        ));
                   },
                 ),
               ),

@@ -26,7 +26,6 @@ class _UserPageState extends State<UserPage> with WindowListener {
       userStore.getTaskCount();
     });
     Modular.to.navigate('/user_module/task/', arguments: widget.user);
-    // userStore.changeRoute('Task', 'task');
 
     super.initState();
   }

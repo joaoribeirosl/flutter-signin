@@ -5,7 +5,6 @@ import 'package:mobx/mobx.dart';
 
 part 'signup_store.g.dart';
 
-// ignore: library_private_types_in_public_api
 class SignupStore = ISignupStore with _$SignupStore;
 
 abstract class ISignupStore with Store {

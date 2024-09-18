@@ -23,7 +23,6 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(children: [
           Center(
             child: Container(
-              // width: MediaQuery.of(context).size.width,
               decoration: const BoxDecoration(
                 image: DecorationImage(
                     alignment: Alignment(-.2, 0),

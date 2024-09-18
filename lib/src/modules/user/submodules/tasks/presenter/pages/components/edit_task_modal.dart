@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin/src/modules/user/submodules/tasks/presenter/pages/components/task_toast_manager.dart';
 
 class EditTaskModal extends StatefulWidget {
-  final String taskText;
+  final String newText;
   final Function(String) onEdit;
-  const EditTaskModal(
-      {super.key, required this.taskText, required this.onEdit});
+  const EditTaskModal({super.key, required this.newText, required this.onEdit});
 
   @override
   State<EditTaskModal> createState() => _EditTaskModalState();
@@ -17,7 +16,7 @@ class _EditTaskModalState extends State<EditTaskModal> {
   @override
   void initState() {
     super.initState();
-    editTaskController.text = widget.taskText;
+    editTaskController.text = widget.newText;
   }
 
   @override

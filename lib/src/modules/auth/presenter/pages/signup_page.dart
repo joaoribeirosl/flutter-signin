@@ -147,8 +147,8 @@ class _SignUpPageState extends State<SignUpPage> {
                             signupStore.agreeTermsCheckboxValue = false;
                             Modular.to.navigate('/');
                           } else {
-                            signupStore.state
-                                .setError('Incorrect password! Try again');
+                            signupStore.state.setError(
+                                'Invalid or incorrect password! Try again');
                           }
                         }
                       : null,

@@ -4,7 +4,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_signin/src/modules/auth/infra/proto/user.pb.dart';
 import 'package:flutter_signin/src/modules/user/presenter/pages/components/side_menu.dart';
 import 'package:flutter_signin/src/modules/user/presenter/store/user_store.dart';
-import 'package:window_manager/window_manager.dart';
 
 class UserPage extends StatefulWidget {
   final User? user;
@@ -14,12 +13,11 @@ class UserPage extends StatefulWidget {
   State<UserPage> createState() => _UserPageState();
 }
 
-class _UserPageState extends State<UserPage> with WindowListener {
+class _UserPageState extends State<UserPage> {
   late final UserStore userStore;
 
   @override
   void initState() {
-    windowManager.addListener(this);
     userStore = context.read<UserStore>();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       userStore.sendTaskIo(widget.user!.id);

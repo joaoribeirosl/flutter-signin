@@ -45,3 +45,5 @@ app.*.map.json
 # mobx generated
 *.g.dart
 
+# protobuf content
+/proto/*.dart

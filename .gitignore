@@ -46,4 +46,4 @@ app.*.map.json
 *.g.dart
 
 # protobuf content
-/proto/*.dart
+**/proto/*.dart

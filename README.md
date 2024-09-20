@@ -11,6 +11,13 @@ This project follows the Clean Architecture principles, ensuring a clear separat
 - **Flutter Modular**
 - **MobX**
 
+### versions
+- Flutter 3.22.3
+- Dart 3.4.4
+- DevTools 2.34.3
+- protoc-24.1-win64.
+
+
 ## Backend Repository
 https://github.com/jefferson-norberto2/api_tasks
 
@@ -80,12 +87,11 @@ def edit_task_by_id(self):
         else:
             return 'Unable to edit' 
 ```
-
 ## To run this project
 
 1. ``flutter packages pub run build_runner build`` or ``dart run build_runner watch `` to generate mobx content.
 
-2. ``protoc --dart_out=. <path/to/messages.proto>`` to generate protobuf content e.g. ``./lib/src/.../user.proto``. You can read the [protobuf documentation](https://protobuf.dev/getting-started/darttutorial/)
+2. ``protoc --dart_out=. <path/to/messages.proto>`` to generate protobuf content e.g. ``./lib/src/.../user.proto``. You can read the [protobuf documentation](https://protobuf.dev/getting-started/darttutorial/) and [pub.dev](https://pub.dev/packages/protobuf). Remember to install the compiler. 
 
 
 3. check your sdk version in ``pubspec.yaml`` 

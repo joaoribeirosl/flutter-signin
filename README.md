@@ -6,7 +6,7 @@ This Flutter project was developed as a technical assessment for residents selec
 
 This project follows the Clean Architecture principles, ensuring a clear separation of concerns and maintainability. The structure of the project is modular, allowing for scalable and easily testable code. 
 
-### Key Technologies Used:
+### Key Technologies Used
 - **Clean Dart**
 - **Flutter Modular**
 - **MobX**

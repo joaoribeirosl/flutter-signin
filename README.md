@@ -19,7 +19,7 @@ This project follows the Clean Architecture principles, ensuring a clear separat
 - Dart 3.4.4
 - DevTools 2.34.3
 - protoc-24.1-win64.
-- 
+  
 ### env vars
 - C:\src\flutter\bin
 - C:\Users\yourUser\AppData\Local\Pub\Cache\bin
@@ -100,9 +100,8 @@ def edit_task_by_id(self):
 
 1. ``flutter packages pub run build_runner build`` or ``dart run build_runner watch `` to generate mobx content.
 
-2. ``generate_proto.bat`` to generate protobuf content. You can read the [protobuf documentation](https://protobuf.dev/getting-started/darttutorial/), [protobuf realeases](https://github.com/protocolbuffers/protobuf/releases?) and [pub.dev](https://pub.dev/packages/protobuf).
+2. ``generate_proto.bat`` to generate protobuf content. You can read the [protobuf documentation](https://protobuf.dev/getting-started/darttutorial/), [protobuf realeases](https://github.com/protocolbuffers/protobuf/releases?) and [pub.dev](https://pub.dev/packages/protobuf). If you got a ``'protoc-gen-dart' is not recognized as an internal or external command`` you can use ``dart pub global activate protoc_plugin``
 
-2.1. If you got a ``'protoc-gen-dart' is not recognized as an internal or external command`` you can use ``dart pub global activate protoc_plugin``
 
 1. check your sdk version in ``pubspec.yaml`` 
 

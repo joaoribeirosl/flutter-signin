@@ -64,6 +64,7 @@ class _SignInPageState extends State<SignInPage> {
               ),
               const SizedBox(height: 32),
               TextField(
+                key: const Key('usernameTextField'),
                 controller: usernameController,
                 decoration: const InputDecoration(
                   labelText: 'Username',

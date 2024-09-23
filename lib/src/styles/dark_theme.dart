@@ -8,7 +8,7 @@ class DarkTheme {
 
   static ThemeData get theme {
     return ThemeData(
-      brightness: Brightness.dark, // Define o modo escuro
+      brightness: Brightness.dark,
       primaryColor: primaryColorDark,
       scaffoldBackgroundColor: backgroundColorDark,
       cardColor: cardColorDark,

@@ -11,6 +11,9 @@ This project follows the Clean Architecture principles, ensuring a clear separat
 - **Flutter Modular**
 - **MobX**
 
+
+![clean dart architecture](./doc/clean_dart.png)
+
 ### versions
 - Flutter 3.22.3
 - Dart 3.4.4

@@ -10,7 +10,8 @@ class SideMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color.fromRGBO(173, 82, 120, 1),
+      color: const Color.fromRGBO(
+          173, 82, 120, 1), // TODO if dark theme, change this color
       width: 130,
       child: Padding(
         padding: const EdgeInsets.only(left: 4.0, right: 4.0),

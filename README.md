@@ -102,7 +102,6 @@ def edit_task_by_id(self):
 
 2. ``generate_proto.bat`` to generate protobuf content. You can read the [protobuf documentation](https://protobuf.dev/getting-started/darttutorial/), [protobuf realeases](https://github.com/protocolbuffers/protobuf/releases?) and [pub.dev](https://pub.dev/packages/protobuf). If you got a ``'protoc-gen-dart' is not recognized as an internal or external command`` you can use ``dart pub global activate protoc_plugin``
 
+3. check your sdk version in ``pubspec.yaml`` 
 
-1. check your sdk version in ``pubspec.yaml`` 
-
-2. ``flutter run``
+4. ``flutter run``
